@@ -87,28 +87,30 @@ LOCK TABLES `permissions` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `productdetials`
+-- Table structure for table `productprices`
 --
 
-DROP TABLE IF EXISTS `productdetials`;
+DROP TABLE IF EXISTS `productprices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `productdetials` (
+CREATE TABLE `productprices` (
   `ProductId` int NOT NULL,
-  `price` double NOT NULL,
+  `price` int NOT NULL,
   `Date` date NOT NULL,
-  PRIMARY KEY (`ProductId`,`Date`),
-  CONSTRAINT `pid` FOREIGN KEY (`ProductId`) REFERENCES `supermarketproducts` (`ProductId`)
+  `IsActivePrice` int NOT NULL,
+  PRIMARY KEY (`price`,`Date`),
+  KEY `forg1_idx` (`ProductId`),
+  CONSTRAINT `pf` FOREIGN KEY (`ProductId`) REFERENCES `supermarketproducts` (`ProductId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `productdetials`
+-- Dumping data for table `productprices`
 --
 
-LOCK TABLES `productdetials` WRITE;
-/*!40000 ALTER TABLE `productdetials` DISABLE KEYS */;
-/*!40000 ALTER TABLE `productdetials` ENABLE KEYS */;
+LOCK TABLES `productprices` WRITE;
+/*!40000 ALTER TABLE `productprices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `productprices` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -145,11 +147,11 @@ DROP TABLE IF EXISTS `rolepermissions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolepermissions` (
   `RoleId` int NOT NULL,
-  `PermissionsId` int NOT NULL,
-  PRIMARY KEY (`RoleId`,`PermissionsId`),
-  KEY `forg2_idx` (`PermissionsId`),
+  `PermissionId` int NOT NULL,
+  PRIMARY KEY (`RoleId`,`PermissionId`),
+  KEY `forg2_idx` (`PermissionId`),
   CONSTRAINT `forg1` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`),
-  CONSTRAINT `forg2` FOREIGN KEY (`PermissionsId`) REFERENCES `permissions` (`PermissionId`)
+  CONSTRAINT `forg2` FOREIGN KEY (`PermissionId`) REFERENCES `permissions` (`PermissionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -196,7 +198,6 @@ CREATE TABLE `supermarket` (
   `supermarketId` int NOT NULL AUTO_INCREMENT,
   `supermarketName` varchar(45) NOT NULL,
   `supermarketRegion` varchar(45) NOT NULL,
-  `phoneNumber` varchar(45) NOT NULL,
   PRIMARY KEY (`supermarketId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -240,32 +241,6 @@ LOCK TABLES `supermarketproducts` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `temppermissions`
---
-
-DROP TABLE IF EXISTS `temppermissions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `temppermissions` (
-  `UserId` int NOT NULL,
-  `PermissionId` int NOT NULL,
-  PRIMARY KEY (`UserId`,`PermissionId`),
-  KEY `f2_idx` (`PermissionId`),
-  CONSTRAINT `f1` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`),
-  CONSTRAINT `f2` FOREIGN KEY (`PermissionId`) REFERENCES `permissions` (`PermissionId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `temppermissions`
---
-
-LOCK TABLES `temppermissions` WRITE;
-/*!40000 ALTER TABLE `temppermissions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `temppermissions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `usergmails`
 --
 
@@ -274,10 +249,10 @@ DROP TABLE IF EXISTS `usergmails`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usergmails` (
   `UserId` int NOT NULL,
-  `Gmail` varchar(45) NOT NULL,
-  PRIMARY KEY (`UserId`,`Gmail`),
-  UNIQUE KEY `Gmail_UNIQUE` (`Gmail`),
-  CONSTRAINT `idofuser` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`)
+  `UserGmail` varchar(55) NOT NULL,
+  PRIMARY KEY (`UserGmail`),
+  KEY `gm_idx` (`UserId`),
+  CONSTRAINT `gm` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -288,6 +263,58 @@ CREATE TABLE `usergmails` (
 LOCK TABLES `usergmails` WRITE;
 /*!40000 ALTER TABLE `usergmails` DISABLE KEYS */;
 /*!40000 ALTER TABLE `usergmails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `userpermissions`
+--
+
+DROP TABLE IF EXISTS `userpermissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `userpermissions` (
+  `UserId` int NOT NULL,
+  `PermissionId` int NOT NULL,
+  PRIMARY KEY (`UserId`,`PermissionId`),
+  KEY `fgn2_idx` (`PermissionId`),
+  CONSTRAINT `fgn1` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE,
+  CONSTRAINT `fgn2` FOREIGN KEY (`PermissionId`) REFERENCES `permissions` (`PermissionId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `userpermissions`
+--
+
+LOCK TABLES `userpermissions` WRITE;
+/*!40000 ALTER TABLE `userpermissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `userpermissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `userroles`
+--
+
+DROP TABLE IF EXISTS `userroles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `userroles` (
+  `UserId` int NOT NULL,
+  `RoleId` int NOT NULL,
+  PRIMARY KEY (`UserId`,`RoleId`),
+  KEY `frg2_idx` (`RoleId`),
+  CONSTRAINT `frg1` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE,
+  CONSTRAINT `frg2` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `userroles`
+--
+
+LOCK TABLES `userroles` WRITE;
+/*!40000 ALTER TABLE `userroles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `userroles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -302,7 +329,6 @@ CREATE TABLE `users` (
   `RoleId` int NOT NULL,
   `Password` varchar(55) NOT NULL,
   `Name` varchar(55) NOT NULL,
-  `PhoneNumber` varchar(10) NOT NULL,
   PRIMARY KEY (`UserId`),
   KEY `RoleId_idx` (`RoleId`),
   CONSTRAINT `RoleId` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`) ON DELETE CASCADE
@@ -317,6 +343,34 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `usersphonenumber`
+--
+
+DROP TABLE IF EXISTS `usersphonenumber`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usersphonenumber` (
+  `UserId` int DEFAULT NULL,
+  `SuperMarketId` int DEFAULT NULL,
+  `PhoneNumber` varchar(45) NOT NULL,
+  PRIMARY KEY (`PhoneNumber`),
+  KEY `usf1_idx` (`UserId`),
+  KEY `usf2_idx` (`SuperMarketId`),
+  CONSTRAINT `usf1` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE,
+  CONSTRAINT `usf2` FOREIGN KEY (`SuperMarketId`) REFERENCES `supermarket` (`supermarketId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usersphonenumber`
+--
+
+LOCK TABLES `usersphonenumber` WRITE;
+/*!40000 ALTER TABLE `usersphonenumber` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usersphonenumber` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -327,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-28 18:30:40
+-- Dump completed on 2022-08-28 23:37:34
