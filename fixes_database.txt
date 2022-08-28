@@ -3,5 +3,5 @@
 3- product details table should be renamed to productprices and date is not primary key
 4- suppose that a supermaket has many phone numbers how to deal with that?!!!
 5- supermarketproducts table the three elements are pk and fk at same time.
-6- temppermissions where is the date ?!!!!
+6- temppermissions where is the date ?!!!! or you should rename table to userpermission
 7- suppose a user has many phone numbers so how to deal with that?!!!!!!!!!!!!
