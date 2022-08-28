@@ -266,6 +266,31 @@ LOCK TABLES `temppermissions` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `usergmails`
+--
+
+DROP TABLE IF EXISTS `usergmails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usergmails` (
+  `UserId` int NOT NULL,
+  `Gmail` varchar(45) NOT NULL,
+  PRIMARY KEY (`UserId`,`Gmail`),
+  UNIQUE KEY `Gmail_UNIQUE` (`Gmail`),
+  CONSTRAINT `idofuser` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usergmails`
+--
+
+LOCK TABLES `usergmails` WRITE;
+/*!40000 ALTER TABLE `usergmails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usergmails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -275,12 +300,10 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `UserId` int NOT NULL AUTO_INCREMENT,
   `RoleId` int NOT NULL,
-  `Gmail` varchar(55) NOT NULL,
   `Password` varchar(55) NOT NULL,
   `Name` varchar(55) NOT NULL,
   `PhoneNumber` varchar(10) NOT NULL,
   PRIMARY KEY (`UserId`),
-  UNIQUE KEY `Gmail_UNIQUE` (`Gmail`),
   KEY `RoleId_idx` (`RoleId`),
   CONSTRAINT `RoleId` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -304,4 +327,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-28 12:13:36
+-- Dump completed on 2022-08-28 18:30:40
