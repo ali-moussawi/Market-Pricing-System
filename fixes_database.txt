@@ -1,0 +1,7 @@
+1- Suppose that a user has many roles how it would be fixed
+2- the relation between permission and role it is (role id with permission id) and duplicated right?!!!
+3- product details table should be renamed to productprices and date is not primary key
+4- suppose that a supermaket has many phone numbers how to deal with that?!!!
+5- supermarketproducts table the three elements are pk and fk at same time.
+6- temppermissions where is the date ?!!!!
+7- suppose a user has many phone numbers so how to deal with that?!!!!!!!!!!!!
