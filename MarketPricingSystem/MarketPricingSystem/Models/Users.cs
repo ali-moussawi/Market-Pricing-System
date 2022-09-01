@@ -18,11 +18,9 @@ namespace MarketPricingSystem.Models
         }
 
         public int UserId { get; set; }
-        public int RoleId { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
 
-        public virtual Roles Role { get; set; }
         public virtual ICollection<Usergmails> Usergmails { get; set; }
         public virtual ICollection<Userpermissions> Userpermissions { get; set; }
         public virtual ICollection<Userroles> Userroles { get; set; }

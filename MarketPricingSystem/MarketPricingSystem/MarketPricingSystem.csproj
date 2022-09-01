@@ -232,6 +232,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\Loginlogs.cs" />
+    <Compile Include="Models\marketpricingContext.cs" />
+    <Compile Include="Models\Permissions.cs" />
+    <Compile Include="Models\Productprices.cs" />
+    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\Rolepermissions.cs" />
+    <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\Supermarket.cs" />
+    <Compile Include="Models\Supermarketproducts.cs" />
+    <Compile Include="Models\Usergmails.cs" />
+    <Compile Include="Models\Userpermissions.cs" />
+    <Compile Include="Models\Userroles.cs" />
+    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\Usersphonenumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -273,7 +288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

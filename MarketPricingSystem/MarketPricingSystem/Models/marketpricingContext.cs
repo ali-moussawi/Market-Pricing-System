@@ -39,7 +39,7 @@ namespace MarketPricingSystem.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123;database=marketpricing");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123;database= marketpricing");
             }
         }
 
@@ -270,9 +270,6 @@ namespace MarketPricingSystem.Models
 
                 entity.ToTable("users");
 
-                entity.HasIndex(e => e.RoleId)
-                    .HasName("RoleId_idx");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(55);
@@ -280,11 +277,6 @@ namespace MarketPricingSystem.Models
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(55);
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("RoleId");
             });
 
             modelBuilder.Entity<Usersphonenumber>(entity =>
