@@ -17,6 +17,7 @@ namespace MarketPricingSystem.Models
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public int BarcodeNb { get; set; }
+        public string ProductDescription { get; set; }
 
         public virtual ICollection<Supermarketproducts> Supermarketproducts { get; set; }
     }
