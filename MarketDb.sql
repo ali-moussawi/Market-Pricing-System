@@ -326,12 +326,9 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `UserId` int NOT NULL AUTO_INCREMENT,
-  `RoleId` int NOT NULL,
   `Password` varchar(55) NOT NULL,
   `Name` varchar(55) NOT NULL,
-  PRIMARY KEY (`UserId`),
-  KEY `RoleId_idx` (`RoleId`),
-  CONSTRAINT `RoleId` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`) ON DELETE CASCADE
+  PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -381,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-28 23:37:34
+-- Dump completed on 2022-09-01 12:41:18
