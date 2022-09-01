@@ -124,6 +124,7 @@ CREATE TABLE `products` (
   `ProductId` int NOT NULL AUTO_INCREMENT,
   `ProductName` varchar(55) NOT NULL,
   `BarcodeNb` int NOT NULL,
+  `productDescription` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`ProductId`),
   UNIQUE KEY `ProductName_UNIQUE` (`ProductName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -378,4 +379,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-01 12:41:18
+-- Dump completed on 2022-09-01 22:05:55
