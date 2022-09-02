@@ -199,6 +199,7 @@ CREATE TABLE `supermarket` (
   `supermarketId` int NOT NULL AUTO_INCREMENT,
   `supermarketName` varchar(45) NOT NULL,
   `supermarketRegion` varchar(45) NOT NULL,
+  `supermarketDescription` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`supermarketId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -379,4 +380,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-01 22:05:55
+-- Dump completed on 2022-09-02 12:56:36
