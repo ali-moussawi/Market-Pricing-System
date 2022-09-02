@@ -13,18 +13,19 @@ namespace MarketPricingSystem.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
+        [HttpGet]
+        public ActionResult Signin()
+        {
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
+        [HttpPost]
+        public ActionResult validatesignin()
+        {
             return View();
         }
+
     }
 }
