@@ -167,6 +167,10 @@ namespace MarketPricingSystem.Models
 
                 entity.Property(e => e.SupermarketId).HasColumnName("supermarketId");
 
+                entity.Property(e => e.SupermarketDescription)
+                    .HasColumnName("supermarketDescription")
+                    .HasMaxLength(255);
+
                 entity.Property(e => e.SupermarketName)
                     .IsRequired()
                     .HasColumnName("supermarketName")

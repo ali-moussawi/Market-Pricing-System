@@ -3,39 +3,78 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg" href="~/Images/icon.svg" sizes="32x32">
+
     <title>@ViewBag.Title</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+
+    <!-- font awesome cdn link  -->
+    <script src="https://kit.fontawesome.com/c48ab5a612.js" crossorigin="anonymous"></script>
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="~/Content/style.css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:black">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Market Pricing Ghobairy", "", "", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <header class="header">
 
-                    <li>@Html.ActionLink("SignIn", "", "")</li>
-                </ul>
+        <a href="#" class="logo"> <i class="fa-solid fa-shop"></i> Ghobairy Market Pricing </a>
+
+        <nav class="navbar">
+            @Html.ActionLink("Home", "Index", "Home")
+            @Html.ActionLink("Sign in", "", "")
+        </nav>
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+    </header>
+
+    <!-- header section ends -->
+    @RenderBody()
+
+    <!-- footer section starts  -->
+
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#"> <i class="fas fa-chevron-right"></i> home </a>
+              
             </div>
+
+            <div class="box">
+                <h3>our services</h3>
+                <a href="#"> <i class="fas fa-chevron-right"></i> choose best prices</a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> track supermarkets</a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> track changes of prices </a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> stop merchant monopoly</a>
+             
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"> <i class="fas fa-phone"></i> +71548165 </a>
+                
+                <a href="#"> <i class="fas fa-envelope"></i> aha057@usal.edu.com </a>
+                
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> lebanon, beirut,909090 </a>
+            </div>
+
+
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+
+
+    </section>
+
+    <!-- footer section ends -->
+
+
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
