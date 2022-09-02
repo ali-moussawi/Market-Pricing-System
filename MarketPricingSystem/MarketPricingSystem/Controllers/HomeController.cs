@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MarketPricingSystem.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,17 @@ namespace MarketPricingSystem.Controllers
 {
     public class HomeController : Controller
     {
+       private marketpricingContext _context;
+
+        public HomeController()
+        {
+            _context = new marketpricingContext();  
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         public ActionResult Index()
         {
             return View();
@@ -25,6 +38,15 @@ namespace MarketPricingSystem.Controllers
         public ActionResult validatesignin()
         {
             return View();
+        }
+
+        public ActionResult SuperMarketList()
+        {
+            var supermarketlist = _context.Supermarket.Include(m => m.Usersphonenumber).ToList();
+
+            return View(supermarketlist);
+
+
         }
 
     }
