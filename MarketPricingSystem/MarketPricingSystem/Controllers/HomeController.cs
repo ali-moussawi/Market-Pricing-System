@@ -55,5 +55,12 @@ namespace MarketPricingSystem.Controllers
             return View();
         }
 
+
+        public ActionResult ProductList(int id)
+        {
+            var allproducts = _context.Supermarketproducts.Where(s => s.SuperMarketId == id).Include(x=>x.pr).ToList();
+            return View(allproducts);
+
+        }
     }
 }
