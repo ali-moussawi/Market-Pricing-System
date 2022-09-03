@@ -49,5 +49,11 @@ namespace MarketPricingSystem.Controllers
 
         }
 
+        public ActionResult Options()
+        {
+
+            return View();
+        }
+
     }
 }
