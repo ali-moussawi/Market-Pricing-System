@@ -20,6 +20,7 @@ else
                 <th>Market Name</th>
                 <th>Market Region</th>
                 <th>Description</th>
+                <th>phone number</th>
                
                 <th>products</th>
 
@@ -33,6 +34,7 @@ else
                 <td>@market.SupermarketName</td>
                 <td>@market.SupermarketRegion</td>
                 <td>@market.SupermarketDescription</td>
+                <td>@market.Usersphonenumber.FirstOrDefault(u => u.SuperMarketId == market.SupermarketId).PhoneNumber</td>
               
 
                 <td>@Html.ActionLink("products", "", "", new { @class = "btn btn-primary" })</td>
