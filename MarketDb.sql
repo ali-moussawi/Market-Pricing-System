@@ -94,16 +94,16 @@ DROP TABLE IF EXISTS `productprices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `productprices` (
-  `ProductId` int NOT NULL,
+  `productId` int NOT NULL,
   `supermarketId` int NOT NULL,
-  `price` int NOT NULL,
+  `Price` int NOT NULL,
   `Date` date NOT NULL,
   `IsActivePrice` int NOT NULL,
-  PRIMARY KEY (`price`,`Date`),
-  KEY `forg1_idx` (`ProductId`),
-  KEY `pf2_idx` (`supermarketId`),
-  CONSTRAINT `pf` FOREIGN KEY (`ProductId`) REFERENCES `supermarketproducts` (`ProductId`) ON DELETE CASCADE,
-  CONSTRAINT `pf2` FOREIGN KEY (`supermarketId`) REFERENCES `supermarketproducts` (`SuperMarketId`)
+  PRIMARY KEY (`Price`,`Date`),
+  KEY `frrg1_idx` (`productId`),
+  KEY `frrg2_idx` (`supermarketId`),
+  CONSTRAINT `frrg1` FOREIGN KEY (`productId`) REFERENCES `products` (`ProductId`),
+  CONSTRAINT `frrg2` FOREIGN KEY (`supermarketId`) REFERENCES `supermarket` (`supermarketId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -383,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-04 13:50:01
+-- Dump completed on 2022-09-04 20:50:16
