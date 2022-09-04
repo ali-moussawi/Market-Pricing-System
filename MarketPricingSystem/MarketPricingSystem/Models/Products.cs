@@ -11,6 +11,7 @@ namespace MarketPricingSystem.Models
     {
         public Products()
         {
+            Productprices = new HashSet<Productprices>();
             Supermarketproducts = new HashSet<Supermarketproducts>();
         }
 
@@ -19,6 +20,7 @@ namespace MarketPricingSystem.Models
         public int BarcodeNb { get; set; }
         public string ProductDescription { get; set; }
 
+        public virtual ICollection<Productprices> Productprices { get; set; }
         public virtual ICollection<Supermarketproducts> Supermarketproducts { get; set; }
     }
 }
