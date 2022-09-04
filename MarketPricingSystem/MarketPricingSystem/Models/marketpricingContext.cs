@@ -99,16 +99,28 @@ namespace MarketPricingSystem.Models
                 entity.ToTable("productprices");
 
                 entity.HasIndex(e => e.ProductId)
-                    .HasName("forg1_idx");
+                    .HasName("frrg1_idx");
 
                 entity.HasIndex(e => e.SupermarketId)
-                    .HasName("pf2_idx");
-
-                entity.Property(e => e.Price).HasColumnName("price");
+                    .HasName("frrg2_idx");
 
                 entity.Property(e => e.Date).HasColumnType("date");
 
+                entity.Property(e => e.ProductId).HasColumnName("productId");
+
                 entity.Property(e => e.SupermarketId).HasColumnName("supermarketId");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Productprices)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("frrg1");
+
+                entity.HasOne(d => d.Supermarket)
+                    .WithMany(p => p.Productprices)
+                    .HasForeignKey(d => d.SupermarketId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("frrg2");
             });
 
             modelBuilder.Entity<Products>(entity =>

@@ -14,5 +14,8 @@ namespace MarketPricingSystem.Models
         public int Price { get; set; }
         public DateTime Date { get; set; }
         public int IsActivePrice { get; set; }
+
+        public virtual Products Product { get; set; }
+        public virtual Supermarket Supermarket { get; set; }
     }
 }
