@@ -95,12 +95,15 @@ DROP TABLE IF EXISTS `productprices`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `productprices` (
   `ProductId` int NOT NULL,
+  `supermarketId` int NOT NULL,
   `price` int NOT NULL,
   `Date` date NOT NULL,
   `IsActivePrice` int NOT NULL,
   PRIMARY KEY (`price`,`Date`),
   KEY `forg1_idx` (`ProductId`),
-  CONSTRAINT `pf` FOREIGN KEY (`ProductId`) REFERENCES `supermarketproducts` (`ProductId`) ON DELETE CASCADE
+  KEY `pf2_idx` (`supermarketId`),
+  CONSTRAINT `pf` FOREIGN KEY (`ProductId`) REFERENCES `supermarketproducts` (`ProductId`) ON DELETE CASCADE,
+  CONSTRAINT `pf2` FOREIGN KEY (`supermarketId`) REFERENCES `supermarketproducts` (`SuperMarketId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -380,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-02 12:56:36
+-- Dump completed on 2022-09-04 13:50:01

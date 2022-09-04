@@ -101,9 +101,14 @@ namespace MarketPricingSystem.Models
                 entity.HasIndex(e => e.ProductId)
                     .HasName("forg1_idx");
 
+                entity.HasIndex(e => e.SupermarketId)
+                    .HasName("pf2_idx");
+
                 entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.Date).HasColumnType("date");
+
+                entity.Property(e => e.SupermarketId).HasColumnName("supermarketId");
             });
 
             modelBuilder.Entity<Products>(entity =>
