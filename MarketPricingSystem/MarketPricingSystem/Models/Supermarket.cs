@@ -18,6 +18,7 @@ namespace MarketPricingSystem.Models
         public int SupermarketId { get; set; }
         public string SupermarketName { get; set; }
         public string SupermarketRegion { get; set; }
+        public string SupermarketDescription { get; set; }
 
         public virtual ICollection<Supermarketproducts> Supermarketproducts { get; set; }
         public virtual ICollection<Usersphonenumber> Usersphonenumber { get; set; }
