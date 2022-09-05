@@ -1,5 +1,4 @@
-﻿@model  IEnumerable< MarketPricingSystem.Models.Supermarketproducts>
-@{
+﻿@model  IEnumerable<MarketPricingSystem.ViewModel.productdetails>
     ViewBag.Title = "ProductList";
 }
 <
@@ -16,12 +15,13 @@ else
     <table id="example" class="table table-striped table-bordered" style="width:100% ;">
         <thead>
             <tr>
-                <th>Market Name</th>
-                <th>Market Region</th>
+                <th>Name</th>
+                <th>Barcode</th>
                 <th>Description</th>
-                <th>phone number</th>
+                <th>price</th>
+              
                
-                <th>products</th>
+             
 
             </tr>
         </thead>
@@ -30,13 +30,14 @@ else
             {
                
             <tr>
-                <td>@market.SupermarketName</td>
-                <td>@market.SupermarketRegion</td>
-                <td>@market.SupermarketDescription</td>
-                <td>@market.Usersphonenumber.FirstOrDefault(u => u.SuperMarketId == market.SupermarketId).PhoneNumber</td>
+                <td>@market.productname</td>
+                <td>@market.productBarcode</td>
+                <td>@market.productDescription</td>
+                <td>@market.productprice<span>$</span></td>
+             
               
 
-                <td>@Html.ActionLink("products", "ProductList", "Home", new { id = market.SupermarketId }, new { @class = "btn btn-primary" })</td>
+              
             </tr>
         }
         </tbody>

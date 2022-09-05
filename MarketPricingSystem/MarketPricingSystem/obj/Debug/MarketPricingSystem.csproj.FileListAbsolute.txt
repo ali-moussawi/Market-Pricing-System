@@ -144,3 +144,5 @@ C:\Users\LENOVO\Desktop\Market-Pricing-System\MarketPricingSystem\MarketPricingS
 C:\Users\LENOVO\Desktop\Market-Pricing-System\MarketPricingSystem\MarketPricingSystem\obj\Debug\MarketPricingSystem.csproj.CopyComplete
 C:\Users\LENOVO\Desktop\Market-Pricing-System\MarketPricingSystem\MarketPricingSystem\obj\Debug\MarketPricingSystem.dll
 C:\Users\LENOVO\Desktop\Market-Pricing-System\MarketPricingSystem\MarketPricingSystem\obj\Debug\MarketPricingSystem.pdb
+C:\Users\LENOVO\Desktop\Market-Pricing-System\MarketPricingSystem\MarketPricingSystem\bin\MySqlConnector.dll
+C:\Users\LENOVO\Desktop\Market-Pricing-System\MarketPricingSystem\MarketPricingSystem\bin\MySqlConnector.xml
