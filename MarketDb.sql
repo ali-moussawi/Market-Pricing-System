@@ -95,6 +95,7 @@ DROP TABLE IF EXISTS `productprices`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `productprices` (
   `productId` int NOT NULL,
+<<<<<<< HEAD
   `supermarketId` int NOT NULL,
   `Price` int NOT NULL,
   `Date` date NOT NULL,
@@ -104,6 +105,17 @@ CREATE TABLE `productprices` (
   KEY `frrg2_idx` (`supermarketId`),
   CONSTRAINT `frrg1` FOREIGN KEY (`productId`) REFERENCES `products` (`ProductId`),
   CONSTRAINT `frrg2` FOREIGN KEY (`supermarketId`) REFERENCES `supermarket` (`supermarketId`)
+=======
+  `supermarketid` int NOT NULL,
+  `price` int NOT NULL,
+  `date` date NOT NULL,
+  `IsActivePrice` int NOT NULL,
+  PRIMARY KEY (`price`,`date`),
+  KEY `prid_idx` (`productId`),
+  KEY `spid_idx` (`supermarketid`),
+  CONSTRAINT `prid` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`),
+  CONSTRAINT `spid` FOREIGN KEY (`supermarketid`) REFERENCES `supermarket` (`supermarketId`)
+>>>>>>> master
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -124,12 +136,14 @@ DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
-  `ProductId` int NOT NULL AUTO_INCREMENT,
-  `ProductName` varchar(55) NOT NULL,
+  `productId` int NOT NULL AUTO_INCREMENT,
+  `productName` varchar(255) NOT NULL,
   `BarcodeNb` int NOT NULL,
-  `productDescription` varchar(250) DEFAULT NULL,
-  PRIMARY KEY (`ProductId`),
-  UNIQUE KEY `ProductName_UNIQUE` (`ProductName`)
+  `productDescription` varchar(255) DEFAULT NULL,
+  `categoryId` int NOT NULL,
+  PRIMARY KEY (`productId`),
+  KEY `ctgr_idx` (`categoryId`),
+  CONSTRAINT `ctgr` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,35 +228,6 @@ CREATE TABLE `supermarket` (
 LOCK TABLES `supermarket` WRITE;
 /*!40000 ALTER TABLE `supermarket` DISABLE KEYS */;
 /*!40000 ALTER TABLE `supermarket` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `supermarketproducts`
---
-
-DROP TABLE IF EXISTS `supermarketproducts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `supermarketproducts` (
-  `SuperMarketId` int NOT NULL,
-  `ProductId` int NOT NULL,
-  `CategoryId` int NOT NULL,
-  PRIMARY KEY (`SuperMarketId`,`ProductId`),
-  KEY `fo2_idx` (`ProductId`),
-  KEY `fo3_idx` (`CategoryId`),
-  CONSTRAINT `fo1` FOREIGN KEY (`SuperMarketId`) REFERENCES `supermarket` (`supermarketId`) ON DELETE CASCADE,
-  CONSTRAINT `fo2` FOREIGN KEY (`ProductId`) REFERENCES `products` (`ProductId`) ON DELETE CASCADE,
-  CONSTRAINT `fo3` FOREIGN KEY (`CategoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `supermarketproducts`
---
-
-LOCK TABLES `supermarketproducts` WRITE;
-/*!40000 ALTER TABLE `supermarketproducts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `supermarketproducts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -383,4 +368,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2022-09-04 20:47:57
+=======
+-- Dump completed on 2022-09-06 15:05:37
+>>>>>>> master
