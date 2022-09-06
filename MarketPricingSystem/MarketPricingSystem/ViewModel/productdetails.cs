@@ -15,8 +15,7 @@ namespace MarketPricingSystem.ViewModel
 
         public int productprice { get; set; }
 
-      //  public string category { get; set; }
-
+        public string productcategory { get; set; }
 
 
     }

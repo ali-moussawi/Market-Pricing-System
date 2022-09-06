@@ -70,7 +70,7 @@ namespace MarketPricingSystem.Controllers
        //install sql connector to can open connection
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
             {
-                string query = "Select productname, BarcodeNb, productDescription, price from products p , productprices pc where pc.supermarketid = "+id.ToString()+ "  and p.productid = pc.productid and pc.IsActivePrice=0";
+                string query = " select  productname ,barcodenb,productdescription , price,categoryname from products p , categories c , productprices pc where p.productid = pc.productid and pc.supermarketid ="+id.ToString() + " and c.categoryid = p.categoryid and isactiveprice=0";
                 using (MySqlCommand cmd = new MySqlCommand(query))
                 {
                     cmd.Connection = con;
@@ -85,7 +85,8 @@ namespace MarketPricingSystem.Controllers
                                 productBarcode = Convert.ToInt32(sdr["BarcodeNb"]),
                                 productDescription = sdr["productDescription"].ToString(),
                                 productprice = Convert.ToInt32(sdr["price"]),
-                                //category for each product
+                                productcategory = sdr["categoryname"].ToString(),
+
                             });
                         }
                     }
@@ -106,7 +107,7 @@ namespace MarketPricingSystem.Controllers
             //install sql connector to can open connection
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
             {
-                string query = "select productid, productname, barcodenb, productdescription from products p where p.productid in (select distinct productid from productprices);";
+                string query = "select productid, productname ,barcodenb , productdescription , categoryname from products p , categories c where p.categoryid = c.categoryid and p.productid in (select Distinct productid from productprices);";
                 using (MySqlCommand cmd = new MySqlCommand(query))
                 {
                     cmd.Connection = con;
@@ -121,6 +122,7 @@ namespace MarketPricingSystem.Controllers
                                 productname = sdr["productname"].ToString(),
                                 productBarcode = Convert.ToInt32(sdr["barcodenb"]),
                                 productDescription= sdr["productdescription"].ToString(),
+                                productcategory = sdr["categoryname"].ToString(),
                             });
                         }
                     }
