@@ -95,17 +95,6 @@ DROP TABLE IF EXISTS `productprices`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `productprices` (
   `productId` int NOT NULL,
-<<<<<<< HEAD
-  `supermarketId` int NOT NULL,
-  `Price` int NOT NULL,
-  `Date` date NOT NULL,
-  `IsActivePrice` int NOT NULL,
-  PRIMARY KEY (`Price`,`Date`),
-  KEY `frrg1_idx` (`productId`),
-  KEY `frrg2_idx` (`supermarketId`),
-  CONSTRAINT `frrg1` FOREIGN KEY (`productId`) REFERENCES `products` (`ProductId`),
-  CONSTRAINT `frrg2` FOREIGN KEY (`supermarketId`) REFERENCES `supermarket` (`supermarketId`)
-=======
   `supermarketid` int NOT NULL,
   `price` int NOT NULL,
   `date` date NOT NULL,
@@ -115,7 +104,6 @@ CREATE TABLE `productprices` (
   KEY `spid_idx` (`supermarketid`),
   CONSTRAINT `prid` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`),
   CONSTRAINT `spid` FOREIGN KEY (`supermarketid`) REFERENCES `supermarket` (`supermarketId`)
->>>>>>> master
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -368,8 +356,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-<<<<<<< HEAD
--- Dump completed on 2022-09-04 20:47:57
-=======
 -- Dump completed on 2022-09-06 15:05:37
->>>>>>> master
