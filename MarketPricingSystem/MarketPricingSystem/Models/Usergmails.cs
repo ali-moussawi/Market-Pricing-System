@@ -11,6 +11,7 @@ namespace MarketPricingSystem.Models
     {
         public int UserId { get; set; }
         public string UserGmail { get; set; }
+        public string Password { get; set; }
 
         public virtual Users User { get; set; }
     }

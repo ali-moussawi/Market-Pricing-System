@@ -223,6 +223,11 @@ namespace MarketPricingSystem.Models
 
                 entity.Property(e => e.UserGmail).HasMaxLength(55);
 
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasMaxLength(55);
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Usergmails)
                     .HasForeignKey(d => d.UserId)
@@ -279,10 +284,6 @@ namespace MarketPricingSystem.Models
                 entity.ToTable("users");
 
                 entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(55);
-
-                entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(55);
             });

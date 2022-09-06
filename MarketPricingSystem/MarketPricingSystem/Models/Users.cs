@@ -18,7 +18,6 @@ namespace MarketPricingSystem.Models
         }
 
         public int UserId { get; set; }
-        public string Password { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Usergmails> Usergmails { get; set; }
