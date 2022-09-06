@@ -12,7 +12,6 @@ namespace MarketPricingSystem.Models
         public Supermarket()
         {
             Productprices = new HashSet<Productprices>();
-            Supermarketproducts = new HashSet<Supermarketproducts>();
             Usersphonenumber = new HashSet<Usersphonenumber>();
         }
 
@@ -22,7 +21,6 @@ namespace MarketPricingSystem.Models
         public string SupermarketDescription { get; set; }
 
         public virtual ICollection<Productprices> Productprices { get; set; }
-        public virtual ICollection<Supermarketproducts> Supermarketproducts { get; set; }
         public virtual ICollection<Usersphonenumber> Usersphonenumber { get; set; }
     }
 }

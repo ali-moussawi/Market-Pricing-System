@@ -10,7 +10,7 @@ namespace MarketPricingSystem.Models
     public partial class Productprices
     {
         public int ProductId { get; set; }
-        public int SupermarketId { get; set; }
+        public int Supermarketid { get; set; }
         public int Price { get; set; }
         public DateTime Date { get; set; }
         public int IsActivePrice { get; set; }

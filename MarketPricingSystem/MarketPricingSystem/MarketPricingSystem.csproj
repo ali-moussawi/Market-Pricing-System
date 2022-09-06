@@ -246,7 +246,6 @@
     <Compile Include="Models\Rolepermissions.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Supermarket.cs" />
-    <Compile Include="Models\Supermarketproducts.cs" />
     <Compile Include="Models\Usergmails.cs" />
     <Compile Include="Models\Userpermissions.cs" />
     <Compile Include="Models\Userroles.cs" />

@@ -11,12 +11,12 @@ namespace MarketPricingSystem.Models
     {
         public Categories()
         {
-            Supermarketproducts = new HashSet<Supermarketproducts>();
+            Products = new HashSet<Products>();
         }
 
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
 
-        public virtual ICollection<Supermarketproducts> Supermarketproducts { get; set; }
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

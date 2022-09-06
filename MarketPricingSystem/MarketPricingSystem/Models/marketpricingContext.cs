@@ -27,7 +27,6 @@ namespace MarketPricingSystem.Models
         public virtual DbSet<Rolepermissions> Rolepermissions { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Supermarket> Supermarket { get; set; }
-        public virtual DbSet<Supermarketproducts> Supermarketproducts { get; set; }
         public virtual DbSet<Usergmails> Usergmails { get; set; }
         public virtual DbSet<Userpermissions> Userpermissions { get; set; }
         public virtual DbSet<Userroles> Userroles { get; set; }
@@ -99,28 +98,32 @@ namespace MarketPricingSystem.Models
                 entity.ToTable("productprices");
 
                 entity.HasIndex(e => e.ProductId)
-                    .HasName("frrg1_idx");
+                    .HasName("prid_idx");
 
-                entity.HasIndex(e => e.SupermarketId)
-                    .HasName("frrg2_idx");
+                entity.HasIndex(e => e.Supermarketid)
+                    .HasName("spid_idx");
 
-                entity.Property(e => e.Date).HasColumnType("date");
+                entity.Property(e => e.Price).HasColumnName("price");
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("date");
 
                 entity.Property(e => e.ProductId).HasColumnName("productId");
 
-                entity.Property(e => e.SupermarketId).HasColumnName("supermarketId");
+                entity.Property(e => e.Supermarketid).HasColumnName("supermarketid");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Productprices)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("frrg1");
+                    .HasConstraintName("prid");
 
                 entity.HasOne(d => d.Supermarket)
                     .WithMany(p => p.Productprices)
-                    .HasForeignKey(d => d.SupermarketId)
+                    .HasForeignKey(d => d.Supermarketid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("frrg2");
+                    .HasConstraintName("spid");
             });
 
             modelBuilder.Entity<Products>(entity =>
@@ -130,17 +133,26 @@ namespace MarketPricingSystem.Models
 
                 entity.ToTable("products");
 
-                entity.HasIndex(e => e.ProductName)
-                    .HasName("ProductName_UNIQUE")
-                    .IsUnique();
+                entity.HasIndex(e => e.CategoryId)
+                    .HasName("ctgr_idx");
+
+                entity.Property(e => e.ProductId).HasColumnName("productId");
+
+                entity.Property(e => e.CategoryId).HasColumnName("categoryId");
 
                 entity.Property(e => e.ProductDescription)
                     .HasColumnName("productDescription")
-                    .HasMaxLength(250);
+                    .HasMaxLength(255);
 
                 entity.Property(e => e.ProductName)
                     .IsRequired()
-                    .HasMaxLength(55);
+                    .HasColumnName("productName")
+                    .HasMaxLength(255);
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.CategoryId)
+                    .HasConstraintName("ctgr");
             });
 
             modelBuilder.Entity<Rolepermissions>(entity =>
@@ -197,35 +209,6 @@ namespace MarketPricingSystem.Models
                     .IsRequired()
                     .HasColumnName("supermarketRegion")
                     .HasMaxLength(45);
-            });
-
-            modelBuilder.Entity<Supermarketproducts>(entity =>
-            {
-                entity.HasKey(e => new { e.SuperMarketId, e.ProductId })
-                    .HasName("PRIMARY");
-
-                entity.ToTable("supermarketproducts");
-
-                entity.HasIndex(e => e.CategoryId)
-                    .HasName("fo3_idx");
-
-                entity.HasIndex(e => e.ProductId)
-                    .HasName("fo2_idx");
-
-                entity.HasOne(d => d.Category)
-                    .WithMany(p => p.Supermarketproducts)
-                    .HasForeignKey(d => d.CategoryId)
-                    .HasConstraintName("fo3");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.Supermarketproducts)
-                    .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("fo2");
-
-                entity.HasOne(d => d.SuperMarket)
-                    .WithMany(p => p.Supermarketproducts)
-                    .HasForeignKey(d => d.SuperMarketId)
-                    .HasConstraintName("fo1");
             });
 
             modelBuilder.Entity<Usergmails>(entity =>
