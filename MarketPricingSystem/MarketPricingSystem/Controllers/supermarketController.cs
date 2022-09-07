@@ -3,18 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MarketPricingSystem.Authorization;
+
 namespace MarketPricingSystem.Controllers
 {
-
-
-
-    [Authorize]
-    public class AdminController : Controller
+    public class supermarketController : Controller
     {
-        // GET: Admin
-
-
+        // GET: supermarket
         public ActionResult Index()
         {
             return View();

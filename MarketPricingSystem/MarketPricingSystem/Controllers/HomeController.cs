@@ -9,7 +9,8 @@ using System.Configuration;
 using MySql.Data.MySqlClient;
 using MarketPricingSystem.ViewModel;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-
+using System.Web.Security;
+using MarketPricingSystem.DAL;
 namespace MarketPricingSystem.Controllers
 {
     
@@ -27,24 +28,16 @@ namespace MarketPricingSystem.Controllers
         {
             _context.Dispose();
         }
+
+
+
+
+
         public ActionResult Index()
         {
             return View();
         }
 
-
-        [HttpGet]
-        public ActionResult Signin()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult validatesignin()
-        {
-            return View();
-        }
 
         public ActionResult SuperMarketList()
         {
@@ -62,143 +55,53 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        public ActionResult ProductList(int id)
+        public ActionResult ProductList(int id)//find list of product in supermarket (no productid)
         {
+            productDal product = new productDal();
 
-            List<productdetails> products = new List<productdetails>();
-       
-       //install sql connector to can open connection
-            using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
-            {
-                string query = " select  productname ,barcodenb,productdescription , price,categoryname from products p , categories c , productprices pc where p.productid = pc.productid and pc.supermarketid ="+id.ToString() + " and c.categoryid = p.categoryid and isactiveprice=0";
-                using (MySqlCommand cmd = new MySqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            products.Add(new productdetails
-                            {
-                                productname = sdr["productname"].ToString(),
-                                productBarcode = Convert.ToInt32(sdr["BarcodeNb"]),
-                                productDescription = sdr["productDescription"].ToString(),
-                                productprice = Convert.ToInt32(sdr["price"]),
-                                productcategory = sdr["categoryname"].ToString(),
+            List<productdetails> supermarketproducts = product.supermarketproductlist(id);
 
-                            });
-                        }
-                    }
-                    con.Close();
-                }
-            }
-
-            return View(products);
+            return View(supermarketproducts);
 
             
 
         }
 
-        public ActionResult Allproducts()
+        public ActionResult Allproducts()//list of all priced product with productid that used to find cheapest and expensive products
         {
-            List<AllProducts> products = new List<AllProducts>();
+            productDal product= new productDal();
 
-            //install sql connector to can open connection
-            using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
-            {
-                string query = "select productid, productname ,barcodenb , productdescription , categoryname from products p , categories c where p.categoryid = c.categoryid and p.productid in (select Distinct productid from productprices);";
-                using (MySqlCommand cmd = new MySqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            products.Add(new AllProducts
-                            {
-                                productid = Convert.ToInt32(sdr["productid"]),
-                                productname = sdr["productname"].ToString(),
-                                productBarcode = Convert.ToInt32(sdr["barcodenb"]),
-                                productDescription= sdr["productdescription"].ToString(),
-                                productcategory = sdr["categoryname"].ToString(),
-                            });
-                        }
-                    }
-                    con.Close();
-                }
-            }
+            List <AllProducts> allproducts = product.Allproducts();
 
-            return View(products);
+            return View(allproducts);
 
         }
 
-        public ActionResult GetCheapestproduct(int id)
+        public ActionResult GetCheapestproduct(int id) // this id is product id
         {
-
-            productvalue cheapproduct=new productvalue();
-            using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
-            {
-                string query = " select supermarketname , productname , price  from supermarket s, products p , productprices pc where s.supermarketid = pc.supermarketid and p.productid = pc.productid and p.productid ="+id.ToString()+ " and pc.ISactiveprice=0    ORDER BY price ASC   limit 1 ;";
-                using (MySqlCommand cmd = new MySqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                             cheapproduct = new productvalue
-                            {
-                                supermarketname = sdr["supermarketname"].ToString(),
-                                productname = sdr["productname"].ToString(),
-                                productprice = Convert.ToInt32(sdr["price"]),
-
-                            };
-                          
-                        }
-                    }
-                    con.Close();
-                }
-
-            }
-            return View(cheapproduct);
+            productDal product = new productDal();
+            List<productvalue> cheapestproducts = product.GetCheapestproduct(id);
+                      
+            return View(cheapestproducts);
 
         }
 
 
         public ActionResult GetExpensiveproduct(int id)
         {
+            productDal product = new productDal();
+            List<productvalue> topexpensivethree = product.GetExpensiveproduct(id); 
+         
+            return View(topexpensivethree);
 
-            productvalue cheapproduct = new productvalue();
-            using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
-            {
-                string query = " select supermarketname , productname , price  from supermarket s, products p , productprices pc where s.supermarketid = pc.supermarketid and p.productid = pc.productid and p.productid =" + id.ToString() + " and pc.ISactiveprice=0    ORDER BY price DESC   limit 1 ;";
-                using (MySqlCommand cmd = new MySqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            cheapproduct = new productvalue
-                            {
-                                supermarketname = sdr["supermarketname"].ToString(),
-                                productname = sdr["productname"].ToString(),
-                                productprice = Convert.ToInt32(sdr["price"]),
+        }
 
-                            };
 
-                        }
-                    }
-                    con.Close();
-                }
+        public ActionResult SuperMarketCategories(int id)
+        {
 
-            }
-            return View(cheapproduct);
 
+            return View();
         }
 
 

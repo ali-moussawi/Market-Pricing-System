@@ -231,13 +231,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\supermarketController.cs" />
+    <Compile Include="CustomAuthorization\customedashboardAuthorization.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DMUController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="DAL\categoryDal.cs" />
+    <Compile Include="DAL\productDal.cs" />
+    <Compile Include="DAL\supermarketDal.cs" />
+    <Compile Include="DAL\userpermissionsDal.cs" />
+    <Compile Include="DAL\userrolesDal.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\Loginlogs.cs" />
     <Compile Include="Models\marketpricingContext.cs" />
     <Compile Include="Models\Permissions.cs" />
@@ -255,12 +265,14 @@
     <Compile Include="ViewModel\AllProducts.cs" />
     <Compile Include="ViewModel\productvalue.cs" />
     <Compile Include="ViewModel\productdetails.cs" />
+    <Compile Include="ViewModel\signin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\expensive-cheapest.css" />
     <Content Include="Content\options.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
@@ -273,6 +285,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\expensive-cheapest.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -296,18 +309,22 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Signin.cshtml" />
     <Content Include="Views\Home\SuperMarketList.cshtml" />
     <Content Include="Views\Home\Options.cshtml" />
     <Content Include="Views\Home\ProductList.cshtml" />
     <Content Include="Views\Home\Allproducts.cshtml" />
     <Content Include="Views\Home\GetCheapestproduct.cshtml" />
     <Content Include="Views\Home\GetExpensiveproduct.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Account\signin.cshtml" />
+    <Content Include="Views\Home\SuperMarketCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
+    <Folder Include="security\" />
     <Folder Include="Views\DMU\" />
+    <Folder Include="Views\Permission\" />
+    <Folder Include="Views\supermarket\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,4 +1,4 @@
-﻿@model MarketPricingSystem.ViewModel.productvalue
+﻿@model IEnumerable< MarketPricingSystem.ViewModel.productvalue>
 
 
 @{
@@ -10,8 +10,27 @@
 
 <div style="margin-top:100px">
 
-    <h1> @Model.supermarketname </h1>
-    <h1> @Model.productname </h1>
-    <h1>@Model.productprice <span>$</span></h1>
+    @foreach(var cheapproduct in Model)
+            {
+               <div style="display:flex">
+
+                   <div>
+
+                       <h1> @cheapproduct.supermarketname </h1>
+                       <h1> @cheapproduct.productname </h1>
+                       <h1>@cheapproduct.productprice <span>$</span></h1>
+
+
+                   </div>
+
+
+               </div>
+
+
+
+            }
+
+
+  
 
 </div>

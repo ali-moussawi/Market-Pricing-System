@@ -7,6 +7,7 @@ namespace MarketPricingSystem.ViewModel
 {
     public class AllProducts
     {
+        //this needed becuase we need to use product id to find some data like cheapest price so we need to pass id to next page
         public int productid { get; set; }
         public string productname { get; set; }
 
