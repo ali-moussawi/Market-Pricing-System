@@ -10,10 +10,10 @@ namespace MarketPricingSystem.ViewModel
     {
 
         [Required]
-        public string gmail { get; set; }
+        public string Gmail { get; set; }
 
         [Required]
-        public string password { get; set; }
+        public string Password { get; set; }
 
     }
 }
