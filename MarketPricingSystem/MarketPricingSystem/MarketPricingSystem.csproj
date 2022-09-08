@@ -232,10 +232,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\supermarketController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CustomAuthorization\customedashboardAuthorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\DMUController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="DAL\categoryDal.cs" />
@@ -275,6 +274,7 @@
     <Content Include="Content\expensive-cheapest.css" />
     <Content Include="Content\options.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\user.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -286,6 +286,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\expensive-cheapest.js" />
+    <Content Include="Scripts\usersdatatables.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -297,6 +298,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\users.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -315,14 +317,14 @@
     <Content Include="Views\Home\Allproducts.cshtml" />
     <Content Include="Views\Home\GetCheapestproduct.cshtml" />
     <Content Include="Views\Home\GetExpensiveproduct.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Account\signin.cshtml" />
     <Content Include="Views\Home\SuperMarketCategories.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageUser.cshtml" />
+    <Content Include="Views\Users\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="security\" />
-    <Folder Include="Views\DMU\" />
     <Folder Include="Views\Permission\" />
     <Folder Include="Views\supermarket\" />
   </ItemGroup>

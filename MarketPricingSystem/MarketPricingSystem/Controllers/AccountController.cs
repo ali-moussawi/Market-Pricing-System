@@ -51,10 +51,10 @@ namespace MarketPricingSystem.Controllers
 
                 FormsAuthentication.SetAuthCookie(userindb.UserGmail, false);
 
-                Session["permission"] = permissionname;
+               
 
-                var tst = Session["permission"];
-                return RedirectToAction("Index", "Home");
+               
+                return RedirectToAction("Dashboard", "Users");
             }
 
             ModelState.AddModelError("", "Username or password is wrong ");
@@ -63,6 +63,13 @@ namespace MarketPricingSystem.Controllers
 
         }
 
+
+        public ActionResult Signout()
+        {
+
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index","Home");
+        }
 
     }
 }
