@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MarketPricingSystem.Models.Supermarket>
+@{
+    ViewBag.Title = "Allsupermarkets";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Super Markets</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+        <div class="card mb-4">
+         
+            <a href="/Supermarket/Createsupermarket" class="btn btn-success" role="button">Create New SuperMarket </a>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+              All SuperMarkets
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Market Name</th>
+                            <th>Market Region</th>
+                            <th>Description</th>
+                            <th>phone number</th>
+                            <th></th>
+                          
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Market Name</th>
+                            <th>Market Region</th>
+                            <th>Description</th>
+                            <th>phone number</th>
+                            <th></th>
+                         
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var market in Model)
+                        {
+
+                            <tr>
+                                <td>@market.SupermarketName</td>
+                                <td>@market.SupermarketRegion</td>
+                                <td>@market.SupermarketDescription</td>
+                                <td>@market.Usersphonenumber.FirstOrDefault(u => u.SuperMarketId == market.SupermarketId).PhoneNumber</td>
+
+                                <td>
+                                    <a href="/Supermarket/Updatesupermarket/@market.SupermarketId" class="btn btn-primary" role="button">Update</a>
+                                    <a href="/Supermarket/ConfirmDelete/@market.SupermarketId" class="btn btn-danger" role="button">Delete</a>
+                                    
+
+
+                                </td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

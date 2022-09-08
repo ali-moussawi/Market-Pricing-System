@@ -231,7 +231,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\supermarketController.cs" />
+    <Compile Include="Controllers\SupermarketController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CustomAuthorization\customedashboardAuthorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -321,12 +321,14 @@
     <Content Include="Views\Home\SuperMarketCategories.cshtml" />
     <Content Include="Views\Shared\_LayoutPageUser.cshtml" />
     <Content Include="Views\Users\Dashboard.cshtml" />
+    <Content Include="Views\Supermarket\Allsupermarkets.cshtml" />
+    <Content Include="Views\Supermarket\Createsupermarket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="security\" />
+    <Folder Include="Views\Allsupermarkets\" />
     <Folder Include="Views\Permission\" />
-    <Folder Include="Views\supermarket\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
