@@ -27,7 +27,7 @@ CREATE TABLE `categories` (
   `categoryName` varchar(45) NOT NULL,
   PRIMARY KEY (`categoryId`),
   UNIQUE KEY `categoryName_UNIQUE` (`categoryName`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,6 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (2,'Beverages'),(1,'Diary'),(3,'Meat'),(4,'Vegetables');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +113,6 @@ CREATE TABLE `productprices` (
 
 LOCK TABLES `productprices` WRITE;
 /*!40000 ALTER TABLE `productprices` DISABLE KEYS */;
-INSERT INTO `productprices` VALUES (3,1,2,'2022-09-06',0),(1,1,4,'2022-09-06',0),(1,2,6,'2022-09-06',0),(4,1,10,'2022-09-06',0),(4,2,12,'2022-09-06',0),(2,2,18,'2022-09-06',0),(2,1,20,'2022-09-06',0);
 /*!40000 ALTER TABLE `productprices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +132,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`productId`),
   KEY `ctgr_idx` (`categoryId`),
   CONSTRAINT `ctgr` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +141,6 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'picon',100500,'8 pieces',1),(2,'Beaf',668973,'1 kilo',3),(3,'Tomato',320982,'1 kilo',4),(4,'pepsi',9543,'1.25 liter',2),(5,'Labneh',445098,'500 gram',1);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,8 +205,9 @@ CREATE TABLE `supermarket` (
   `supermarketName` varchar(45) NOT NULL,
   `supermarketRegion` varchar(45) NOT NULL,
   `supermarketDescription` varchar(255) DEFAULT NULL,
+  `phonenumber` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`supermarketId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +216,6 @@ CREATE TABLE `supermarket` (
 
 LOCK TABLES `supermarket` WRITE;
 /*!40000 ALTER TABLE `supermarket` DISABLE KEYS */;
-INSERT INTO `supermarket` VALUES (1,'Rammal','ghobiery','open all the week'),(2,'Karffor','Hadath','open from 8 am to 12 pm');
 /*!40000 ALTER TABLE `supermarket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,32 +243,6 @@ CREATE TABLE `usergmails` (
 LOCK TABLES `usergmails` WRITE;
 /*!40000 ALTER TABLE `usergmails` DISABLE KEYS */;
 /*!40000 ALTER TABLE `usergmails` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `userpermissions`
---
-
-DROP TABLE IF EXISTS `userpermissions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `userpermissions` (
-  `UserId` int NOT NULL,
-  `PermissionId` int NOT NULL,
-  PRIMARY KEY (`UserId`,`PermissionId`),
-  KEY `fgn2_idx` (`PermissionId`),
-  CONSTRAINT `fgn1` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE,
-  CONSTRAINT `fgn2` FOREIGN KEY (`PermissionId`) REFERENCES `permissions` (`PermissionId`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `userpermissions`
---
-
-LOCK TABLES `userpermissions` WRITE;
-/*!40000 ALTER TABLE `userpermissions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `userpermissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -310,6 +281,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `UserId` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(55) NOT NULL,
+  `phoneNumber` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -322,35 +294,6 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `usersphonenumber`
---
-
-DROP TABLE IF EXISTS `usersphonenumber`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usersphonenumber` (
-  `UserId` int DEFAULT NULL,
-  `SuperMarketId` int DEFAULT NULL,
-  `PhoneNumber` varchar(45) NOT NULL,
-  PRIMARY KEY (`PhoneNumber`),
-  KEY `usf1_idx` (`UserId`),
-  KEY `usf2_idx` (`SuperMarketId`),
-  CONSTRAINT `usf1` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE,
-  CONSTRAINT `usf2` FOREIGN KEY (`SuperMarketId`) REFERENCES `supermarket` (`supermarketId`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usersphonenumber`
---
-
-LOCK TABLES `usersphonenumber` WRITE;
-/*!40000 ALTER TABLE `usersphonenumber` DISABLE KEYS */;
-INSERT INTO `usersphonenumber` VALUES (NULL,1,'71007009'),(NULL,2,'81565749');
-/*!40000 ALTER TABLE `usersphonenumber` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -361,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-06 21:10:26
+-- Dump completed on 2022-09-09 20:34:09
