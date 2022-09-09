@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
 
-<h2>Deletesupermarket</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Supermarket</h4>
+
+<div style="margin-left:150px">
+
+    <h3 style="color:red">Are you sure you want to delete this? </h3>
+    <h4  style="color:red">Supermarket</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -38,11 +39,11 @@
 
     </dl>
 
-  
 
-<div class="form-actions no-color">
-    <a href="/Supermarket/ConfirmDelete/@Model.SupermarketId" class="btn btn-danger" role="button">Delete</a>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-    
+
+    <div class="form-actions no-color">
+        <a href="/Supermarket/ConfirmDelete/@Model.SupermarketId" class="btn btn-danger" role="button">Delete</a>
+        <a href="/Supermarket/Allsupermarkets" class="btn btn-primary" role="button">Back</a>
+    </div>
+
 </div>

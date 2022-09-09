@@ -265,6 +265,7 @@
     <Compile Include="ViewModel\productvalue.cs" />
     <Compile Include="ViewModel\productdetails.cs" />
     <Compile Include="ViewModel\signin.cs" />
+    <Compile Include="ViewModel\supermarketdata.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -322,8 +323,8 @@
     <Content Include="Views\Shared\_LayoutPageUser.cshtml" />
     <Content Include="Views\Users\Dashboard.cshtml" />
     <Content Include="Views\Supermarket\Allsupermarkets.cshtml" />
-    <Content Include="Views\Supermarket\Createsupermarket.cshtml" />
     <Content Include="Views\Supermarket\Deletesupermarket.cshtml" />
+    <Content Include="Views\Supermarket\Updatesupermarket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
