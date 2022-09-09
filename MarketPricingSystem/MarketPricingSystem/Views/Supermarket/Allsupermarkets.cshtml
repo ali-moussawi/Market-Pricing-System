@@ -53,19 +53,8 @@
                                 <td>@market.SupermarketName</td>
                                 <td>@market.SupermarketRegion</td>
                                 <td>@market.SupermarketDescription</td>
-                                <td>
-                                    @if (@market.Usersphonenumber.FirstOrDefault(u => u.SuperMarketId == market.SupermarketId) != null)
-                                    {
-                                        @market.Usersphonenumber.FirstOrDefault(u => u.SuperMarketId == market.SupermarketId).PhoneNumber
-                                    }
-                                   else
-                                        {
-                                             <span>no phone number</span>
-                                        }
-
-
-
-                                </td>
+                                <td>@market.Phonenumber</td>
+                             
 
                                 <td>
                                     <a href="/Supermarket/Updatesupermarket/@market.SupermarketId" class="btn btn-primary" role="button">Update</a>

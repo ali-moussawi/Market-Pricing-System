@@ -12,17 +12,14 @@ namespace MarketPricingSystem.Models
         public Users()
         {
             Usergmails = new HashSet<Usergmails>();
-            Userpermissions = new HashSet<Userpermissions>();
             Userroles = new HashSet<Userroles>();
-            Usersphonenumber = new HashSet<Usersphonenumber>();
         }
 
         public int UserId { get; set; }
         public string Name { get; set; }
+        public string PhoneNumber { get; set; }
 
         public virtual ICollection<Usergmails> Usergmails { get; set; }
-        public virtual ICollection<Userpermissions> Userpermissions { get; set; }
         public virtual ICollection<Userroles> Userroles { get; set; }
-        public virtual ICollection<Usersphonenumber> Usersphonenumber { get; set; }
     }
 }

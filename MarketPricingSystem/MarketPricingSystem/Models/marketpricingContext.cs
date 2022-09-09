@@ -28,16 +28,14 @@ namespace MarketPricingSystem.Models
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Supermarket> Supermarket { get; set; }
         public virtual DbSet<Usergmails> Usergmails { get; set; }
-        public virtual DbSet<Userpermissions> Userpermissions { get; set; }
         public virtual DbSet<Userroles> Userroles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Usersphonenumber> Usersphonenumber { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123;database=marketpricing");
             }
         }
@@ -196,6 +194,10 @@ namespace MarketPricingSystem.Models
 
                 entity.Property(e => e.SupermarketId).HasColumnName("supermarketId");
 
+                entity.Property(e => e.Phonenumber)
+                    .HasColumnName("phonenumber")
+                    .HasMaxLength(45);
+
                 entity.Property(e => e.SupermarketDescription)
                     .HasColumnName("supermarketDescription")
                     .HasMaxLength(255);
@@ -234,27 +236,6 @@ namespace MarketPricingSystem.Models
                     .HasConstraintName("gm");
             });
 
-            modelBuilder.Entity<Userpermissions>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.PermissionId })
-                    .HasName("PRIMARY");
-
-                entity.ToTable("userpermissions");
-
-                entity.HasIndex(e => e.PermissionId)
-                    .HasName("fgn2_idx");
-
-                entity.HasOne(d => d.Permission)
-                    .WithMany(p => p.Userpermissions)
-                    .HasForeignKey(d => d.PermissionId)
-                    .HasConstraintName("fgn2");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Userpermissions)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("fgn1");
-            });
-
             modelBuilder.Entity<Userroles>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.RoleId })
@@ -286,34 +267,10 @@ namespace MarketPricingSystem.Models
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(55);
-            });
 
-            modelBuilder.Entity<Usersphonenumber>(entity =>
-            {
-                entity.HasKey(e => e.PhoneNumber)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("usersphonenumber");
-
-                entity.HasIndex(e => e.SuperMarketId)
-                    .HasName("usf2_idx");
-
-                entity.HasIndex(e => e.UserId)
-                    .HasName("usf1_idx");
-
-                entity.Property(e => e.PhoneNumber).HasMaxLength(45);
-
-                entity.HasOne(d => d.SuperMarket)
-                    .WithMany(p => p.Usersphonenumber)
-                    .HasForeignKey(d => d.SuperMarketId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("usf2");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Usersphonenumber)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("usf1");
+                entity.Property(e => e.PhoneNumber)
+                    .HasColumnName("phoneNumber")
+                    .HasMaxLength(45);
             });
 
             OnModelCreatingPartial(modelBuilder);
