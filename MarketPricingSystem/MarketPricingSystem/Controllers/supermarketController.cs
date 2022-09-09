@@ -29,7 +29,7 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Allsupermarkets()
         {
 
-            var supermarketlist = _context.Supermarket.Include(m => m.Usersphonenumber).ToList();
+            var supermarketlist = _context.Supermarket.ToList();
 
             return View(supermarketlist);
 
