@@ -37,23 +37,24 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        public ActionResult Deletesupermarket()
+        public ActionResult Deletesupermarket(int id )
         {
-          
-            return View();
+            var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == id);
+
+            return View(targetsupermarket);
         }
 
 
 
-        [HttpPost]
+      
         public ActionResult ConfirmDelete(int id)
         {
             var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == id);
 
             _context.Supermarket.Remove(targetsupermarket);
+            _context.SaveChanges();
 
-
-            return View();
+            return RedirectToAction("Allsupermarkets");
         }
 
 

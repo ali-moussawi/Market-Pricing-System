@@ -323,11 +323,11 @@
     <Content Include="Views\Users\Dashboard.cshtml" />
     <Content Include="Views\Supermarket\Allsupermarkets.cshtml" />
     <Content Include="Views\Supermarket\Createsupermarket.cshtml" />
+    <Content Include="Views\Supermarket\Deletesupermarket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="security\" />
-    <Folder Include="Views\Allsupermarkets\" />
     <Folder Include="Views\Permission\" />
   </ItemGroup>
   <ItemGroup>

@@ -53,11 +53,23 @@
                                 <td>@market.SupermarketName</td>
                                 <td>@market.SupermarketRegion</td>
                                 <td>@market.SupermarketDescription</td>
-                                <td>@market.Usersphonenumber.FirstOrDefault(u => u.SuperMarketId == market.SupermarketId).PhoneNumber</td>
+                                <td>
+                                    @if (@market.Usersphonenumber.FirstOrDefault(u => u.SuperMarketId == market.SupermarketId) != null)
+                                    {
+                                        @market.Usersphonenumber.FirstOrDefault(u => u.SuperMarketId == market.SupermarketId).PhoneNumber
+                                    }
+                                   else
+                                        {
+                                             <span>no phone number</span>
+                                        }
+
+
+
+                                </td>
 
                                 <td>
                                     <a href="/Supermarket/Updatesupermarket/@market.SupermarketId" class="btn btn-primary" role="button">Update</a>
-                                    <a href="/Supermarket/ConfirmDelete/@market.SupermarketId" class="btn btn-danger" role="button">Delete</a>
+                                    <a href="/Supermarket/Deletesupermarket/@market.SupermarketId" class="btn btn-danger" role="button">Delete</a>
                                     
 
 
