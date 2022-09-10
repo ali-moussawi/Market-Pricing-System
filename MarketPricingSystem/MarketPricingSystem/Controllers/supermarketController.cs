@@ -60,16 +60,39 @@ namespace MarketPricingSystem.Controllers
 
         public ActionResult Updatesupermarket(int id)
         {
+            var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == id);
+            
 
 
-            return View();
+            return View(targetsupermarket);
         }
-
-        public ActionResult Confirmupdate(int id)
+        [HttpPost]
+        public ActionResult Confirmupdate(int Supermarketid, string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {
 
+            var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == Supermarketid);
+            if(MarketName != "")
+            {
+                targetsupermarket.SupermarketName = MarketName;
+            }
+            if(MarketRegion != "")
+            {
+                targetsupermarket.SupermarketRegion = MarketRegion;
+            }
+          
+           if(MarketDescription !="")
+            {
+                targetsupermarket.SupermarketDescription = MarketDescription;
+            }
+            if(MarketNumber != "")
+            {
+                targetsupermarket.Phonenumber = MarketNumber;
+            }
+           
+            _context.SaveChanges();
 
-            return View();
+            var supermarketlist = _context.Supermarket.ToList();
+            return View("Allsupermarkets",supermarketlist);
         }
 
 
@@ -82,10 +105,18 @@ namespace MarketPricingSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult ConfirmCreate()
+        public ActionResult ConfirmCreate(string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {
-
-            return View();
+            Supermarket market = new Supermarket();
+        
+            market.SupermarketName = MarketName;
+            market.SupermarketRegion = MarketRegion;
+            market.Phonenumber = MarketNumber;
+            market.SupermarketDescription = MarketDescription;
+            _context.Supermarket.Add(market);
+            _context.SaveChanges();
+            var supermarketlist = _context.Supermarket.ToList();
+            return View("Allsupermarkets", supermarketlist);
         }
 
 

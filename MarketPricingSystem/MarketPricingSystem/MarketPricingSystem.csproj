@@ -322,6 +322,7 @@
     <Content Include="Views\Supermarket\Allsupermarkets.cshtml" />
     <Content Include="Views\Supermarket\Deletesupermarket.cshtml" />
     <Content Include="Views\Supermarket\Updatesupermarket.cshtml" />
+    <Content Include="Views\Supermarket\Createsupermarket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
