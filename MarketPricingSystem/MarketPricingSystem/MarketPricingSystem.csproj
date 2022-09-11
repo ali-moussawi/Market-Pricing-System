@@ -333,11 +333,11 @@
     <Content Include="Views\Category\Deletecategory.cshtml" />
     <Content Include="Views\Category\Createcategory.cshtml" />
     <Content Include="Views\Category\Updatecategory.cshtml" />
+    <Content Include="Views\Permission\Allpermissions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="security\" />
-    <Folder Include="Views\Permission\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

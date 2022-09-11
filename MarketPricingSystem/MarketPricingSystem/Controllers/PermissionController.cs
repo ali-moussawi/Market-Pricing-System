@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarketPricingSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,28 @@ namespace MarketPricingSystem.Controllers
 {
     public class PermissionController : Controller
     {
-        // GET: Permission
-        public ActionResult Index()
+        private marketpricingContext _context;
+
+        public PermissionController()
         {
-            return View();
+            _context = new marketpricingContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+
+
+
+        public ActionResult Allpermissions()
+        {
+
+            var permissionlits = _context.Permissions.ToList();
+
+            return View(permissionlits);
+
         }
     }
 }
