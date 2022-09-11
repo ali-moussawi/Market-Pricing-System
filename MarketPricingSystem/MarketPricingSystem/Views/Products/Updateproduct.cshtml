@@ -1,0 +1,66 @@
+﻿@model MarketPricingSystem.ViewModel.product
+@{
+    ViewBag.Title = "Updatesupermarket";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+<main>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Update SuperMarket</h3></div>
+                    <div class="card-body">
+
+
+                        <form method="post" action="/Supermarket/Confirmupdate">
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="supermarketname" type="text"  name="MarketName" />
+                                        <label for="supermarketname">@Model.SupermarketName </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input class="form-control" id="supermarketRegion" type="text"  name="MarketRegion"/>
+                                        <label for="supermarketRegion">@Model.SupermarketRegion</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="supermarketDescription" type="text"  name="MarketDescription" />
+                                <label for="supermarketDescription">@Model.SupermarketDescription</label>
+                            </div>
+
+
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="phonenumber" type="text" name="MarketNumber" />
+                                        <label for="phonenumber">@Model.Phonenumber</label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <input type="hidden" value="@Model.SupermarketId" name="Supermarketid" />
+
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid"> <button type="submit" class="btn btn-primary"> Update</button> </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

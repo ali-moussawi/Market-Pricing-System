@@ -50,12 +50,85 @@ namespace MarketPricingSystem.DAL
 
 
 
-
-
-
-        public List<AllProducts> Allproducts()//need productid for future work
+        public product product(int id)//need productid for future work
         {
-            List<AllProducts> products = new List<AllProducts>();
+            product product = new product();
+
+            //install sql connector to can open connection
+            using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
+            {
+                string query = "select productid, productname ,barcodenb , productdescription , categoryname from products p , categories c where p.categoryid = c.categoryid and p.productid = "+id.ToString();
+                using (MySqlCommand cmd = new MySqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    {
+
+                        while (sdr.Read())
+                        {
+
+
+                            product.productid = Convert.ToInt32(sdr["productid"]);
+                            product.productname = sdr["productname"].ToString();
+                            product.productBarcode = Convert.ToInt32(sdr["barcodenb"]);
+                            product.productDescription = sdr["productdescription"].ToString();
+                            product.productcategory = sdr["categoryname"].ToString();
+                           
+                        }
+                    }
+                    con.Close();
+                }
+                return product;
+            }
+
+        }
+
+
+
+        public List<product> ProductList()//need productid for future work
+        {
+            List<product> products = new List<product>();
+
+            //install sql connector to can open connection
+            using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
+            {
+                string query = "select productid, productname ,barcodenb , productdescription , categoryname from products p , categories c where p.categoryid = c.categoryid";
+                using (MySqlCommand cmd = new MySqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            products.Add(new product
+                            {
+                                productid = Convert.ToInt32(sdr["productid"]),
+                                productname = sdr["productname"].ToString(),
+                                productBarcode = Convert.ToInt32(sdr["barcodenb"]),
+                                productDescription = sdr["productdescription"].ToString(),
+                                productcategory = sdr["categoryname"].ToString(),
+                            });
+                        }
+                    }
+                    con.Close();
+                }
+                return products;
+            }
+
+        }
+
+
+
+
+
+
+
+
+        public List<product> Allproducts()//need productid for future work
+        {
+            List<product> products = new List<product>();
 
             //install sql connector to can open connection
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
@@ -69,7 +142,7 @@ namespace MarketPricingSystem.DAL
                     {
                         while (sdr.Read())
                         {
-                            products.Add(new AllProducts
+                            products.Add(new product
                             {
                                 productid = Convert.ToInt32(sdr["productid"]),
                                 productname = sdr["productname"].ToString(),

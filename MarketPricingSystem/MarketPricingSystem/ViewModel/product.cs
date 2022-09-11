@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MarketPricingSystem.ViewModel
 {
-    public class AllProducts
+    public class product
     {
         //this needed becuase we need to use product id to find some data like cheapest price so we need to pass id to next page
         public int productid { get; set; }

@@ -71,7 +71,7 @@ namespace MarketPricingSystem.Controllers
         {
             productDal product= new productDal();
 
-            List <AllProducts> allproducts = product.Allproducts();
+            List <product> allproducts = product.Allproducts();
 
             return View(allproducts);
 
