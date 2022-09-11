@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MarketPricingSystem.Models.Categories>
+@{
+    ViewBag.Title = "Allsupermarkets";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">All Categories</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+        <div class="card mb-4">
+         
+            <a href="/Category/Createcategory" class="btn btn-success" role="button">Add New Category </a>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+              All Categories
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Category Name</th>
+                           
+                            <th></th>
+                          
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Category Name</th>
+
+                            <th></th>
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var market in Model)
+                        {
+
+                            <tr>
+                                <td>@market.CategoryName</td>
+                            
+
+                                <td>
+                                    <a href="/Category/Updatecategory/@market.CategoryId" class="btn btn-primary" role="button">Update</a>
+                                    <a href="/Category/Deletecategory/@market.CategoryId" class="btn btn-danger" role="button">Delete</a>
+                                    
+
+
+                                </td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

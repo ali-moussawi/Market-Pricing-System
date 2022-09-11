@@ -71,20 +71,20 @@ namespace MarketPricingSystem.Controllers
         {
 
             var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == Supermarketid);
-            if(MarketName != "")
+            if(!string.IsNullOrEmpty(MarketName))
             {
                 targetsupermarket.SupermarketName = MarketName;
             }
-            if(MarketRegion != "")
+            if(!string.IsNullOrEmpty(MarketRegion))
             {
                 targetsupermarket.SupermarketRegion = MarketRegion;
             }
           
-           if(MarketDescription !="")
+           if(!string.IsNullOrEmpty(MarketDescription))
             {
                 targetsupermarket.SupermarketDescription = MarketDescription;
             }
-            if(MarketNumber != "")
+            if(!string.IsNullOrEmpty(MarketNumber))
             {
                 targetsupermarket.Phonenumber = MarketNumber;
             }
