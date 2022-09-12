@@ -12,7 +12,7 @@ namespace MarketPricingSystem.Controllers
     public class ProductsController : Controller
     {
         private marketpricingContext _context;
-        private productDal product = new productDal();
+        private productDal productDal = new productDal();
 
         public ProductsController()
         {
@@ -30,7 +30,7 @@ namespace MarketPricingSystem.Controllers
         public ActionResult AllProducts()
         {
            
-            List < product > pdlist= product.ProductList();
+            List < product > pdlist= productDal.ProductList();
           
 
             return View(pdlist);
@@ -42,7 +42,7 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Deleteproduct(int id)
         {
             
-            var targetproduct = product.product(id) ;
+            var targetproduct = productDal.product(id) ;
 
             return View(targetproduct);
         }
@@ -65,43 +65,69 @@ namespace MarketPricingSystem.Controllers
 
         public ActionResult Updateproduct(int id)
         {
-            var targetsupermarket = _context.Products.FirstOrDefault(m => m.ProductId == id);
+            var targetproduct = _context.Products.FirstOrDefault(m => m.ProductId == id);
+            var allcategories = _context.Categories.ToList();
 
-
-
-            return View(targetsupermarket);
-        }
-        [HttpPost]
-        public ActionResult Confirmupdate(int Productid, string ProductName, int  Barcode, string ProductDescription, int Categoryid)
-        {
-
-         
+            productandcategory productandcategory = new productandcategory
+            {
+                Product = targetproduct,
+                Categories = allcategories,
+            };
+            
+           
           
-            return View( );
+
+
+            return View(productandcategory);
+        }
+
+
+
+
+        [HttpPost]
+        public ActionResult Confirmupdate(int Productid, string productname, int Barcode, string ProductDescription, int Categoryid)
+        {
+            var targetproduct = _context.Products.FirstOrDefault(p => p.ProductId == Productid);
+
+            targetproduct.ProductDescription = ProductDescription;
+            targetproduct.ProductName = productname;
+            targetproduct.BarcodeNb = Barcode;
+            targetproduct.CategoryId = Categoryid;
+
+            _context.SaveChanges();
+            List<product> pdlist = productDal.ProductList();
+
+            return View("AllProducts", pdlist);
         }
 
 
 
         public ActionResult Createproduct()
         {
+            var allcategories = _context.Categories.ToList();
 
-            return View();
+
+            return View(allcategories);
         }
 
 
         [HttpPost]
-        public ActionResult ConfirmCreate(string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
+        public ActionResult ConfirmCreate(string productname, int Barcode, string ProductDescription, int Categoryid)
         {
-            Supermarket market = new Supermarket();
+            Products product = new Products();
 
-            market.SupermarketName = MarketName;
-            market.SupermarketRegion = MarketRegion;
-            market.Phonenumber = MarketNumber;
-            market.SupermarketDescription = MarketDescription;
-            _context.Supermarket.Add(market);
+            product.ProductName = productname;
+            product.BarcodeNb = Barcode;
+            product.ProductDescription = ProductDescription;
+            product.CategoryId = Categoryid;
+            _context.Products.Add(product);
             _context.SaveChanges();
-            var supermarketlist = _context.Supermarket.ToList();
-            return View("Allsupermarkets", supermarketlist);
+
+            List<product> pdlist = productDal.ProductList();
+
+
+
+            return View("AllProducts", pdlist);
         }
 
     }
