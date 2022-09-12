@@ -233,17 +233,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SupermarketController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CustomAuthorization\customedashboardAuthorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
-    <Compile Include="DAL\categoryDal.cs" />
     <Compile Include="DAL\productDal.cs" />
-    <Compile Include="DAL\supermarketDal.cs" />
-    <Compile Include="DAL\userpermissionsDal.cs" />
-    <Compile Include="DAL\userrolesDal.cs" />
+    <Compile Include="DAL\RolesDal.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,6 +262,7 @@
     <Compile Include="ViewModel\productandcategory.cs" />
     <Compile Include="ViewModel\productvalue.cs" />
     <Compile Include="ViewModel\productdetails.cs" />
+    <Compile Include="ViewModel\RolesandPermissions.cs" />
     <Compile Include="ViewModel\signin.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +333,10 @@
     <Content Include="Views\Category\Createcategory.cshtml" />
     <Content Include="Views\Category\Updatecategory.cshtml" />
     <Content Include="Views\Permission\Allpermissions.cshtml" />
+    <Content Include="Views\Roles\AllRoles.cshtml" />
+    <Content Include="Views\Roles\Deleterole.cshtml" />
+    <Content Include="Views\Roles\Rolepermissions.cshtml" />
+    <Content Include="Views\Roles\Createrole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
