@@ -249,7 +249,6 @@
     </Compile>
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Class1.cs" />
-    <Compile Include="Models\Loginlogs.cs" />
     <Compile Include="Models\marketpricingContext.cs" />
     <Compile Include="Models\Permissions.cs" />
     <Compile Include="Models\Productprices.cs" />

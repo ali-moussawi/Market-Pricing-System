@@ -20,7 +20,6 @@ namespace MarketPricingSystem.Models
         }
 
         public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<Loginlogs> Loginlogs { get; set; }
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<Productprices> Productprices { get; set; }
         public virtual DbSet<Products> Products { get; set; }
@@ -35,7 +34,7 @@ namespace MarketPricingSystem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+
                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123;database=marketpricing");
             }
         }
@@ -59,21 +58,6 @@ namespace MarketPricingSystem.Models
                     .IsRequired()
                     .HasColumnName("categoryName")
                     .HasMaxLength(45);
-            });
-
-            modelBuilder.Entity<Loginlogs>(entity =>
-            {
-                entity.HasKey(e => e.LogId)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("loginlogs");
-
-                entity.Property(e => e.LoginDate).HasColumnType("date");
-
-                entity.Property(e => e.UserGmail)
-                    .IsRequired()
-                    .HasColumnName("userGmail")
-                    .HasMaxLength(55);
             });
 
             modelBuilder.Entity<Permissions>(entity =>
