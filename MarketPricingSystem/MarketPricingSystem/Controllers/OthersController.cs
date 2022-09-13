@@ -34,7 +34,7 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Allusers()
         {
 
-            var userslist = _context.Users.ToList();
+            var userslist = _context.Users.Where(u => u.Gmail != "aha057@usal.edu.lb").ToList();
 
             return View(userslist);
 

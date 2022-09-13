@@ -273,6 +273,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\expensive-cheapest.css" />
     <Content Include="Content\options.css" />
+    <Content Include="Content\Settings.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\user.css" />
     <Content Include="favicon.ico" />
@@ -342,6 +343,7 @@
     <Content Include="Views\Others\Userroles.cshtml" />
     <Content Include="Views\Others\Deleteuser.cshtml" />
     <Content Include="Views\Others\Createuser.cshtml" />
+    <Content Include="Views\Users\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
