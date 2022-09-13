@@ -13,16 +13,16 @@
     @using (Html.BeginForm("Validatesignin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
-
+     
     <div class="form-horizontal">
         <h4>signin</h4>
         <hr />
-     
+        @Html.ValidationSummary()
         <div class="form-group">
             @Html.LabelFor(m => m.Gmail, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Gmail, new { @class = "form-control" , type="gmail" })
-               
+                @Html.TextBoxFor(m => m.Gmail, new { @class = "form-control", type = "gmail" })
+
             </div>
         </div>
 
@@ -30,7 +30,7 @@
             @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-               
+
             </div>
         </div>
 
@@ -48,3 +48,17 @@
 
 <div style="margin-top:200px"><span></span> </div>
 
+
+@section Styles {
+    
+    <style>
+
+        .validation-summary-errors{
+
+            color :red;
+        }
+
+    </style>
+
+    
+    }

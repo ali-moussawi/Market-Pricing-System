@@ -74,12 +74,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
-
-
-
-
-
+    
 
 
 
