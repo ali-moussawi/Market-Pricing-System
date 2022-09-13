@@ -11,15 +11,15 @@ namespace MarketPricingSystem.Models
     {
         public Users()
         {
-            Usergmails = new HashSet<Usergmails>();
             Userroles = new HashSet<Userroles>();
         }
 
         public int UserId { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
+        public string Gmail { get; set; }
+        public string Password { get; set; }
 
-        public virtual ICollection<Usergmails> Usergmails { get; set; }
         public virtual ICollection<Userroles> Userroles { get; set; }
     }
 }

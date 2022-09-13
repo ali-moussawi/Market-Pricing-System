@@ -232,6 +232,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\OthersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SupermarketController.cs" />
@@ -240,6 +241,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="DAL\otherDal.cs" />
     <Compile Include="DAL\productDal.cs" />
     <Compile Include="DAL\RolesDal.cs" />
     <Compile Include="Global.asax.cs">
@@ -254,7 +256,6 @@
     <Compile Include="Models\Rolepermissions.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Supermarket.cs" />
-    <Compile Include="Models\Usergmails.cs" />
     <Compile Include="Models\Userroles.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -337,6 +338,7 @@
     <Content Include="Views\Roles\Deleterole.cshtml" />
     <Content Include="Views\Roles\Rolepermissions.cshtml" />
     <Content Include="Views\Roles\Createrole.cshtml" />
+    <Content Include="Views\Others\Allusers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

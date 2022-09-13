@@ -26,7 +26,6 @@ namespace MarketPricingSystem.Models
         public virtual DbSet<Rolepermissions> Rolepermissions { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Supermarket> Supermarket { get; set; }
-        public virtual DbSet<Usergmails> Usergmails { get; set; }
         public virtual DbSet<Userroles> Userroles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
@@ -98,13 +97,11 @@ namespace MarketPricingSystem.Models
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Productprices)
                     .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("prid");
 
                 entity.HasOne(d => d.Supermarket)
                     .WithMany(p => p.Productprices)
                     .HasForeignKey(d => d.Supermarketid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("spid");
             });
 
@@ -150,13 +147,11 @@ namespace MarketPricingSystem.Models
                 entity.HasOne(d => d.Permission)
                     .WithMany(p => p.Rolepermissions)
                     .HasForeignKey(d => d.PermissionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("forg2");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Rolepermissions)
                     .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("forg1");
             });
 
@@ -197,29 +192,6 @@ namespace MarketPricingSystem.Models
                     .HasMaxLength(45);
             });
 
-            modelBuilder.Entity<Usergmails>(entity =>
-            {
-                entity.HasKey(e => e.UserGmail)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("usergmails");
-
-                entity.HasIndex(e => e.UserId)
-                    .HasName("gm_idx");
-
-                entity.Property(e => e.UserGmail).HasMaxLength(55);
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasColumnName("password")
-                    .HasMaxLength(55);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Usergmails)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("gm");
-            });
-
             modelBuilder.Entity<Userroles>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.RoleId })
@@ -248,8 +220,22 @@ namespace MarketPricingSystem.Models
 
                 entity.ToTable("users");
 
+                entity.HasIndex(e => e.Gmail)
+                    .HasName("Gmail_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Gmail)
+                    .IsRequired()
+                    .HasColumnName("gmail")
+                    .HasMaxLength(55);
+
                 entity.Property(e => e.Name)
                     .IsRequired()
+                    .HasMaxLength(55);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
                     .HasMaxLength(55);
 
                 entity.Property(e => e.PhoneNumber)
