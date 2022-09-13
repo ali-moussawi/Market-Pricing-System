@@ -339,6 +339,8 @@
     <Content Include="Views\Roles\Rolepermissions.cshtml" />
     <Content Include="Views\Roles\Createrole.cshtml" />
     <Content Include="Views\Others\Allusers.cshtml" />
+    <Content Include="Views\Others\Userroles.cshtml" />
+    <Content Include="Views\Others\Deleteuser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

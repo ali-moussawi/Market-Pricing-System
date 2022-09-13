@@ -11,7 +11,9 @@ namespace MarketPricingSystem.Controllers
     public class OthersController : Controller
     {
 
-        private RolesDal roleDal = new RolesDal();
+        private otherDal otherdal = new otherDal();
+
+        
 
         private marketpricingContext _context;
 
@@ -32,13 +34,42 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Allusers()
         {
 
-            var rolelist = _context.Roles.ToList();
+            var userslist = _context.Users.ToList();
 
-            return View(rolelist);
+            return View(userslist);
 
         }
 
 
+        public ActionResult Userroles(int id )
+        {
+            List<MarketPricingSystem.Models.Roles> roles = otherdal.userroles(id);
+
+            return View(roles);
+
+        }
+
+
+
+        public ActionResult Deleteuser(int id)
+        {
+            var targetuser = _context.Users.FirstOrDefault(m => m.UserId == id);
+
+            return View(targetuser);
+        }
+
+
+
+
+        public ActionResult ConfirmDelete(int id)
+        {
+            var targetuser = _context.Users.FirstOrDefault(m => m.UserId == id);
+
+            _context.Users.Remove(targetuser);
+            _context.SaveChanges();
+
+            return RedirectToAction("Allusers");
+        }
 
 
 

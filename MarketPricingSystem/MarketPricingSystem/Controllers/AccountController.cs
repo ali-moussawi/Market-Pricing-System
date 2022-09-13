@@ -40,7 +40,7 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Validatesignin(string gmail, string password)
         {
            
-            var userindb = _context.Usergmails.Where(x => x.UserGmail == gmail && x.Password == password).FirstOrDefault();
+            var userindb = _context.Users.Where(x => x.Gmail == gmail && x.Password == password).FirstOrDefault();
 
             if (userindb != null)
             {
@@ -48,7 +48,7 @@ namespace MarketPricingSystem.Controllers
                 var roleid = _context.Userroles.Where(x => x.UserId == userid).FirstOrDefault().RoleId;
                 var rolename = _context.Roles.Where(x => x.RoleId == roleid).FirstOrDefault().RoleName.ToLower();
 
-                FormsAuthentication.SetAuthCookie(userindb.UserGmail, false);
+                FormsAuthentication.SetAuthCookie(userindb.Gmail, false);
 
                
 

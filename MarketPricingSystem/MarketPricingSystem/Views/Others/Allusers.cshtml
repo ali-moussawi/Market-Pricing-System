@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MarketPricingSystem.Models.Roles>
+﻿@model  IEnumerable<MarketPricingSystem.Models.Users>
 @{
     ViewBag.Title = "Allsupermarkets";
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
@@ -14,18 +14,21 @@
         </ol>
         <div  style="margin-bottom:10px">
          
-            <a href="/Roles/Createrole" class="btn btn-success" role="button">Create New Role </a>
+            <a href="/Others/Createuser" class="btn btn-success" role="button">Create New User </a>
         </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-              All Roles
+              All Users
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th>Role Name</th>
+                            <th>Name</th>
+                            <th>phone number</th>
+                            <th>Gmail</th>
+                            <th>Password</th>
                             
                        
                             <th></th>
@@ -35,30 +38,36 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Role Name</th>
-                          
+                            <th>Name</th>
+                            <th>phone number</th>
+                            <th>Gmail</th>
+                            <th>Password</th>
 
 
                             <th></th>
 
-
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var market in Model)
+                        @foreach (var user in Model)
                         {
 
                             <tr>
-                                <td>@market.RoleName</td>
+                                <td>@user.Name</td>
+                                <td>@user.PhoneNumber</td>
+                                <td>@user.Gmail</td>
+                                <td>@user.Password</td>
                             
 
                                 <td>
-                                  
 
-                                    <a href="/Roles/Rolepermissions/@market.RoleId" class="btn btn-primary" role="button">permissions</a>
+                                    <a href="/Others/Rolepermissions" class="btn btn-primary" role="button">Edit</a>
 
-                                    <a href="/Roles/Deleterole/@market.RoleId" class="btn btn-danger" role="button">Delete</a>
-                                    
+
+                                    <a href="/Others/Userroles/@user.UserId" class="btn btn-success" role="button">Roles</a>
+
+                                    <a href="/Others/Deleteuser/@user.UserId" class="btn btn-danger" role="button">Delete</a>
+
 
 
                                 </td>
