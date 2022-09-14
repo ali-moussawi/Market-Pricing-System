@@ -334,7 +334,6 @@
     <Content Include="Views\Category\Updatecategory.cshtml" />
     <Content Include="Views\Permission\Allpermissions.cshtml" />
     <Content Include="Views\Roles\AllRoles.cshtml" />
-    <Content Include="Views\Roles\Deleterole.cshtml" />
     <Content Include="Views\Roles\Rolepermissions.cshtml" />
     <Content Include="Views\Roles\Createrole.cshtml" />
     <Content Include="Views\Others\Allusers.cshtml" />

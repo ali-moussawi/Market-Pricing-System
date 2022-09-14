@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="~/Content/user.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-
+    
     @RenderSection("Styles", false)
 
 
@@ -19,7 +19,7 @@
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/Users/Dashboard">Dashboard Is Ready</a>
+        <a class="navbar-brand ps-3" href="/Users/Dashboard">Welcome Back</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -30,7 +30,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/Users/Settings">Settings</a></li>
+                    <li><a class="dropdown-item" href="/Users/Settings">My Profile</a></li>
 
                     <li><hr class="dropdown-divider" /></li>
                     <li><a class="dropdown-item" href="/Account/Signout">Logout</a></li>
@@ -44,8 +44,16 @@
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
+
+
+
+
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
+
+
+
+                        <div class="sb-sidenav-menu-heading">basic</div>
+
                         <a class="nav-link" href="/Users/Dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
@@ -53,21 +61,69 @@
 
 
 
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
+                        <div class="sb-sidenav-menu-heading">Settings</div>
+
+
+
+                        <a class="nav-link" href="/Supermarket/Allsupermarkets">
+                            <div class="sb-nav-link-icon"> <i class="fa-solid fa-cart-shopping"></i></div>
+                            Super Markets
+                        </a>
+
+                        <a class="nav-link" href="/Products/AllProducts">
+                            <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
+                            Products
+                        </a>
+                        <a class="nav-link" href="/Category/AllCategories">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                            Categories
                         </a>
                         <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-trend-up"></i> </div>
+                            Super Market Products
                         </a>
+                        <a class="nav-link" href="/Roles/AllRoles">
+                            <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-lock"></i></div>
+                            Roles
+                        </a>
+                        <a class="nav-link" href="/Permission/Allpermissions">
+                            <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-door-open"></i></div>
+                            Permissions
+                        </a>
+                        <a class="nav-link" href="/Others/Allusers">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                            Users
+                        </a>
+
+
+
                     </div>
+
+
+
+
                 </div>
+
+
+
+
+
+
+
+
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
                     @User.Identity.Name
                 </div>
+
+
+
+
+
+
+
+
+
             </nav>
         </div>
         <div id="layoutSidenav_content">
@@ -78,7 +134,7 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                        <div class="text-muted">Copyright &copy; Market Pricing 2022-2023</div>
 
                     </div>
                 </div>

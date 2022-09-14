@@ -39,25 +39,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        public ActionResult Deleterole(int id)
-        {
-            var targetrole= _context.Roles.FirstOrDefault(m => m.RoleId == id);
-
-            return View(targetrole);
-        }
-
-
-
-
-        public ActionResult ConfirmDelete(int id)
-        {
-            var targetrole = _context.Roles.FirstOrDefault(m => m.RoleId == id);
-
-            _context.Roles.Remove(targetrole);
-            _context.SaveChanges();
-
-            return RedirectToAction("AllRoles");
-        }
+      
 
 
         public ActionResult Rolepermissions(int id)

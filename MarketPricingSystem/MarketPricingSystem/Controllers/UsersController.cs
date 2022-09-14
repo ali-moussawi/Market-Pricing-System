@@ -28,7 +28,21 @@ namespace MarketPricingSystem.Controllers
 
         public ActionResult Dashboard()
         {
-            return View();
+            List<int> data = new List<int>();
+            int supermarket = _context.Supermarket.Count();
+            int products = _context.Products.Count();
+            int categories = _context.Categories.Count();
+            int users = _context.Users.Where(u => u.Gmail != "aha057@usal.edu.lb").Count();
+
+            data.Add(supermarket);
+            data.Add(products);
+            data.Add(categories);
+            data.Add(users);
+
+
+
+
+            return View(data);
         }
 
         public ActionResult Settings()
