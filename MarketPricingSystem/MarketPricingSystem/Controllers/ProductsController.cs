@@ -87,6 +87,23 @@ namespace MarketPricingSystem.Controllers
         [HttpPost]
         public ActionResult Confirmupdate(int Productid, string productname, int Barcode, string ProductDescription, int Categoryid)
         {
+            var checkdbproductbr = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
+            if (checkdbproductbr != null)
+            {
+                List<product> pdlist1 = productDal.ProductList();
+
+                return View("AllProducts", pdlist1);
+            }
+            var checkdbproductname = _context.Products.FirstOrDefault(p => p.ProductName == productname);
+            if (checkdbproductname != null)
+            {
+                List<product> pdlist3 = productDal.ProductList();
+
+                return View("AllProducts", pdlist3);
+            }
+
+
+
             var targetproduct = _context.Products.FirstOrDefault(p => p.ProductId == Productid);
 
             targetproduct.ProductDescription = ProductDescription;
@@ -114,20 +131,47 @@ namespace MarketPricingSystem.Controllers
         [HttpPost]
         public ActionResult ConfirmCreate(string productname, int Barcode, string ProductDescription, int Categoryid)
         {
-            Products product = new Products();
 
-            product.ProductName = productname;
-            product.BarcodeNb = Barcode;
-            product.ProductDescription = ProductDescription;
-            product.CategoryId = Categoryid;
-            _context.Products.Add(product);
-            _context.SaveChanges();
-
-            List<product> pdlist = productDal.ProductList();
+            var checkdbproductbr = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
+            if (checkdbproductbr != null)
+            {
+                List<product> pdlist2 = productDal.ProductList();
 
 
 
-            return View("AllProducts", pdlist);
+                return View("AllProducts", pdlist2);
+            }
+
+
+            var checkdbproductname = _context.Products.FirstOrDefault(p => p.ProductName == productname);
+            if (checkdbproductname != null)
+            {
+                List<product> pdlist3 = productDal.ProductList();
+
+
+
+                return View("AllProducts", pdlist3);
+            }
+            else
+            {
+
+                Products product = new Products();
+
+                product.ProductName = productname;
+                product.BarcodeNb = Barcode;
+                product.ProductDescription = ProductDescription;
+                product.CategoryId = Categoryid;
+                _context.Products.Add(product);
+                _context.SaveChanges();
+
+                List<product> pdlist = productDal.ProductList();
+
+
+
+                return View("AllProducts", pdlist);
+            }
+
+         
         }
 
     }
