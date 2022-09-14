@@ -32,7 +32,7 @@ namespace MarketPricingSystem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123;database=marketpricing");
             }
         }
@@ -111,8 +111,16 @@ namespace MarketPricingSystem.Models
 
                 entity.ToTable("products");
 
+                entity.HasIndex(e => e.BarcodeNb)
+                    .HasName("BarcodeNb_UNIQUE")
+                    .IsUnique();
+
                 entity.HasIndex(e => e.CategoryId)
                     .HasName("ctgr_idx");
+
+                entity.HasIndex(e => e.ProductName)
+                    .HasName("productName_UNIQUE")
+                    .IsUnique();
 
                 entity.Property(e => e.ProductId).HasColumnName("productId");
 
@@ -169,6 +177,18 @@ namespace MarketPricingSystem.Models
             modelBuilder.Entity<Supermarket>(entity =>
             {
                 entity.ToTable("supermarket");
+
+                entity.HasIndex(e => e.Phonenumber)
+                    .HasName("phonenumber_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.SupermarketName)
+                    .HasName("supermarketName_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.SupermarketRegion)
+                    .HasName("supermarketRegion_UNIQUE")
+                    .IsUnique();
 
                 entity.Property(e => e.SupermarketId).HasColumnName("supermarketId");
 

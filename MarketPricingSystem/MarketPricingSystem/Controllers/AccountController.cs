@@ -45,7 +45,8 @@ namespace MarketPricingSystem.Controllers
             if (userindb != null)
             {
                 var userid = userindb.UserId;
-                var roleid = _context.Userroles.Where(x => x.UserId == userid).FirstOrDefault().RoleId;
+                
+                var roleid = _context.Users.Where(x => x.UserId == userid).FirstOrDefault().Roleid;
                 var rolename = _context.Roles.Where(x => x.RoleId == roleid).FirstOrDefault().RoleName.ToLower();
 
                 FormsAuthentication.SetAuthCookie(userindb.Gmail, false);
