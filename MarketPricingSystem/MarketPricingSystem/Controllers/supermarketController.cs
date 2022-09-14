@@ -1,4 +1,6 @@
-﻿using MarketPricingSystem.Models;
+﻿using MarketPricingSystem.DAL;
+using MarketPricingSystem.Models;
+using MarketPricingSystem.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -69,12 +71,61 @@ namespace MarketPricingSystem.Controllers
         [HttpPost]
         public ActionResult Confirmupdate(int Supermarketid, string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {
-
             var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == Supermarketid);
+
+            var checkdbmarketname_region = _context.Supermarket.FirstOrDefault(p => p.SupermarketName == MarketName && p.SupermarketRegion == MarketRegion);
+
+
+            if (checkdbmarketname_region != null)
+            {
+                targetsupermarket.SupermarketDescription = MarketDescription;
+                _context.SaveChanges();
+
+                if (targetsupermarket.Phonenumber != MarketNumber)
+                {
+                    var numberdb = _context.Supermarket.FirstOrDefault(m => m.Phonenumber == MarketNumber);
+                    if (numberdb != null)
+                    {
+
+                        var supermarketlist3 = _context.Supermarket.ToList();
+                        return View("Allsupermarkets", supermarketlist3);
+                    }
+             
+                }
+                
+                targetsupermarket.Phonenumber = MarketNumber;
+
+                _context.SaveChanges();
+
+                var supermarketlist1 = _context.Supermarket.ToList();
+                return View("Allsupermarkets", supermarketlist1);
+            }
+
+
+
+           
                 targetsupermarket.SupermarketName = MarketName;
                 targetsupermarket.SupermarketRegion = MarketRegion;
-                targetsupermarket.SupermarketDescription = MarketDescription;
-                targetsupermarket.Phonenumber = MarketNumber;
+
+          
+            targetsupermarket.SupermarketDescription = MarketDescription;
+            _context.SaveChanges();
+
+
+
+            if (targetsupermarket.Phonenumber != MarketNumber)
+            {
+                var numberdb = _context.Supermarket.FirstOrDefault(m => m.Phonenumber == MarketNumber);
+                if (numberdb != null)
+                {
+
+                    var supermarketlist3 = _context.Supermarket.ToList();
+                    return View("Allsupermarkets", supermarketlist3);
+                }
+
+            }
+
+            targetsupermarket.Phonenumber = MarketNumber;
            
            
             _context.SaveChanges();
@@ -95,6 +146,33 @@ namespace MarketPricingSystem.Controllers
         [HttpPost]
         public ActionResult ConfirmCreate(string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {
+
+
+
+            var checkdbmarketname_region = _context.Supermarket.FirstOrDefault(p => p.SupermarketName == MarketName && p.SupermarketRegion == MarketRegion);
+
+
+            if (checkdbmarketname_region != null)
+            {
+                var supermarketlist1 = _context.Supermarket.ToList();
+                return View("Allsupermarkets", supermarketlist1);
+            }
+
+            var marketnumber = _context.Supermarket.FirstOrDefault(p => p.Phonenumber == MarketNumber);
+
+
+            if (marketnumber != null)
+            {
+                var supermarketlist2 = _context.Supermarket.ToList();
+                return View("Allsupermarkets", supermarketlist2);
+            }
+
+
+
+
+
+
+
             Supermarket market = new Supermarket();
         
             market.SupermarketName = MarketName;

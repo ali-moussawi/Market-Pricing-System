@@ -108,6 +108,8 @@ CREATE TABLE `products` (
   `productDescription` varchar(255) DEFAULT NULL,
   `categoryId` int NOT NULL,
   PRIMARY KEY (`productId`),
+  UNIQUE KEY `productName_UNIQUE` (`productName`),
+  UNIQUE KEY `BarcodeNb_UNIQUE` (`BarcodeNb`),
   KEY `ctgr_idx` (`categoryId`),
   CONSTRAINT `ctgr` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -187,8 +189,9 @@ CREATE TABLE `supermarket` (
   `supermarketRegion` varchar(45) NOT NULL,
   `supermarketDescription` varchar(255) DEFAULT NULL,
   `phonenumber` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`supermarketId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`supermarketId`),
+  UNIQUE KEY `phonenumber_UNIQUE` (`phonenumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +200,7 @@ CREATE TABLE `supermarket` (
 
 LOCK TABLES `supermarket` WRITE;
 /*!40000 ALTER TABLE `supermarket` DISABLE KEYS */;
-INSERT INTO `supermarket` VALUES (1,'Karrfor','Ghobiery','open all days of the week','81048065'),(2,'Rammal','hadath','we have best prices','76998349'),(3,'Ammliye','Al Matar highway ','Best product prices and vouchers','01992876');
+INSERT INTO `supermarket` VALUES (1,'Karrfor','Ghobiery','open all days of the week','81048065'),(2,'Rammal','hadath','we have best prices','76998349'),(3,'Ammliye','Al Matar highway ','Best product prices and vouchers','01992876'),(6,'Karrfor','Jbeil','we depend on dollar 9000','70233235');
 /*!40000 ALTER TABLE `supermarket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,7 +222,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `Gmail_UNIQUE` (`gmail`),
   KEY `frg123roleid_idx` (`roleid`),
   CONSTRAINT `frg123roleid` FOREIGN KEY (`roleid`) REFERENCES `roles` (`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,6 +231,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'ali moussawi','71548165','aha057@usal.edu.lb','admin123',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -240,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-14 15:19:34
+-- Dump completed on 2022-09-14 20:31:17
