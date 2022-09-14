@@ -202,33 +202,6 @@ INSERT INTO `supermarket` VALUES (1,'Karrfor','Ghobiery','open all days of the w
 UNLOCK TABLES;
 
 --
--- Table structure for table `userroles`
---
-
-DROP TABLE IF EXISTS `userroles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `userroles` (
-  `UserId` int NOT NULL,
-  `RoleId` int NOT NULL,
-  PRIMARY KEY (`UserId`,`RoleId`),
-  KEY `frg2_idx` (`RoleId`),
-  CONSTRAINT `frg1` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`) ON DELETE CASCADE,
-  CONSTRAINT `frg2` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `userroles`
---
-
-LOCK TABLES `userroles` WRITE;
-/*!40000 ALTER TABLE `userroles` DISABLE KEYS */;
-INSERT INTO `userroles` VALUES (1,1);
-/*!40000 ALTER TABLE `userroles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `users`
 --
 
@@ -241,8 +214,11 @@ CREATE TABLE `users` (
   `phoneNumber` varchar(45) DEFAULT NULL,
   `gmail` varchar(55) NOT NULL,
   `password` varchar(55) NOT NULL,
+  `roleid` int NOT NULL,
   PRIMARY KEY (`UserId`),
-  UNIQUE KEY `Gmail_UNIQUE` (`gmail`)
+  UNIQUE KEY `Gmail_UNIQUE` (`gmail`),
+  KEY `frg123roleid_idx` (`roleid`),
+  CONSTRAINT `frg123roleid` FOREIGN KEY (`roleid`) REFERENCES `roles` (`RoleId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -252,7 +228,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Ali','70994357','','');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -265,4 +240,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-13 10:33:14
+-- Dump completed on 2022-09-14 15:19:34

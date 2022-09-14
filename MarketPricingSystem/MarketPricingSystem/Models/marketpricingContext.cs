@@ -26,7 +26,6 @@ namespace MarketPricingSystem.Models
         public virtual DbSet<Rolepermissions> Rolepermissions { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Supermarket> Supermarket { get; set; }
-        public virtual DbSet<Userroles> Userroles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -192,27 +191,6 @@ namespace MarketPricingSystem.Models
                     .HasMaxLength(45);
             });
 
-            modelBuilder.Entity<Userroles>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.RoleId })
-                    .HasName("PRIMARY");
-
-                entity.ToTable("userroles");
-
-                entity.HasIndex(e => e.RoleId)
-                    .HasName("frg2_idx");
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Userroles)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("frg2");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Userroles)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("frg1");
-            });
-
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.HasKey(e => e.UserId)
@@ -223,6 +201,9 @@ namespace MarketPricingSystem.Models
                 entity.HasIndex(e => e.Gmail)
                     .HasName("Gmail_UNIQUE")
                     .IsUnique();
+
+                entity.HasIndex(e => e.Roleid)
+                    .HasName("frg123roleid_idx");
 
                 entity.Property(e => e.Gmail)
                     .IsRequired()
@@ -241,6 +222,14 @@ namespace MarketPricingSystem.Models
                 entity.Property(e => e.PhoneNumber)
                     .HasColumnName("phoneNumber")
                     .HasMaxLength(45);
+
+                entity.Property(e => e.Roleid).HasColumnName("roleid");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.Roleid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("frg123roleid");
             });
 
             OnModelCreatingPartial(modelBuilder);

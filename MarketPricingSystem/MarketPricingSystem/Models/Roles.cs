@@ -12,13 +12,13 @@ namespace MarketPricingSystem.Models
         public Roles()
         {
             Rolepermissions = new HashSet<Rolepermissions>();
-            Userroles = new HashSet<Userroles>();
+            Users = new HashSet<Users>();
         }
 
         public int RoleId { get; set; }
         public string RoleName { get; set; }
 
         public virtual ICollection<Rolepermissions> Rolepermissions { get; set; }
-        public virtual ICollection<Userroles> Userroles { get; set; }
+        public virtual ICollection<Users> Users { get; set; }
     }
 }
