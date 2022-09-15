@@ -88,7 +88,7 @@ namespace MarketPricingSystem.Controllers
                     {
 
                         var supermarketlist3 = _context.Supermarket.ToList();
-                        return View("Allsupermarkets", supermarketlist3);
+                        return RedirectToAction("Allsupermarkets", supermarketlist3);
                     }
              
                 }
@@ -98,7 +98,7 @@ namespace MarketPricingSystem.Controllers
                 _context.SaveChanges();
 
                 var supermarketlist1 = _context.Supermarket.ToList();
-                return View("Allsupermarkets", supermarketlist1);
+                return RedirectToAction("Allsupermarkets", supermarketlist1);
             }
 
 
@@ -120,7 +120,7 @@ namespace MarketPricingSystem.Controllers
                 {
 
                     var supermarketlist3 = _context.Supermarket.ToList();
-                    return View("Allsupermarkets", supermarketlist3);
+                    return RedirectToAction("Allsupermarkets", supermarketlist3);
                 }
 
             }
@@ -131,7 +131,7 @@ namespace MarketPricingSystem.Controllers
             _context.SaveChanges();
 
             var supermarketlist = _context.Supermarket.ToList();
-            return View("Allsupermarkets",supermarketlist);
+            return RedirectToAction("Allsupermarkets",supermarketlist);
         }
 
 
@@ -155,7 +155,8 @@ namespace MarketPricingSystem.Controllers
             if (checkdbmarketname_region != null)
             {
                 var supermarketlist1 = _context.Supermarket.ToList();
-                return View("Allsupermarkets", supermarketlist1);
+                return RedirectToAction("Allsupermarkets",supermarketlist1);
+                
             }
 
             var marketnumber = _context.Supermarket.FirstOrDefault(p => p.Phonenumber == MarketNumber);
@@ -164,7 +165,7 @@ namespace MarketPricingSystem.Controllers
             if (marketnumber != null)
             {
                 var supermarketlist2 = _context.Supermarket.ToList();
-                return View("Allsupermarkets", supermarketlist2);
+                return RedirectToAction("Allsupermarkets", supermarketlist2);
             }
 
 
@@ -182,7 +183,7 @@ namespace MarketPricingSystem.Controllers
             _context.Supermarket.Add(market);
             _context.SaveChanges();
             var supermarketlist = _context.Supermarket.ToList();
-            return View("Allsupermarkets", supermarketlist);
+            return RedirectToAction("Allsupermarkets", supermarketlist);
         }
 
 

@@ -67,7 +67,7 @@ namespace MarketPricingSystem.Controllers
             if (checkdb != null)
             {
                 var rolelist = _context.Roles.ToList();
-                return View("AllRoles", rolelist);
+                return RedirectToAction("AllRoles", rolelist);
             }
 
 
@@ -108,7 +108,7 @@ namespace MarketPricingSystem.Controllers
 
 
             var rolelistt = _context.Roles.ToList();
-            return View("AllRoles", rolelistt);
+            return RedirectToAction("AllRoles", rolelistt);
         }
 
 

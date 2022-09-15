@@ -92,14 +92,14 @@ namespace MarketPricingSystem.Controllers
             {
                 List<product> pdlist1 = productDal.ProductList();
 
-                return View("AllProducts", pdlist1);
+                return RedirectToAction("AllProducts", pdlist1);
             }
             var checkdbproductname = _context.Products.FirstOrDefault(p => p.ProductName == productname);
             if (checkdbproductname != null)
             {
                 List<product> pdlist3 = productDal.ProductList();
 
-                return View("AllProducts", pdlist3);
+                return RedirectToAction("AllProducts", pdlist3);
             }
 
 
@@ -114,7 +114,7 @@ namespace MarketPricingSystem.Controllers
             _context.SaveChanges();
             List<product> pdlist = productDal.ProductList();
 
-            return View("AllProducts", pdlist);
+            return RedirectToAction("AllProducts", pdlist);
         }
 
 
@@ -139,7 +139,8 @@ namespace MarketPricingSystem.Controllers
 
 
 
-                return View("AllProducts", pdlist2);
+                return RedirectToAction("AllProducts",pdlist2);
+                   
             }
 
 
@@ -150,7 +151,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-                return View("AllProducts", pdlist3);
+                return RedirectToAction("AllProducts",pdlist3);
             }
             else
             {
@@ -168,7 +169,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-                return View("AllProducts", pdlist);
+                return RedirectToAction("AllProducts", pdlist);
             }
 
          

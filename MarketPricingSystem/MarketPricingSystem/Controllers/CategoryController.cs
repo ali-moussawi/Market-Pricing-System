@@ -78,14 +78,14 @@ namespace MarketPricingSystem.Controllers
                 _context.SaveChanges();
 
                 var categorylist = _context.Categories.ToList();
-                return View("AllCategories", categorylist);
+                return RedirectToAction("AllCategories", categorylist);
             }
 
             else
             {
 
                 var categorylist = _context.Categories.ToList();
-                return View("AllCategories", categorylist);
+                return RedirectToAction("AllCategories", categorylist);
             }
         }
 
@@ -106,7 +106,8 @@ namespace MarketPricingSystem.Controllers
             if(checkdb != null)
             {
                 var categories = _context.Categories.ToList();
-                return View("AllCategories", categories);
+                return RedirectToAction("AllCategories", categories);
+                    
             }
 
 
@@ -119,7 +120,7 @@ namespace MarketPricingSystem.Controllers
             _context.Categories.Add(category);
             _context.SaveChanges();
             var categorylist = _context.Categories.ToList();
-            return View("AllCategories", categorylist);
+            return RedirectToAction("AllCategories", categorylist);
         }
 
 
