@@ -13,13 +13,13 @@
             <li class="breadcrumb-item active">Tables</li>
         </ol>
         <div style="margin-bottom:10px">
-         
+
             <a href="/Supermarket/Createsupermarket" class="btn btn-success" role="button">Create New SuperMarket </a>
         </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-              All SuperMarkets
+                All SuperMarkets
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -30,7 +30,7 @@
                             <th>Description</th>
                             <th>phone number</th>
                             <th></th>
-                          
+
 
                         </tr>
                     </thead>
@@ -41,7 +41,7 @@
                             <th>Description</th>
                             <th>phone number</th>
                             <th></th>
-                         
+
 
                         </tr>
                     </tfoot>
@@ -54,12 +54,15 @@
                                 <td>@market.SupermarketRegion</td>
                                 <td>@market.SupermarketDescription</td>
                                 <td>@market.Phonenumber</td>
-                             
+
 
                                 <td>
                                     <a href="/Supermarket/Updatesupermarket/@market.SupermarketId" class="btn btn-primary" role="button">Update</a>
-                                    <a href="/Supermarket/Deletesupermarket/@market.SupermarketId" class="btn btn-danger" role="button">Delete</a>
-                                    
+
+
+                                    <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@market.SupermarketId">
+                                        Delete
+                                    </button>
 
 
                                 </td>
@@ -74,3 +77,47 @@
         </div>
     </div>
 </main>
+
+@section scripts {
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirm(event) {
+            var btn = event;
+            let value = btn.getAttribute("mid-data");
+
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url :"/Supermarket/ConfirmDelete/"+value,
+                        method: "get",
+                        success: function () {
+                            $(btn).closest('tr').fadeOut();
+                        }
+                    })
+
+
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        }
+
+
+    </script>
+
+}

@@ -12,23 +12,23 @@
             <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active">Tables</li>
         </ol>
-        <div  style="margin-bottom:10px">
-         
+        <div style="margin-bottom:10px">
+
             <a href="/Category/Createcategory" class="btn btn-success" role="button">Add New Category </a>
         </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-              All Categories
+                All Categories
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
                             <th>Category Name</th>
-                           
+
                             <th></th>
-                          
+
 
                         </tr>
                     </thead>
@@ -42,17 +42,27 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var market in Model)
+                        @foreach (var category in Model)
                         {
 
-                            <tr>
-                                <td>@market.CategoryName</td>
-                            
+                            <tr class="js-row">
+                                <td>@category.CategoryName</td>
+
 
                                 <td>
-                                    <a href="/Category/Updatecategory/@market.CategoryId" class="btn btn-primary" role="button">Update</a>
-                                    <a href="/Category/Deletecategory/@market.CategoryId" class="btn btn-danger" role="button">Delete</a>
-                                    
+                                    <a href="/Category/Updatecategory/@category.CategoryId" class="btn btn-primary" role="button">Update</a>
+
+
+
+
+                               
+
+
+                                   
+                                        <button type="button" class="btn btn-danger   js-delete"  onclick="confirm(this)"  cid-data="@category.CategoryId">
+                                            Delete
+                                        </button>
+                                 
 
 
                                 </td>
@@ -67,3 +77,50 @@
         </div>
     </div>
 </main>
+
+
+
+@section scripts {
+   
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirm(event) {
+            var btn = event;
+            let value = btn.getAttribute("cid-data");
+
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url :"/Category/ConfirmDelete/"+value,
+                        method: "get",
+                        success: function () {
+                            $(btn).closest('tr').fadeOut();
+                        }
+                    })
+
+
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        }
+
+
+    </script>
+
+}
+

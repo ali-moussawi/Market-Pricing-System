@@ -285,6 +285,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\expensive-cheapest.js" />
+    <Content Include="Scripts\jquery-3.6.1.js" />
     <Content Include="Scripts\usersdatatables.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -321,15 +322,12 @@
     <Content Include="Views\Shared\_LayoutPageUser.cshtml" />
     <Content Include="Views\Users\Dashboard.cshtml" />
     <Content Include="Views\Supermarket\Allsupermarkets.cshtml" />
-    <Content Include="Views\Supermarket\Deletesupermarket.cshtml" />
     <Content Include="Views\Supermarket\Updatesupermarket.cshtml" />
     <Content Include="Views\Supermarket\Createsupermarket.cshtml" />
     <Content Include="Views\Products\AllProducts.cshtml" />
     <Content Include="Views\Products\Createproduct.cshtml" />
-    <Content Include="Views\Products\Deleteproduct.cshtml" />
     <Content Include="Views\Products\Updateproduct.cshtml" />
     <Content Include="Views\Category\AllCategories.cshtml" />
-    <Content Include="Views\Category\Deletecategory.cshtml" />
     <Content Include="Views\Category\Createcategory.cshtml" />
     <Content Include="Views\Category\Updatecategory.cshtml" />
     <Content Include="Views\Permission\Allpermissions.cshtml" />
