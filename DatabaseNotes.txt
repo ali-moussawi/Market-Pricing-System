@@ -1,0 +1,4 @@
+1. must be same permissions with same name to avoid problems in application;
+2.in database must be same permissions as in the permissions image in this repo;
+3.in database int table categories must be record (NO CATEGORY) TO AVOID PROBLEMS
+	THIS RECORD ADDED TO SOLVE PROBLEM WHEN DELETE CATEGORY FROM DATABASE;

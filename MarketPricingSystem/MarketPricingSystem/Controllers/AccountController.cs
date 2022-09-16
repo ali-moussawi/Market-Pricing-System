@@ -37,10 +37,10 @@ namespace MarketPricingSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult Validatesignin(string gmail, string password)
+        public ActionResult Validatesignin(string Gmail, string Password)
         {
            
-            var userindb = _context.Users.Where(x => x.Gmail == gmail && x.Password == password).FirstOrDefault();
+            var userindb = _context.Users.Where(x => x.Gmail == Gmail && x.Password == Password).FirstOrDefault();
 
             if (userindb != null)
             {

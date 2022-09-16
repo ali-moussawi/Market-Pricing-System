@@ -39,14 +39,6 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        public ActionResult Deletesupermarket(int id )
-        {
-            var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == id);
-
-            return View(targetsupermarket);
-        }
-
-
 
       
         public ActionResult ConfirmDelete(int id)

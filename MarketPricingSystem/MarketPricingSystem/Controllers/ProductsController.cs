@@ -39,15 +39,6 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        public ActionResult Deleteproduct(int id)
-        {
-            
-            var targetproduct = productDal.product(id) ;
-
-            return View(targetproduct);
-        }
-
-
 
 
         public ActionResult ConfirmDelete(int id)
@@ -66,7 +57,7 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Updateproduct(int id)
         {
             var targetproduct = _context.Products.FirstOrDefault(m => m.ProductId == id);
-            var allcategories = _context.Categories.ToList();
+            var allcategories = _context.Categories.Where(c => c.CategoryName != "NO CATEGORY").ToList();
 
             productandcategory productandcategory = new productandcategory
             {
@@ -87,31 +78,54 @@ namespace MarketPricingSystem.Controllers
         [HttpPost]
         public ActionResult Confirmupdate(int Productid, string productname, int Barcode, string ProductDescription, int Categoryid)
         {
+            var targetproduct = _context.Products.FirstOrDefault(p => p.ProductId == Productid);
+
+            targetproduct.ProductDescription = ProductDescription;
+            targetproduct.CategoryId = Categoryid;
+            _context.SaveChanges();
+
+
+
+            var checkdbproductname = _context.Products.FirstOrDefault(p => p.ProductName == productname);
+
+            if (checkdbproductname != null)
+            {
+             
+                var checkdbproductbr1 = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
+
+                if (checkdbproductbr1 == null)
+                {
+                    targetproduct.BarcodeNb = Barcode;
+                    _context.SaveChanges();
+                  
+                }
+
+
+               
+                List<product> pdlist3 = productDal.ProductList();
+
+                return RedirectToAction("AllProducts", pdlist3);
+            }
+
+            targetproduct.ProductName = productname;
+            _context.SaveChanges();
+
+
+
+
+
             var checkdbproductbr = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
+
             if (checkdbproductbr != null)
             {
                 List<product> pdlist1 = productDal.ProductList();
 
                 return RedirectToAction("AllProducts", pdlist1);
             }
-            var checkdbproductname = _context.Products.FirstOrDefault(p => p.ProductName == productname);
-            if (checkdbproductname != null)
-            {
-                List<product> pdlist3 = productDal.ProductList();
-
-                return RedirectToAction("AllProducts", pdlist3);
-            }
-
-
-
-            var targetproduct = _context.Products.FirstOrDefault(p => p.ProductId == Productid);
-
-            targetproduct.ProductDescription = ProductDescription;
-            targetproduct.ProductName = productname;
+           
             targetproduct.BarcodeNb = Barcode;
-            targetproduct.CategoryId = Categoryid;
-
             _context.SaveChanges();
+
             List<product> pdlist = productDal.ProductList();
 
             return RedirectToAction("AllProducts", pdlist);
@@ -121,7 +135,7 @@ namespace MarketPricingSystem.Controllers
 
         public ActionResult Createproduct()
         {
-            var allcategories = _context.Categories.ToList();
+            var allcategories = _context.Categories.Where(c => c.CategoryName != "NO CATEGORY").ToList();
 
 
             return View(allcategories);

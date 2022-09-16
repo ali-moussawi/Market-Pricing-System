@@ -241,6 +241,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\otherDal.cs" />
     <Compile Include="DAL\productDal.cs" />
     <Compile Include="DAL\RolesDal.cs" />

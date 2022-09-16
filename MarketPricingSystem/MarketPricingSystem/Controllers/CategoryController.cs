@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using MarketPricingSystem.DAL;
 namespace MarketPricingSystem.Controllers
 {
     public class CategoryController : Controller
     {
 
-
+        private CategoryDAL _categoryDAL = new CategoryDAL();
 
         private marketpricingContext _context;
 
@@ -29,7 +29,7 @@ namespace MarketPricingSystem.Controllers
 
         public ActionResult AllCategories() { 
 
-            var categoryList = _context.Categories.ToList();
+            var categoryList = _context.Categories.Where(c=>c.CategoryName != "NO CATEGORY").ToList();
 
             return View(categoryList);
 
@@ -37,18 +37,11 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        public ActionResult Deletecategory(int id)
-        {
-            var targetcategory = _context.Categories.FirstOrDefault(m => m.CategoryId == id);
-
-            return View(targetcategory);
-        }
-
-
-
-
         public ActionResult ConfirmDelete(int id)
         {
+            _categoryDAL.setproductnocategory(id);
+
+
             var targetcategory = _context.Categories.FirstOrDefault(m => m.CategoryId == id);
 
             _context.Categories.Remove(targetcategory);
@@ -70,23 +63,23 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Confirmupdate(int Categoryid, string Categoryname)
         {
 
+            var checkdb = _context.Categories.FirstOrDefault(c => c.CategoryName == Categoryname);
+            if (checkdb != null)
+            {
+                var categories = _context.Categories.ToList();
+                return RedirectToAction("AllCategories", categories);
+
+            }
+
+
             var targetcategory = _context.Categories.FirstOrDefault(m => m.CategoryId == Categoryid);
 
-            if (!string.IsNullOrEmpty(Categoryname))
-            {
+           
                 targetcategory.CategoryName = Categoryname;
                 _context.SaveChanges();
 
                 var categorylist = _context.Categories.ToList();
-                return RedirectToAction("AllCategories", categorylist);
-            }
-
-            else
-            {
-
-                var categorylist = _context.Categories.ToList();
-                return RedirectToAction("AllCategories", categorylist);
-            }
+                return RedirectToAction("AllCategories", categorylist);    
         }
 
 
@@ -115,8 +108,6 @@ namespace MarketPricingSystem.Controllers
             Categories category = new Categories();
             category.CategoryName = CategoryName;
 
-
-         
             _context.Categories.Add(category);
             _context.SaveChanges();
             var categorylist = _context.Categories.ToList();
