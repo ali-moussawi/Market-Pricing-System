@@ -54,13 +54,14 @@ namespace MarketPricingSystem.Controllers
 
         public ActionResult Createrole()
         {
+            var allpermissions = _context.Permissions.ToList();
 
-            return View();
+            return View(allpermissions);
         }
 
 
         [HttpPost]
-        public ActionResult ConfirmCreate(string Rolename, int? perone, int? pertwo, int? perthree, int? perfour, int? perfive, int? persix)
+        public ActionResult ConfirmCreate(string Rolename, int? viewsupermarket, int? addsupermarket, int? updatesupermarket, int? deletesupermarket, int? viewproduct, int? addproduct   , int? updateproduct, int? deleteproduct , int? viewcategory, int? addcategory, int? updatecategory , int? deletecategory, int? viewroles, int? createrole , int? viewpermissions , int? viewusers , int? adduser , int? updateuser , int? deleteuser)
         {
 
             var checkdb = _context.Roles.FirstOrDefault(c => c.RoleName == Rolename);
@@ -76,33 +77,109 @@ namespace MarketPricingSystem.Controllers
             newrole.RoleName = Rolename;
             _context.Roles.Add(newrole);
             _context.SaveChanges();
+
+
+
             var newroleid = _context.Roles.FirstOrDefault(r => r.RoleName == Rolename).RoleId;
            
+            if(viewsupermarket != null)
+            {
+                roleDal.addperTorole(newroleid, viewsupermarket.Value);
 
-            if(perone != null)
+            }           
+            if(addsupermarket != null)
             {
-                roleDal.addperTorole(newroleid, 1);
-            }
-            if (pertwo != null)
+                roleDal.addperTorole(newroleid, addsupermarket.Value);
+
+            }           
+            if(updatesupermarket != null)
             {
-                roleDal.addperTorole(newroleid, 2);
-            }
-            if (perthree != null)
+                roleDal.addperTorole(newroleid, updatesupermarket.Value);
+
+            }           
+            if(deletesupermarket != null)
             {
-                roleDal.addperTorole(newroleid, 3);
-            }
-            if (perfour != null)
+                roleDal.addperTorole(newroleid, deletesupermarket.Value);
+
+            }           
+            if(viewproduct != null)
             {
-                roleDal.addperTorole(newroleid, 4);
-            }
-            if (perfive != null)
+                roleDal.addperTorole(newroleid, viewproduct.Value);
+
+            }           
+            if(addproduct != null)
             {
-                roleDal.addperTorole(newroleid, 5);
-            }
-            if (persix != null)
+                roleDal.addperTorole(newroleid, addproduct.Value);
+
+            }           
+            if(updateproduct != null)
             {
-                roleDal.addperTorole(newroleid, 6);
+                roleDal.addperTorole(newroleid, updateproduct.Value);
+
+            }           
+            if(deleteproduct != null)
+            {
+                roleDal.addperTorole(newroleid, deleteproduct.Value);
+
+            }           
+            if(viewcategory != null)
+            {
+                roleDal.addperTorole(newroleid, viewcategory.Value);
+
+            }           
+            if(addcategory != null)
+            {
+                roleDal.addperTorole(newroleid, addcategory.Value);
+
+            }           
+            if(updatecategory != null)
+            {
+                roleDal.addperTorole(newroleid, updatecategory.Value);
+
+            }           
+            if(deletecategory != null)
+            {
+                roleDal.addperTorole(newroleid, deletecategory.Value);
+
+            }           
+            if(viewroles != null)
+            {
+                roleDal.addperTorole(newroleid, viewroles.Value);
+
+            }           
+            if(createrole != null)
+            {
+                roleDal.addperTorole(newroleid, createrole.Value);
+
+            }           
+            if(viewpermissions != null)
+            {
+                roleDal.addperTorole(newroleid, viewpermissions.Value);
+
+            }           
+            if(viewusers != null)
+            {
+                roleDal.addperTorole(newroleid, viewusers.Value);
+
+            }           
+            if(adduser != null)
+            {
+                roleDal.addperTorole(newroleid, adduser.Value);
+
+            }           
+            if(updateuser != null)
+            {
+                roleDal.addperTorole(newroleid, updateuser.Value);
+
+            }           
+            if(deleteuser != null)
+            {
+                roleDal.addperTorole(newroleid, deleteuser.Value);
+
             }
+
+
+
 
 
 

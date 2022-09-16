@@ -27,7 +27,7 @@ CREATE TABLE `categories` (
   `categoryName` varchar(45) NOT NULL,
   PRIMARY KEY (`categoryId`),
   UNIQUE KEY `categoryName_UNIQUE` (`categoryName`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (3,'Beverages'),(1,'Diary'),(5,'Fruits'),(2,'Meats and Fish'),(12,'Snack'),(6,'vegetables');
+INSERT INTO `categories` VALUES (51,'Diary'),(55,'fruits'),(2,'Meats and Fish'),(12,'Snack'),(15,'vegetables');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,7 +51,7 @@ CREATE TABLE `permissions` (
   `PermissionId` int NOT NULL AUTO_INCREMENT,
   `PermissionName` varchar(45) NOT NULL,
   PRIMARY KEY (`PermissionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `permissions` (
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
-INSERT INTO `permissions` VALUES (1,'Crudesupermarket'),(2,'Crudeproducts'),(3,'Crudeusers'),(4,'Cruderoles'),(5,'Crudecategories'),(6,'Crudesupermarketproducts');
+INSERT INTO `permissions` VALUES (1,'viewsupermarket'),(2,'addsupermarket'),(3,'updatesupermarket'),(4,'deletesupermarket'),(5,'viewproduct'),(6,'addproduct'),(7,'updateproduct'),(8,'deleteproduct'),(9,'viewcategory'),(10,'addcategory'),(11,'updatecategory'),(12,'deletecategory'),(13,'viewroles'),(14,'createrole'),(15,'viewpermissions'),(16,'viewusers'),(17,'adduser'),(18,'updateuser'),(19,'deleteuser');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,8 +111,8 @@ CREATE TABLE `products` (
   UNIQUE KEY `productName_UNIQUE` (`productName`),
   UNIQUE KEY `BarcodeNb_UNIQUE` (`BarcodeNb`),
   KEY `ctgr_idx` (`categoryId`),
-  CONSTRAINT `ctgr` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `ctgr` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'picon',9900,'small pieces',1),(3,'pepsi',879042,'2.2 liter',12),(4,'tomato',9281,'1 kilo',6),(6,'apple',20978,'2 kilo',5);
+INSERT INTO `products` VALUES (3,'pepsi',879042,'2.2 liter',12),(7,'Master',440982,'salt, big one',12);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,8 +137,8 @@ CREATE TABLE `rolepermissions` (
   `PermissionId` int NOT NULL,
   PRIMARY KEY (`RoleId`,`PermissionId`),
   KEY `forg2_idx` (`PermissionId`),
-  CONSTRAINT `forg1` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`) ON DELETE CASCADE,
-  CONSTRAINT `forg2` FOREIGN KEY (`PermissionId`) REFERENCES `permissions` (`PermissionId`) ON DELETE CASCADE
+  CONSTRAINT `forg1` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`),
+  CONSTRAINT `forg2` FOREIGN KEY (`PermissionId`) REFERENCES `permissions` (`PermissionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -148,7 +148,7 @@ CREATE TABLE `rolepermissions` (
 
 LOCK TABLES `rolepermissions` WRITE;
 /*!40000 ALTER TABLE `rolepermissions` DISABLE KEYS */;
-INSERT INTO `rolepermissions` VALUES (1,1),(4,1),(1,2),(2,2),(4,2),(1,3),(1,4),(1,5),(1,6),(2,6);
+INSERT INTO `rolepermissions` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(2,16),(1,17),(2,17),(1,18),(2,18),(1,19),(2,19);
 /*!40000 ALTER TABLE `rolepermissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +163,7 @@ CREATE TABLE `roles` (
   `RoleId` int NOT NULL AUTO_INCREMENT,
   `RoleName` varchar(50) NOT NULL,
   PRIMARY KEY (`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +172,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Admin'),(2,'Dmu'),(4,'test');
+INSERT INTO `roles` VALUES (1,'Admin'),(2,'test');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +191,7 @@ CREATE TABLE `supermarket` (
   `phonenumber` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`supermarketId`),
   UNIQUE KEY `phonenumber_UNIQUE` (`phonenumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +200,7 @@ CREATE TABLE `supermarket` (
 
 LOCK TABLES `supermarket` WRITE;
 /*!40000 ALTER TABLE `supermarket` DISABLE KEYS */;
-INSERT INTO `supermarket` VALUES (1,'Karrfor','Ghobiery','open all days of the week','81048065'),(2,'Rammal','hadath','we have best prices','76998349'),(3,'Ammliye','Al Matar highway ','Best product prices and vouchers','01992876'),(6,'Karrfor','Jbeil','we depend on dollar 9000','70233235');
+INSERT INTO `supermarket` VALUES (1,'Karrfor','Ghobiery','open all days of the week','81048065'),(2,'Rammal','hadath','we have best prices','76998349'),(3,'Ammliye','Al Matar highway ','Best product prices and vouchers','01992876');
 /*!40000 ALTER TABLE `supermarket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +222,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `Gmail_UNIQUE` (`gmail`),
   KEY `frg123roleid_idx` (`roleid`),
   CONSTRAINT `frg123roleid` FOREIGN KEY (`roleid`) REFERENCES `roles` (`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'ali moussawi','71548165','aha057@usal.edu.lb','admin123',1);
+INSERT INTO `users` VALUES (1,'Ali','71548165','aha057@usal.edu.lb','admin123',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -244,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-14 20:31:17
+-- Dump completed on 2022-09-16 14:00:14

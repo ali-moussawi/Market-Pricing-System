@@ -49,15 +49,14 @@ namespace MarketPricingSystem.DAL
 
         public  void addperTorole(int roleid , int perid)
         {
-            Rolepermissions newpermission = new Rolepermissions();
-            if (perid != 0)
-            {
-                newpermission.RoleId = roleid;
-                newpermission.PermissionId = perid;
+            Rolepermissions newrolepermission = new Rolepermissions();
 
-                _context.Rolepermissions.Add(newpermission);
+            newrolepermission.RoleId = roleid;
+            newrolepermission.PermissionId = perid;
+
+                _context.Rolepermissions.Add(newrolepermission);
                 _context.SaveChanges();
-            }
+            
 
 
         }
