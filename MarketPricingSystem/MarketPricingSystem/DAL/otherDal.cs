@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Security;
 using MarketPricingSystem.Models;
 using MySql.Data.MySqlClient;
-
+using MarketPricingSystem.ViewModel;
 namespace MarketPricingSystem.DAL
 {
     public class otherDal
@@ -19,13 +19,16 @@ namespace MarketPricingSystem.DAL
 
 
 
-        public List<MarketPricingSystem.Models.Roles> userroles(int userid)
+
+
+
+        public List<Userdetails> allusers()
         {
+            List<Userdetails> users= new List<Userdetails>();
 
 
+            string query = "select userid, name,phonenumber,gmail,password , rolename from users u ,roles r  where u.roleid = r.roleid  and gmail != 'aha057@usal.edu.lb'";
 
-            List<MarketPricingSystem.Models.Roles> roles = new List<MarketPricingSystem.Models.Roles>();
-            string query = "  select rolename from roles r, userroles ur where ur.userid ="+ userid.ToString()  +" and r.roleid = ur.roleid ";
             using (MySqlCommand cmd = new MySqlCommand(query))
             {
                 cmd.Connection = con;
@@ -34,36 +37,44 @@ namespace MarketPricingSystem.DAL
                 {
                     while (sdr.Read())
                     {
-                        roles.Add(new MarketPricingSystem.Models.Roles
+                        users.Add(new Userdetails
                         {
-                             RoleName = sdr["rolename"].ToString(),
+                            userid = Convert.ToInt32(sdr["userid"]),
+                            username = sdr["name"].ToString(),
+                            userphonenumber = sdr["phonenumber"].ToString(),
+                            usergmail = sdr["gmail"].ToString(),
+                            userpassword = sdr["password"].ToString(),
+                            rolename = sdr["rolename"].ToString(),
 
                         });
                     }
                 }
                 con.Close();
             }
-            return roles;
+            return users;
         }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

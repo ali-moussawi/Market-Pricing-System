@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MarketPricingSystem.ViewModel;
 
 namespace MarketPricingSystem.Controllers
 {
     public class OthersController : Controller
     {
 
-        private otherDal otherdal = new otherDal();
+        private otherDal _otherdal = new otherDal();
 
         
 
@@ -34,20 +35,17 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Allusers()
         {
 
-            var userslist = _context.Users.Where(u => u.Gmail != "aha057@usal.edu.lb").ToList();
-
-            return View(userslist);
-
-        }
+            List<Userdetails> users = _otherdal.allusers();
 
 
-        public ActionResult Userroles(int id )
-        {
-            List<MarketPricingSystem.Models.Roles> roles = otherdal.userroles(id);
 
-            return View(roles);
+
+            return View(users);
 
         }
+
+
+     
 
 
 

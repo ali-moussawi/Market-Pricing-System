@@ -220,6 +220,7 @@ CREATE TABLE `users` (
   `roleid` int NOT NULL,
   PRIMARY KEY (`UserId`),
   UNIQUE KEY `Gmail_UNIQUE` (`gmail`),
+  UNIQUE KEY `phoneNumber_UNIQUE` (`phoneNumber`),
   KEY `frg123roleid_idx` (`roleid`),
   CONSTRAINT `frg123roleid` FOREIGN KEY (`roleid`) REFERENCES `roles` (`RoleId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -244,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-16 14:00:14
+-- Dump completed on 2022-09-16 14:18:08
