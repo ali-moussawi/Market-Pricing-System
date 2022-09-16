@@ -58,24 +58,14 @@ namespace MarketPricingSystem.Controllers
         {
             var targetuser = _context.Users.FirstOrDefault(u => u.Gmail == gmail);
 
-            if (!String.IsNullOrEmpty(name))
+             targetuser.Name = name;
+            _context.SaveChanges();
+            var uphonenb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phone);
+            if(uphonenb !=null)
             {
-                targetuser.Name = name;
-                _context.SaveChanges();
-
+                return RedirectToAction("Dashboard");
             }
-            if (!String.IsNullOrEmpty(phone))
-            {
-                targetuser.PhoneNumber = phone;
-                _context.SaveChanges();
 
-            }
-            if (!String.IsNullOrEmpty(newpassword))
-            {
-                targetuser.Password = newpassword;
-                _context.SaveChanges();
-
-            }
 
 
 
