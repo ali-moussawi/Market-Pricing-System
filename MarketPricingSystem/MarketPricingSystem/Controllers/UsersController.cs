@@ -49,24 +49,25 @@ namespace MarketPricingSystem.Controllers
         {
             var gmail = User.Identity.Name;
             Users user = _context.Users.FirstOrDefault(u => u.Gmail == gmail);
-
-
             return View(user);
         }
 
-        public ActionResult Updatesettings( string gmail , string name, string phone, string newpassword)
+        public ActionResult Updatesettings( int userid, string name, string phone, string newpassword)
         {
-            var targetuser = _context.Users.FirstOrDefault(u => u.Gmail == gmail);
+            var targetuser = _context.Users.FirstOrDefault(u => u.UserId == userid);
 
-             targetuser.Name = name;
+            targetuser.Name = name;
+            targetuser.Password = newpassword;
             _context.SaveChanges();
+
             var uphonenb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phone);
             if(uphonenb !=null)
             {
                 return RedirectToAction("Dashboard");
             }
 
-
+            targetuser.PhoneNumber = phone;
+            _context.SaveChanges();
 
 
             return RedirectToAction("Dashboard");
