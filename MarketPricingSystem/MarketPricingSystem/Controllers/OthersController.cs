@@ -59,6 +59,62 @@ namespace MarketPricingSystem.Controllers
 
 
 
+            public ActionResult Updateuser(int id)
+        {
+           Userandroles updateuser = new Userandroles();
+            var targetuser = _context.Users.FirstOrDefault(u => u.UserId == id);
+            var rolelist = _context.Roles.Where(r=> r.RoleName != "Admin").ToList();
+            updateuser.User=targetuser;
+            updateuser.Rolelist=rolelist;
+
+
+
+            return View(updateuser);
+        }
+
+
+
+                public ActionResult Confirmupdate(int userid, string username, string phonenumber , string password, int roleid)
+        {
+
+
+            var targetuser = _context.Users.FirstOrDefault(m => m.UserId == userid);
+            targetuser.Name = username;
+            targetuser.Password = password;
+            targetuser.Roleid = roleid;
+            _context.SaveChanges();
+
+            var checknb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phonenumber);
+
+            if (checknb != null)
+            {
+                return RedirectToAction("Allusers");
+            }
+
+
+            targetuser.PhoneNumber = phonenumber;
+            _context.SaveChanges();
+
+            return RedirectToAction("Allusers");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public ActionResult ConfirmDelete(int id)
         {
             var targetuser = _context.Users.FirstOrDefault(m => m.UserId == id);

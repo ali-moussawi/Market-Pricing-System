@@ -262,6 +262,7 @@
     <Compile Include="ViewModel\productandcategory.cs" />
     <Compile Include="ViewModel\productvalue.cs" />
     <Compile Include="ViewModel\productdetails.cs" />
+    <Compile Include="ViewModel\userandroles.cs" />
     <Compile Include="ViewModel\Userdetails.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +339,7 @@
     <Content Include="Views\Others\Userroles.cshtml" />
     <Content Include="Views\Others\Createuser.cshtml" />
     <Content Include="Views\Users\Settings.cshtml" />
+    <Content Include="Views\Others\Updateuser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
