@@ -72,7 +72,48 @@ namespace MarketPricingSystem.Controllers
 
 
 
-    
+        public ActionResult Createuser()
+        {
+            var roleslist = _context.Roles.Where(r=>r.RoleName != "Admin").ToList();
+            
+
+            return View(roleslist);
+        }
+
+            public ActionResult Confirmcreate(string username ,string phonenumber, string gmail, string password,  int roleid)
+        {
+            var chechnb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phonenumber);
+            if (chechnb != null)
+            {
+                return RedirectToAction("Allusers");
+
+
+            }
+
+            var chechgmail = _context.Users.FirstOrDefault(u => u.Gmail == gmail);
+            if (chechgmail != null)
+            {
+                return RedirectToAction("Allusers");
+
+
+            }
+
+            Users newuser = new Users();
+            newuser.Name = username;
+            newuser.PhoneNumber = phonenumber;
+            newuser.Gmail = gmail;
+            newuser.Password = password;
+            newuser.Roleid = roleid;
+            _context.Users.Add(newuser);
+            _context.SaveChanges();
+
+
+
+            return RedirectToAction("Allusers");
+        }
+
+
+
 
 
 
