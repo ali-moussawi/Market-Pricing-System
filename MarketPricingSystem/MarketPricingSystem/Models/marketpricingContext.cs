@@ -72,8 +72,6 @@ namespace MarketPricingSystem.Models
 
             modelBuilder.Entity<Productprices>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("productprices");
 
                 entity.HasIndex(e => e.ProductId)
@@ -81,6 +79,8 @@ namespace MarketPricingSystem.Models
 
                 entity.HasIndex(e => e.Supermarketid)
                     .HasName("spid_idx");
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
@@ -93,12 +93,12 @@ namespace MarketPricingSystem.Models
                 entity.Property(e => e.Supermarketid).HasColumnName("supermarketid");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany()
+                    .WithMany(p => p.Productprices)
                     .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("prid");
 
                 entity.HasOne(d => d.Supermarket)
-                    .WithMany()
+                    .WithMany(p => p.Productprices)
                     .HasForeignKey(d => d.Supermarketid)
                     .HasConstraintName("spid");
             });

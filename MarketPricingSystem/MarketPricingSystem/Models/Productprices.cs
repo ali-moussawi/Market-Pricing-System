@@ -9,6 +9,7 @@ namespace MarketPricingSystem.Models
 {
     public partial class Productprices
     {
+        public int Id { get; set; }
         public int ProductId { get; set; }
         public int Supermarketid { get; set; }
         public int Price { get; set; }

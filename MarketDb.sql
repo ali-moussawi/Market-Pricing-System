@@ -72,16 +72,18 @@ DROP TABLE IF EXISTS `productprices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `productprices` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `productId` int NOT NULL,
   `supermarketid` int NOT NULL,
   `price` int NOT NULL,
   `date` date NOT NULL,
   `IsActivePrice` int NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `prid_idx` (`productId`),
   KEY `spid_idx` (`supermarketid`),
   CONSTRAINT `prid` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`) ON DELETE CASCADE,
   CONSTRAINT `spid` FOREIGN KEY (`supermarketid`) REFERENCES `supermarket` (`supermarketId`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +92,7 @@ CREATE TABLE `productprices` (
 
 LOCK TABLES `productprices` WRITE;
 /*!40000 ALTER TABLE `productprices` DISABLE KEYS */;
-INSERT INTO `productprices` VALUES (1,1,10,'2022-09-18',1),(3,1,1000,'2022-09-19',1),(3,2,2000,'2022-09-19',0),(1,1,20000,'2022-09-19',1),(1,1,30000,'2022-09-19',1);
+INSERT INTO `productprices` VALUES (1,1,1,10,'2022-09-18',1),(2,3,1,1000,'2022-09-19',1),(3,3,2,2000,'2022-09-19',0),(4,1,1,20000,'2022-09-19',1),(5,1,1,30000,'2022-09-19',1);
 /*!40000 ALTER TABLE `productprices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-19 22:30:22
+-- Dump completed on 2022-09-19 22:37:03
