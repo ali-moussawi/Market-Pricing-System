@@ -345,6 +345,7 @@
     <Content Include="Views\Supermarketproducts\Allsupermarkets.cshtml" />
     <Content Include="Views\Supermarketproducts\Supermarketproducts.cshtml" />
     <Content Include="Views\Supermarketproducts\Createproduct.cshtml" />
+    <Content Include="Views\Supermarketproducts\Updateproductprice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

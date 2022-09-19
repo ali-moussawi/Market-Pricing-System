@@ -30,6 +30,7 @@
                             <th>price</th>
                             <th>category</th>
 
+                            <th></th>
 
 
                         </tr>
@@ -41,11 +42,11 @@
                             <th>Description</th>
                             <th>price</th>
                             <th>category</th>
-
+                            <th></th>
 
                         </tr>
                     </tfoot>
-                 
+
                     <tbody>
                         @foreach (var market in Model.supermarketproducts)
                         {
@@ -58,7 +59,16 @@
                                 <td>@market.productcategory</td>
 
 
+                                <th>
 
+
+                                    @Html.ActionLink("Update", "Updateproductprice", "Supermarketproducts", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary" })
+
+                                    <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data1="@Model.marketid" middata2=" @market.productid">
+                                        Delete
+                                    </button>
+
+                                </th>
 
                             </tr>
                         }
@@ -70,3 +80,49 @@
         </div>
     </div>
 </main>
+
+
+@section scripts {
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirm(event) {
+            var btn = event;
+            let value1 = btn.getAttribute("mid-data1");
+            let value2 = btn.getAttribute("middata2");
+
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/Supermarketproducts/ConfirmDelete?marketid=" + value1 + "&productid=" + value2,
+                        method: "get",
+                        success: function () {
+                            $(btn).closest('tr').fadeOut();
+                        }
+                    })
+
+
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        }
+
+
+    </script>
+
+}
