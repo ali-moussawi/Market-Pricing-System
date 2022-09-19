@@ -236,6 +236,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SupermarketController.cs" />
+    <Compile Include="Controllers\SupermarketproductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CustomAuthorization\customedashboardAuthorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -258,6 +259,8 @@
     <Compile Include="Models\Supermarket.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\marketandproducts.cs" />
+    <Compile Include="ViewModel\marketidwithproducts.cs" />
     <Compile Include="ViewModel\product.cs" />
     <Compile Include="ViewModel\productandcategory.cs" />
     <Compile Include="ViewModel\productvalue.cs" />
@@ -319,7 +322,6 @@
     <Content Include="Views\Home\GetCheapestproduct.cshtml" />
     <Content Include="Views\Home\GetExpensiveproduct.cshtml" />
     <Content Include="Views\Account\signin.cshtml" />
-    <Content Include="Views\Home\SuperMarketCategories.cshtml" />
     <Content Include="Views\Shared\_LayoutPageUser.cshtml" />
     <Content Include="Views\Users\Dashboard.cshtml" />
     <Content Include="Views\Supermarket\Allsupermarkets.cshtml" />
@@ -340,6 +342,9 @@
     <Content Include="Views\Others\Createuser.cshtml" />
     <Content Include="Views\Users\Settings.cshtml" />
     <Content Include="Views\Others\Updateuser.cshtml" />
+    <Content Include="Views\Supermarketproducts\Allsupermarkets.cshtml" />
+    <Content Include="Views\Supermarketproducts\Supermarketproducts.cshtml" />
+    <Content Include="Views\Supermarketproducts\Createproduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

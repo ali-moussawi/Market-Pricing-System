@@ -22,7 +22,7 @@ namespace MarketPricingSystem.DAL
             List<productdetails> products = new List<productdetails>();
 
 
-            string query = " select  productname ,barcodenb,productdescription , price,categoryname from products p , categories c , productprices pc where p.productid = pc.productid and pc.supermarketid =" + supermarketid.ToString() + " and c.categoryid = p.categoryid and isactiveprice=0";
+            string query = " select p.productid, productname ,barcodenb,productdescription , price,categoryname from products p , categories c , productprices pc where p.productid = pc.productid and pc.supermarketid =" + supermarketid.ToString() + " and c.categoryid = p.categoryid and isactiveprice=0";
 
             using (MySqlCommand cmd = new MySqlCommand(query))
             {
@@ -33,7 +33,7 @@ namespace MarketPricingSystem.DAL
                     while (sdr.Read())
                     {
                         products.Add(new productdetails
-                        {
+                        {   productid = Convert.ToInt32(sdr["productid"]),
                             productname = sdr["productname"].ToString(),
                             productBarcode = Convert.ToInt32(sdr["BarcodeNb"]),
                             productDescription = sdr["productDescription"].ToString(),
