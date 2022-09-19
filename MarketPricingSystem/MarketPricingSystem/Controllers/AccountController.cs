@@ -1,4 +1,5 @@
 ﻿using MarketPricingSystem.Models;
+using MarketPricingSystem.security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace MarketPricingSystem.Controllers
 {
     public class AccountController : Controller
     {
-
+        private EncryptandDecrypt encryptandDecrypt = new EncryptandDecrypt();
         private marketpricingContext _context;
 
         public AccountController()
@@ -39,14 +40,16 @@ namespace MarketPricingSystem.Controllers
         [HttpPost]
         public ActionResult Validatesignin(string Gmail, string Password)
         {
-           
+            Password = encryptandDecrypt.EncryptPassword(Password);
+
             var userindb = _context.Users.Where(x => x.Gmail == Gmail && x.Password == Password).FirstOrDefault();
 
             if (userindb != null)
             {
                 var userid = userindb.UserId;
-                
+         
                 var roleid = _context.Users.Where(x => x.UserId == userid).FirstOrDefault().Roleid;
+
                 var rolename = _context.Roles.Where(x => x.RoleId == roleid).FirstOrDefault().RoleName.ToLower();
 
                 FormsAuthentication.SetAuthCookie(userindb.Gmail, false);

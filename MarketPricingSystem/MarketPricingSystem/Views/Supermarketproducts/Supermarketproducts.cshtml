@@ -62,7 +62,7 @@
                                 <th>
 
 
-                                    @Html.ActionLink("Update", "Updateproductprice", "Supermarketproducts", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("Update", "Updateproductprice", "Supermarketproducts", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary", @style = "color:white;" })
 
                                     <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data1="@Model.marketid" middata2=" @market.productid">
                                         Delete

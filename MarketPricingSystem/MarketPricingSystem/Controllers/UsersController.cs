@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using MarketPricingSystem.Models;
 using Org.BouncyCastle.Asn1.X509;
-
+using MarketPricingSystem.security;
 namespace MarketPricingSystem.Controllers
 {
     [Authorize]
     public class UsersController : Controller
     {
-
+        private EncryptandDecrypt encryptandDecrypt =new EncryptandDecrypt();
         private marketpricingContext _context;
 
         public UsersController()
@@ -31,7 +31,7 @@ namespace MarketPricingSystem.Controllers
             List<int> data = new List<int>();
             int supermarket = _context.Supermarket.Count();
             int products = _context.Products.Count();
-            int categories = _context.Categories.Count();
+            int categories = _context.Categories.Where(c=>c.CategoryName !="NO CATEGORY").Count();
             int users = _context.Users.Where(u => u.Gmail != "aha057@usal.edu.lb").Count();
 
             data.Add(supermarket);
@@ -49,6 +49,7 @@ namespace MarketPricingSystem.Controllers
         {
             var gmail = User.Identity.Name;
             Users user = _context.Users.FirstOrDefault(u => u.Gmail == gmail);
+            user.Password = encryptandDecrypt.DecryptPassword(user.Password);
             return View(user);
         }
 
@@ -57,7 +58,10 @@ namespace MarketPricingSystem.Controllers
             var targetuser = _context.Users.FirstOrDefault(u => u.UserId == userid);
 
             targetuser.Name = name;
-            targetuser.Password = newpassword;
+
+                
+        
+            targetuser.Password = encryptandDecrypt.EncryptPassword(newpassword);
             _context.SaveChanges();
 
             var uphonenb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phone);

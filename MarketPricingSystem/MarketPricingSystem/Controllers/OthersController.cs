@@ -6,12 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MarketPricingSystem.ViewModel;
+using MarketPricingSystem.security;
 
 namespace MarketPricingSystem.Controllers
 {
     public class OthersController : Controller
     {
-
+        private EncryptandDecrypt encryptandDecrypt = new EncryptandDecrypt();
         private otherDal _otherdal = new otherDal();
 
         
@@ -63,6 +64,7 @@ namespace MarketPricingSystem.Controllers
         {
            Userandroles updateuser = new Userandroles();
             var targetuser = _context.Users.FirstOrDefault(u => u.UserId == id);
+            targetuser.Password =encryptandDecrypt.DecryptPassword(targetuser.Password);
             var rolelist = _context.Roles.Where(r=> r.RoleName != "Admin").ToList();
             updateuser.User=targetuser;
             updateuser.Rolelist=rolelist;
@@ -80,6 +82,8 @@ namespace MarketPricingSystem.Controllers
 
             var targetuser = _context.Users.FirstOrDefault(m => m.UserId == userid);
             targetuser.Name = username;
+            password = encryptandDecrypt.EncryptPassword(password);
+
             targetuser.Password = password;
             targetuser.Roleid = roleid;
             _context.SaveChanges();
@@ -158,6 +162,9 @@ namespace MarketPricingSystem.Controllers
             newuser.Name = username;
             newuser.PhoneNumber = phonenumber;
             newuser.Gmail = gmail;
+
+            password = encryptandDecrypt.EncryptPassword(password);
+
             newuser.Password = password;
             newuser.Roleid = roleid;
             _context.Users.Add(newuser);
