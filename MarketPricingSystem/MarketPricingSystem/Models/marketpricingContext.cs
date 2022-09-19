@@ -55,7 +55,7 @@ namespace MarketPricingSystem.Models
                 entity.Property(e => e.CategoryName)
                     .IsRequired()
                     .HasColumnName("categoryName")
-                    .HasMaxLength(45);
+                    .HasMaxLength(55);
             });
 
             modelBuilder.Entity<Permissions>(entity =>
@@ -72,8 +72,7 @@ namespace MarketPricingSystem.Models
 
             modelBuilder.Entity<Productprices>(entity =>
             {
-                entity.HasKey(e => new { e.Price, e.Date })
-                    .HasName("PRIMARY");
+                entity.HasNoKey();
 
                 entity.ToTable("productprices");
 
@@ -83,23 +82,23 @@ namespace MarketPricingSystem.Models
                 entity.HasIndex(e => e.Supermarketid)
                     .HasName("spid_idx");
 
-                entity.Property(e => e.Price).HasColumnName("price");
-
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
                     .HasColumnType("date");
+
+                entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.ProductId).HasColumnName("productId");
 
                 entity.Property(e => e.Supermarketid).HasColumnName("supermarketid");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.Productprices)
+                    .WithMany()
                     .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("prid");
 
                 entity.HasOne(d => d.Supermarket)
-                    .WithMany(p => p.Productprices)
+                    .WithMany()
                     .HasForeignKey(d => d.Supermarketid)
                     .HasConstraintName("spid");
             });
@@ -138,6 +137,7 @@ namespace MarketPricingSystem.Models
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("ctgr");
             });
 
@@ -154,11 +154,13 @@ namespace MarketPricingSystem.Models
                 entity.HasOne(d => d.Permission)
                     .WithMany(p => p.Rolepermissions)
                     .HasForeignKey(d => d.PermissionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("forg2");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Rolepermissions)
                     .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("forg1");
             });
 
@@ -212,6 +214,10 @@ namespace MarketPricingSystem.Models
 
                 entity.HasIndex(e => e.Gmail)
                     .HasName("Gmail_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.PhoneNumber)
+                    .HasName("phoneNumber_UNIQUE")
                     .IsUnique();
 
                 entity.HasIndex(e => e.Roleid)

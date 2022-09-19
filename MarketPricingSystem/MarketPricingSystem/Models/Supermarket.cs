@@ -9,17 +9,10 @@ namespace MarketPricingSystem.Models
 {
     public partial class Supermarket
     {
-        public Supermarket()
-        {
-            Productprices = new HashSet<Productprices>();
-        }
-
         public int SupermarketId { get; set; }
         public string SupermarketName { get; set; }
         public string SupermarketRegion { get; set; }
         public string SupermarketDescription { get; set; }
         public string Phonenumber { get; set; }
-
-        public virtual ICollection<Productprices> Productprices { get; set; }
     }
 }
