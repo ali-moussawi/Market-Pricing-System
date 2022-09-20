@@ -27,7 +27,7 @@ namespace MarketPricingSystem.DAL
             List<Userdetails> users= new List<Userdetails>();
 
 
-            string query = "select userid, name,phonenumber,gmail,password , rolename from users u ,roles r  where u.roleid = r.roleid  and gmail != 'aha057@usal.edu.lb'";
+            string query = "select userid, name,phonenumber,gmail,password , rolename from users u ,roles r  where u.roleid = r.roleid  and gmail != 'admin@gmail.com'";
 
             using (MySqlCommand cmd = new MySqlCommand(query))
             {

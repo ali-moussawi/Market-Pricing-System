@@ -32,7 +32,7 @@ namespace MarketPricingSystem.Controllers
             int supermarket = _context.Supermarket.Count();
             int products = _context.Products.Count();
             int categories = _context.Categories.Where(c=>c.CategoryName !="NO CATEGORY").Count();
-            int users = _context.Users.Where(u => u.Gmail != "aha057@usal.edu.lb").Count();
+            int users = _context.Users.Where(u => u.Gmail !="admin@gmail.com").Count();
 
             data.Add(supermarket);
             data.Add(products);
