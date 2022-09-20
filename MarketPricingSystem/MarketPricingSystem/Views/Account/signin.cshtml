@@ -18,10 +18,10 @@
         <hr />
         @Html.ValidationSummary()
         <div class="form-group">
-            @Html.LabelFor(m => m.Gmail, new { @class = "col-md-2 control-label" })
+            <label id="Email"class="col-md-2 control-label" >Email</label>
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Gmail, new { @class = "form-control", type = "gmail" })
-
+              
+                <input type="email" class="form-control" id="Email" name="Gmail" />
             </div>
         </div>
 
