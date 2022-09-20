@@ -1,6 +1,4 @@
-1. must be same permissions with same name to avoid problems in application;
-2.in database must be same permissions as in the permissions image in this repo;
-3.in database int table categories must be record (NO CATEGORY) TO AVOID PROBLEMS
-	THIS RECORD ADDED TO SOLVE PROBLEM WHEN DELETE CATEGORY FROM DATABASE;
-4.in database must have role= Admin with all permissions.
-5.in database must be user admin with email (must edit code according to this email) and must have role 'Admin'.
+1.must be add category = "NO CATEGORY".
+2.must be add role ="Admin".
+3.must be all permissions added in database(same name in picture).
+4.must have user with role admin (change email in code to the new email);
