@@ -16,6 +16,7 @@
     outline: none; border: none;
     text-transform: capitalize;
     transition: all .2s ease-out;
+   
     text-decoration: none;
 }
 
@@ -23,6 +24,7 @@ html{
     font-size: 62.5%;
     overflow-x: hidden;
     scroll-behavior:smooth;
+
 }
 
 section{
