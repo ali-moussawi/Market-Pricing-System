@@ -59,9 +59,12 @@ namespace MarketPricingSystem.Controllers
 
             targetuser.Name = name;
 
-                
-        
-            targetuser.Password = encryptandDecrypt.EncryptPassword(newpassword);
+
+            if (!String.IsNullOrWhiteSpace(newpassword) && !String.IsNullOrEmpty(newpassword))
+            {
+                targetuser.Password = encryptandDecrypt.EncryptPassword(newpassword);
+            }
+
             _context.SaveChanges();
 
             var uphonenb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phone);

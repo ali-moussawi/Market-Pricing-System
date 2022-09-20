@@ -24,7 +24,7 @@ namespace MarketPricingSystem.DAL
         public List<Permissions> Rolepermission (int roleid)
         {
             List<Permissions> permissions = new List<Permissions>();
-            string query = "  select permissionname from permissions p , rolepermissions pr  where pr.roleid = "+roleid.ToString() + " and p.permissionid = pr.permissionid";
+            string query = "  select permissionname from permissions p , rolepermissions pr  where pr.roleid = "+roleid.ToString() + " and p.permissionid = pr.permissionid ";
             using (MySqlCommand cmd = new MySqlCommand(query))
             {
                 cmd.Connection = con;

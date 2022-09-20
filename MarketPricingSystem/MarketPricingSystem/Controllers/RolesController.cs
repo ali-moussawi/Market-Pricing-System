@@ -31,7 +31,7 @@ namespace MarketPricingSystem.Controllers
         public ActionResult AllRoles()
         {
 
-            var rolelist = _context.Roles.ToList();
+            var rolelist = _context.Roles.Where(r=>r.RoleName!="Admin").ToList();
 
             return View(rolelist);
 

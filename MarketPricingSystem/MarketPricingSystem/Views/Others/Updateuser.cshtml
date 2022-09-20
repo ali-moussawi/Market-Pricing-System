@@ -43,8 +43,8 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="password" type="password" name="password" value="@Model.User.Password" onclick="able()" required />
-                                        <label for="password">password</label>
+                                        <input class="form-control" id="password" type="password" name="password" onclick="able()" onchange="able()" />
+                                        <label for="password">change password</label>
                                     </div>
                                     <span id="c1" style="color:red">Password does not match !</span>
                                 </div>
@@ -52,8 +52,8 @@
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="confirmpassword" onchange="onclick()" value="@Model.User.Password" type="password" required />
-                                        <label for="confirmpassword">Confirm password</label>
+                                        <input class="form-control" id="confirmpassword"  onclick="able()"  type="password"  onchange="able()" />
+                                        <label for="confirmpassword">Confirm new password</label>
 
                                     </div>
                                     <span id="c2" style="color:red">Password does not match !</span>

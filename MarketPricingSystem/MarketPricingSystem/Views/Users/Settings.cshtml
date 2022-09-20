@@ -39,15 +39,15 @@
 
             <div class="row py-2">
                 <div class="col-md-6 pt-md-0 pt-3">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="bg-light form-control" value="@Model.Password" onclick="able()" name="newpassword" required>
+                    <label for="password">Change password</label>
+                    <input type="password" id="password" class="bg-light form-control"  onclick="able()" name="newpassword" onchange="able()">
                     <span id="c1" style="color:red">Password does not match !</span>
                 </div>
 
 
                 <div class="col-md-6 pt-md-0 pt-3">
-                    <label for="confirmpassword">Password</label>
-                    <input type="password" id="confirmpassword" class="bg-light form-control" value="@Model.Password" onclick="able()" required>
+                    <label for="confirmpassword">Confirm new password</label>
+                    <input type="password" id="confirmpassword" class="bg-light form-control"  onclick="able()"  onchange="able()">
                     <span id="c2" style="color:red">Password does not match !</span>
                 </div>
 

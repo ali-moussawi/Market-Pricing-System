@@ -82,9 +82,13 @@ namespace MarketPricingSystem.Controllers
 
             var targetuser = _context.Users.FirstOrDefault(m => m.UserId == userid);
             targetuser.Name = username;
-            password = encryptandDecrypt.EncryptPassword(password);
 
-            targetuser.Password = password;
+            if (!String.IsNullOrWhiteSpace(password) && !String.IsNullOrEmpty(password))
+            {
+                password = encryptandDecrypt.EncryptPassword(password);
+
+                targetuser.Password = password;
+            }
             targetuser.Roleid = roleid;
             _context.SaveChanges();
 
