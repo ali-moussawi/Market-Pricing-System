@@ -67,8 +67,9 @@ namespace MarketPricingSystem.Controllers
             var checkdb = _context.Roles.FirstOrDefault(c => c.RoleName == Rolename);
             if (checkdb != null)
             {
-                var rolelist = _context.Roles.ToList();
-                return RedirectToAction("AllRoles", rolelist);
+                TempData["Message1"] = "Role already Exists"; 
+
+                return RedirectToAction("Createrole");
             }
 
 

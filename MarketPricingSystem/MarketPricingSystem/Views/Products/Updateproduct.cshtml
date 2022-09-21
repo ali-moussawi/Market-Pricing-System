@@ -14,25 +14,25 @@
 
 
                         <form method="post" action="/Products/Confirmupdate">
-
+                            <h6 style="color:red;opacity:0.5">@TempData["Message1"]  </h6>  <h6 style="color:red;opacity:0.5;margin-left:53%">@TempData["Message2"]  </h6>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="productname" type="text"  name="productname" value="@Model.Product.ProductName" required/>
+                                        <input class="form-control" id="productname" type="text" name="productname" value="@Model.Product.ProductName" required />
                                         <label for="productname">Name </label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input class="form-control" id="Barcode" type="text"  name="Barcode" value="@Model.Product.BarcodeNb" required/>
+                                        <input class="form-control" id="Barcode" type="text" name="Barcode" value="@Model.Product.BarcodeNb" required />
                                         <label for="Barcode">Barcode</label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="ProductDescription" type="text"  name="ProductDescription"  value="@Model.Product.ProductDescription" required />
+                                <input class="form-control" id="ProductDescription" type="text" name="ProductDescription" value="@Model.Product.ProductDescription" required />
                                 <label for="ProductDescription">Description</label>
                             </div>
 
@@ -53,10 +53,10 @@
                                                 }
                                                 else
                                                 {
-                                                <option value="@category.CategoryId">@category.CategoryName</option>
-                                                    }
-
+                                                    <option value="@category.CategoryId">@category.CategoryName</option>
                                                 }
+
+                                            }
 
 
 
@@ -65,7 +65,7 @@
                                     </div>
 
                                 </div>
-                                
+
                             </div>
 
                             <input type="hidden" value="@Model.Product.ProductId" name="Productid" />

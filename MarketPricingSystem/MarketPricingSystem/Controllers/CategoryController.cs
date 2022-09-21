@@ -62,17 +62,24 @@ namespace MarketPricingSystem.Controllers
         [HttpPost]
         public ActionResult Confirmupdate(int Categoryid, string Categoryname)
         {
+            var targetcategory = _context.Categories.FirstOrDefault(m => m.CategoryId == Categoryid);
 
-            var checkdb = _context.Categories.FirstOrDefault(c => c.CategoryName == Categoryname);
-            if (checkdb != null)
+
+            if (targetcategory.CategoryName != Categoryname)
             {
-                var categories = _context.Categories.ToList();
-                return RedirectToAction("AllCategories", categories);
+
+
+                var checkdb = _context.Categories.FirstOrDefault(c => c.CategoryName == Categoryname);
+                if (checkdb != null)
+                {
+                    TempData["Message1"] = "Category already exists";
+
+                    return RedirectToAction("Updatecategory", new {@id = targetcategory.CategoryId });
+
+                }
 
             }
-
-
-            var targetcategory = _context.Categories.FirstOrDefault(m => m.CategoryId == Categoryid);
+          
 
            
                 targetcategory.CategoryName = Categoryname;
@@ -98,8 +105,8 @@ namespace MarketPricingSystem.Controllers
             var checkdb =_context.Categories.FirstOrDefault(c => c.CategoryName == CategoryName);   
             if(checkdb != null)
             {
-                var categories = _context.Categories.ToList();
-                return RedirectToAction("AllCategories", categories);
+                TempData["Message1"] = "Category already exists";
+                return RedirectToAction("Createcategory");
                     
             }
 

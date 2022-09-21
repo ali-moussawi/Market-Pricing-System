@@ -80,55 +80,40 @@ namespace MarketPricingSystem.Controllers
         {
             var targetproduct = _context.Products.FirstOrDefault(p => p.ProductId == Productid);
 
+
+            if (targetproduct.ProductName != productname)
+            {
+                var checkdbproductname = _context.Products.FirstOrDefault(p => p.ProductName == productname);
+
+                if (checkdbproductname != null)
+                {
+                    TempData["Message1"] = "Product name already taken";
+
+                    return RedirectToAction("Updateproduct", new { @id = targetproduct.ProductId });
+                }
+            }
+
+            if (targetproduct.BarcodeNb != Barcode)
+            {
+                var checkdbproductbr = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
+
+                if (checkdbproductbr != null)
+                {
+                    TempData["Message2"] = "Barcode Already Exists";
+
+                    return RedirectToAction("Updateproduct", new { @id = targetproduct.ProductId });
+
+                }
+            }
+
+            targetproduct.ProductName = productname;
+            targetproduct.BarcodeNb=Barcode;
             targetproduct.ProductDescription = ProductDescription;
             targetproduct.CategoryId = Categoryid;
             _context.SaveChanges();
 
 
-
-            var checkdbproductname = _context.Products.FirstOrDefault(p => p.ProductName == productname);
-
-            if (checkdbproductname != null)
-            {
-             
-                var checkdbproductbr1 = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
-
-                if (checkdbproductbr1 == null)
-                {
-                    targetproduct.BarcodeNb = Barcode;
-                    _context.SaveChanges();
-                  
-                }
-
-
-               
-                List<product> pdlist3 = productDal.ProductList();
-
-                return RedirectToAction("AllProducts", pdlist3);
-            }
-
-            targetproduct.ProductName = productname;
-            _context.SaveChanges();
-
-
-
-
-
-            var checkdbproductbr = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
-
-            if (checkdbproductbr != null)
-            {
-                List<product> pdlist1 = productDal.ProductList();
-
-                return RedirectToAction("AllProducts", pdlist1);
-            }
-           
-            targetproduct.BarcodeNb = Barcode;
-            _context.SaveChanges();
-
-            List<product> pdlist = productDal.ProductList();
-
-            return RedirectToAction("AllProducts", pdlist);
+            return RedirectToAction("AllProducts");
         }
 
 
@@ -143,39 +128,47 @@ namespace MarketPricingSystem.Controllers
 
 
         [HttpPost]
-        public ActionResult ConfirmCreate(string productname, int Barcode, string ProductDescription, int Categoryid)
+        public ActionResult ConfirmCreate(string productname, int Barcode, string ProductDescription, int? Categoryid)
         {
-
-            var checkdbproductbr = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
-            if (checkdbproductbr != null)
-            {
-                List<product> pdlist2 = productDal.ProductList();
-
-
-
-                return RedirectToAction("AllProducts",pdlist2);
-                   
-            }
+         
 
 
             var checkdbproductname = _context.Products.FirstOrDefault(p => p.ProductName == productname);
             if (checkdbproductname != null)
             {
-                List<product> pdlist3 = productDal.ProductList();
-
-
-
-                return RedirectToAction("AllProducts",pdlist3);
+                TempData["Message1"] = "Product name already taken";
+                var allcategories = _context.Categories.Where(c => c.CategoryName != "NO CATEGORY").ToList();
+                return RedirectToAction("Createproduct", allcategories);
             }
-            else
+
+
+
+            var checkdbproductbr = _context.Products.FirstOrDefault(p => p.BarcodeNb == Barcode);
+
+            if (checkdbproductbr != null)
             {
+                var allcategories = _context.Categories.Where(c => c.CategoryName != "NO CATEGORY").ToList();
+
+                TempData["Message2"] = "Barcode Already Exists";
+
+                return RedirectToAction("Createproduct", allcategories);
+            }
+
+            if (Categoryid == null)
+            {
+
+                TempData["Message3"] = "Please select a category";
+
+                return RedirectToAction("Createproduct");
+
+            }
 
                 Products product = new Products();
 
                 product.ProductName = productname;
                 product.BarcodeNb = Barcode;
                 product.ProductDescription = ProductDescription;
-                product.CategoryId = Categoryid;
+                product.CategoryId = Categoryid.Value;
                 _context.Products.Add(product);
                 _context.SaveChanges();
 
@@ -184,7 +177,7 @@ namespace MarketPricingSystem.Controllers
 
 
                 return RedirectToAction("AllProducts", pdlist);
-            }
+            
 
          
         }

@@ -64,63 +64,47 @@ namespace MarketPricingSystem.Controllers
         public ActionResult Confirmupdate(int Supermarketid, string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {
             var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == Supermarketid);
-
-            var checkdbmarketname_region = _context.Supermarket.FirstOrDefault(p => p.SupermarketName == MarketName && p.SupermarketRegion == MarketRegion);
-
-
-            if (checkdbmarketname_region != null)
-            {
-                targetsupermarket.SupermarketDescription = MarketDescription;
-                _context.SaveChanges();
-
-                if (targetsupermarket.Phonenumber != MarketNumber)
-                {
-                    var numberdb = _context.Supermarket.FirstOrDefault(m => m.Phonenumber == MarketNumber);
-                    if (numberdb != null)
-                    {
-
-                        var supermarketlist3 = _context.Supermarket.ToList();
-                        return RedirectToAction("Allsupermarkets", supermarketlist3);
-                    }
-             
-                }
-                
-                targetsupermarket.Phonenumber = MarketNumber;
-
-                _context.SaveChanges();
-
-                var supermarketlist1 = _context.Supermarket.ToList();
-                return RedirectToAction("Allsupermarkets", supermarketlist1);
-            }
-
-
-
-           
-                targetsupermarket.SupermarketName = MarketName;
-                targetsupermarket.SupermarketRegion = MarketRegion;
-
-          
             targetsupermarket.SupermarketDescription = MarketDescription;
             _context.SaveChanges();
 
 
+            if (targetsupermarket.SupermarketName!=MarketName && targetsupermarket.SupermarketRegion!=MarketRegion) {
+                var checkdbmarketname_region = _context.Supermarket.FirstOrDefault(p => p.SupermarketName == MarketName && p.SupermarketRegion == MarketRegion);
 
-            if (targetsupermarket.Phonenumber != MarketNumber)
-            {
-                var numberdb = _context.Supermarket.FirstOrDefault(m => m.Phonenumber == MarketNumber);
-                if (numberdb != null)
+
+                if (checkdbmarketname_region != null)
                 {
+                    TempData["Message1"] = "Supermarket name and Region Already Exists";
 
-                    var supermarketlist3 = _context.Supermarket.ToList();
-                    return RedirectToAction("Allsupermarkets", supermarketlist3);
+
+
+                    return RedirectToAction("Updatesupermarket", new { @id = Supermarketid });
+
                 }
 
             }
 
+            if (targetsupermarket.Phonenumber != MarketNumber)
+            {
+                var numberdb = _context.Supermarket.FirstOrDefault(m => m.Phonenumber == MarketNumber);
+
+                if (numberdb != null)
+                {
+
+                     TempData["Message2"] = "Phone number already taken";
+
+                    return RedirectToAction("Updatesupermarket", new { @id = Supermarketid });
+                }
+
+            }
+
+            targetsupermarket.SupermarketName = MarketName;
+            targetsupermarket.SupermarketRegion = MarketRegion;
+            targetsupermarket.SupermarketDescription = MarketDescription;
             targetsupermarket.Phonenumber = MarketNumber;
-           
-           
             _context.SaveChanges();
+
+
 
             var supermarketlist = _context.Supermarket.ToList();
             return RedirectToAction("Allsupermarkets",supermarketlist);
@@ -146,8 +130,12 @@ namespace MarketPricingSystem.Controllers
 
             if (checkdbmarketname_region != null)
             {
-                var supermarketlist1 = _context.Supermarket.ToList();
-                return RedirectToAction("Allsupermarkets",supermarketlist1);
+
+                TempData["Message1"]  = "Supermarket name and Region Already Exists";
+
+
+               
+                return RedirectToAction("Createsupermarket");
                 
             }
 
@@ -156,8 +144,11 @@ namespace MarketPricingSystem.Controllers
 
             if (marketnumber != null)
             {
-                var supermarketlist2 = _context.Supermarket.ToList();
-                return RedirectToAction("Allsupermarkets", supermarketlist2);
+                TempData["Message2"] = "Phone number already taken";
+
+
+
+                return RedirectToAction("Createsupermarket");
             }
 
 

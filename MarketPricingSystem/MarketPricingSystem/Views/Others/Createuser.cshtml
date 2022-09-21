@@ -16,7 +16,7 @@
 
 
                         <form method="post" action="/Others/Confirmcreate">
-
+                            <h6 style="color:red;opacity:0.5;margin-left:53%">@TempData["Message1"]  </h6>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
@@ -32,9 +32,9 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <h6 style="color:red;opacity:0.5;">@TempData["Message2"]  </h6>
                             <div class="form-floating mb-3">
-                                <input class="form-control"  type="email" id="gmail"  name="gmail" required />
+                                <input class="form-control" type="email" id="gmail" name="gmail" required />
                                 <label for="gmail"> User gmail</label>
                             </div>
 
@@ -43,7 +43,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="password"  type="password" name="password" onclick="able()" required />
+                                        <input class="form-control" id="password" type="password" name="password" onclick="able()" required />
                                         <label for="password">password</label>
                                     </div>
                                     <span id="c1" style="color:red">Password does not match !</span>
@@ -52,22 +52,22 @@
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="confirmpassword"  onclick="able()" type="password" required />
+                                        <input class="form-control" id="confirmpassword" onclick="able()" type="password" required />
                                         <label for="confirmpassword">Confirm password</label>
 
                                     </div>
-                                    <span id="c2" style="color:red"  >Password does not match !</span>
+                                    <span id="c2" style="color:red">Password does not match !</span>
                                 </div>
 
                             </div>
-
+                            <h6 style="color:red;opacity:0.5;">@TempData["Message3"]  </h6>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="role" style="opacity: 0.5">Role</label>
 
-                                        <select id="role" class="form-control" name="roleid">
-
+                                        <select id="role" class="form-control" name="roleid" required>
+                                            <option disabled selected>--select--</option>
                                             @foreach (var role in Model)
                                             {
                                                 <option value="@role.RoleId">@role.RoleName</option>

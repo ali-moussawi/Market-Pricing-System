@@ -76,12 +76,13 @@ namespace MarketPricingSystem.Controllers
 
 
 
-                public ActionResult Confirmupdate(int userid, string username, string phonenumber , string password, int roleid)
+         public ActionResult Confirmupdate(int userid, string username, string phonenumber , string password, int roleid)
         {
-
-
             var targetuser = _context.Users.FirstOrDefault(m => m.UserId == userid);
-            targetuser.Name = username;
+
+
+
+           
 
             if (!String.IsNullOrWhiteSpace(password) && !String.IsNullOrEmpty(password))
             {
@@ -89,17 +90,22 @@ namespace MarketPricingSystem.Controllers
 
                 targetuser.Password = password;
             }
-            targetuser.Roleid = roleid;
-            _context.SaveChanges();
 
-            var checknb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phonenumber);
 
-            if (checknb != null)
+            if (targetuser.PhoneNumber != phonenumber)
             {
-                return RedirectToAction("Allusers");
+                var checknb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phonenumber);
+
+                if (checknb != null)
+                {
+                    TempData["Message1"] = "Phone number Already in use";
+
+                    return RedirectToAction("Updateuser", new { @id= targetuser.UserId});
+                }
             }
 
-
+            targetuser.Roleid = roleid;
+            targetuser.Name = username;
             targetuser.PhoneNumber = phonenumber;
             _context.SaveChanges();
 
@@ -144,12 +150,21 @@ namespace MarketPricingSystem.Controllers
             return View(roleslist);
         }
 
-            public ActionResult Confirmcreate(string username ,string phonenumber, string gmail, string password,  int roleid)
+
+
+
+            public ActionResult Confirmcreate(string username ,string phonenumber, string gmail, string password,  int? roleid)
         {
+           
+
+
+
             var chechnb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phonenumber);
             if (chechnb != null)
             {
-                return RedirectToAction("Allusers");
+                TempData["Message1"] = "Phone number Already in use";
+                return RedirectToAction("Createuser");
+             
 
 
             }
@@ -157,10 +172,17 @@ namespace MarketPricingSystem.Controllers
             var chechgmail = _context.Users.FirstOrDefault(u => u.Gmail == gmail);
             if (chechgmail != null)
             {
-                return RedirectToAction("Allusers");
+                TempData["Message2"] = "Email Already in use";
+                return RedirectToAction("Createuser");
 
 
             }
+            if (roleid == null)
+            {
+                TempData["Message3"] = "Please select a role";
+                return RedirectToAction("Createuser");
+            }
+
 
             Users newuser = new Users();
             newuser.Name = username;
@@ -170,7 +192,7 @@ namespace MarketPricingSystem.Controllers
             password = encryptandDecrypt.EncryptPassword(password);
 
             newuser.Password = password;
-            newuser.Roleid = roleid;
+            newuser.Roleid = roleid.Value;
             _context.Users.Add(newuser);
             _context.SaveChanges();
 

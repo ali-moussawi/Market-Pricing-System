@@ -55,9 +55,30 @@ namespace MarketPricingSystem.Controllers
 
         public ActionResult Updatesettings( int userid, string name, string phone, string newpassword)
         {
+
+
+
             var targetuser = _context.Users.FirstOrDefault(u => u.UserId == userid);
 
-            targetuser.Name = name;
+           
+
+            if(targetuser.PhoneNumber != phone)
+            {
+
+                var uphonenb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phone);
+                if (uphonenb != null)
+                {
+                    TempData["Message1"] = "Phone number already in use";
+
+                    return RedirectToAction("Settings");
+                }
+
+
+            }
+           
+
+
+
 
 
             if (!String.IsNullOrWhiteSpace(newpassword) && !String.IsNullOrEmpty(newpassword))
@@ -65,14 +86,8 @@ namespace MarketPricingSystem.Controllers
                 targetuser.Password = encryptandDecrypt.EncryptPassword(newpassword);
             }
 
-            _context.SaveChanges();
 
-            var uphonenb = _context.Users.FirstOrDefault(u => u.PhoneNumber == phone);
-            if(uphonenb !=null)
-            {
-                return RedirectToAction("Dashboard");
-            }
-
+            targetuser.Name = name;
             targetuser.PhoneNumber = phone;
             _context.SaveChanges();
 
