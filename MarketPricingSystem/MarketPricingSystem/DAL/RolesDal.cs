@@ -3,6 +3,7 @@ using MarketPricingSystem.ViewModel;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -24,11 +25,13 @@ namespace MarketPricingSystem.DAL
         public List<Permissions> Rolepermission (int roleid)
         {
             List<Permissions> permissions = new List<Permissions>();
-            string query = "  select permissionname from permissions p , rolepermissions pr  where pr.roleid = "+roleid.ToString() + " and p.permissionid = pr.permissionid ";
-            using (MySqlCommand cmd = new MySqlCommand(query))
+            using (MySqlCommand cmd = new MySqlCommand("Rolepermission", con))
             {
                 cmd.Connection = con;
                 con.Open();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@roleid", roleid);
                 using (MySqlDataReader sdr = cmd.ExecuteReader())
                 {
                     while (sdr.Read())

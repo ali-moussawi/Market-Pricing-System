@@ -3,8 +3,10 @@ using MarketPricingSystem.ViewModel;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace MarketPricingSystem.DAL
@@ -17,9 +19,9 @@ namespace MarketPricingSystem.DAL
             int nocategoryid=0;
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
             {
-                string query = "select categoryid from categories where categoryname = 'no category' ";
+              
 
-                using (MySqlCommand cmd = new MySqlCommand(query))
+                using (MySqlCommand cmd = new MySqlCommand("Nocategoryid", con))
                 {
                     cmd.Connection = con;
                     con.Open();
@@ -33,11 +35,15 @@ namespace MarketPricingSystem.DAL
                     }
                     con.Close();
                 }
-                string query2 = " update products  set categoryid=" + nocategoryid + "  where categoryid=" +Categoryid;
-                using (MySqlCommand cmd = new MySqlCommand(query2))
+               
+                using (MySqlCommand cmd = new MySqlCommand("updatecategorystatus", con))
                 {
                     cmd.Connection = con;
                     con.Open();
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@nocategoryid", nocategoryid);
+                    cmd.Parameters.AddWithValue("@categoryid", Categoryid);
                     MySqlDataReader sdr = cmd.ExecuteReader();
 
                 }

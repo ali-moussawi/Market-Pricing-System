@@ -6,6 +6,8 @@ using System.Web.Security;
 using MarketPricingSystem.Models;
 using MySql.Data.MySqlClient;
 using MarketPricingSystem.ViewModel;
+using System.Data;
+
 namespace MarketPricingSystem.DAL
 {
     public class otherDal
@@ -27,12 +29,14 @@ namespace MarketPricingSystem.DAL
             List<Userdetails> users= new List<Userdetails>();
 
 
-            string query = "select userid, name,phonenumber,gmail,password , rolename from users u ,roles r  where u.roleid = r.roleid  and gmail != 'admin@gmail.com'";
 
-            using (MySqlCommand cmd = new MySqlCommand(query))
+
+            using (MySqlCommand cmd = new MySqlCommand("Allusers", con))
             {
                 cmd.Connection = con;
                 con.Open();
+
+                cmd.CommandType = CommandType.StoredProcedure;
                 using (MySqlDataReader sdr = cmd.ExecuteReader())
                 {
                     while (sdr.Read())
