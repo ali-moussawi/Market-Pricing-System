@@ -266,6 +266,7 @@
     <Compile Include="ViewModel\productandcategory.cs" />
     <Compile Include="ViewModel\productvalue.cs" />
     <Compile Include="ViewModel\productdetails.cs" />
+    <Compile Include="ViewModel\roleandpermissionsandcheckedone.cs" />
     <Compile Include="ViewModel\userandroles.cs" />
     <Compile Include="ViewModel\Userdetails.cs" />
   </ItemGroup>
@@ -347,6 +348,7 @@
     <Content Include="Views\Supermarketproducts\Supermarketproducts.cshtml" />
     <Content Include="Views\Supermarketproducts\Createproduct.cshtml" />
     <Content Include="Views\Supermarketproducts\Updateproductprice.cshtml" />
+    <Content Include="Views\Roles\Updaterole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

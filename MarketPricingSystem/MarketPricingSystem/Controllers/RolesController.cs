@@ -191,6 +191,19 @@ namespace MarketPricingSystem.Controllers
 
 
 
+        public ActionResult Updaterole(int id)
+        {
+
+
+
+            var allpermissions = _context.Permissions.ToList();
+
+            return View(allpermissions);
+
+        }
+
+
+
 
 
 

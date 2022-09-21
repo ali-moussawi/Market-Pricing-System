@@ -6,6 +6,7 @@ using System.Web;
 using MarketPricingSystem.ViewModel;
 using MarketPricingSystem.Models;
 using System.Web.Mvc;
+using System.Data;
 
 namespace MarketPricingSystem.DAL
 {
@@ -22,12 +23,15 @@ namespace MarketPricingSystem.DAL
             List<productdetails> products = new List<productdetails>();
 
 
-            string query = " select p.productid, productname ,barcodenb,productdescription , price,categoryname from products p , categories c , productprices pc where p.productid = pc.productid and pc.supermarketid =" + supermarketid.ToString() + " and c.categoryid = p.categoryid and isactiveprice=0";
 
-            using (MySqlCommand cmd = new MySqlCommand(query))
+
+            using (MySqlCommand cmd = new MySqlCommand("Marketproducts", con))
             {
                 cmd.Connection = con;
                 con.Open();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@marketid", supermarketid);
                 using (MySqlDataReader sdr = cmd.ExecuteReader())
                 {
                     while (sdr.Read())
@@ -57,11 +61,14 @@ namespace MarketPricingSystem.DAL
             //install sql connector to can open connection
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
             {
-                string query = "select productid, productname ,barcodenb , productdescription , categoryname from products p , categories c where p.categoryid = c.categoryid and p.productid = "+id.ToString();
-                using (MySqlCommand cmd = new MySqlCommand(query))
+           
+                using (MySqlCommand cmd = new MySqlCommand("product", con))
                 {
                     cmd.Connection = con;
                     con.Open();
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@productid", id);
                     using (MySqlDataReader sdr = cmd.ExecuteReader())
                     {
 
@@ -86,18 +93,20 @@ namespace MarketPricingSystem.DAL
 
 
 
-        public List<product> ProductList()//need productid for future work
+        public List<product> ProductList()//need productid for future work //all products with categories without price
         {
             List<product> products = new List<product>();
 
             //install sql connector to can open connection
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
             {
-                string query = "select productid, productname ,barcodenb , productdescription , categoryname from products p , categories c where p.categoryid = c.categoryid";
-                using (MySqlCommand cmd = new MySqlCommand(query))
+            
+               using (MySqlCommand cmd = new MySqlCommand("ProductList", con))
                 {
                     cmd.Connection = con;
                     con.Open();
+
+                    cmd.CommandType = CommandType.StoredProcedure;
                     using (MySqlDataReader sdr = cmd.ExecuteReader())
                     {
                         while (sdr.Read())
@@ -126,18 +135,20 @@ namespace MarketPricingSystem.DAL
 
 
 
-        public List<product> Allproducts()//need productid for future work
+        public List<product> Allproducts()//need productid for future work//only all priced products (dont return products that are not priced)
         {
             List<product> products = new List<product>();
 
             //install sql connector to can open connection
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
             {
-                string query = "select productid, productname ,barcodenb , productdescription , categoryname from products p , categories c where p.categoryid = c.categoryid and p.productid in (select Distinct productid from productprices);";
-                using (MySqlCommand cmd = new MySqlCommand(query))
+                using (MySqlCommand cmd = new MySqlCommand("Allproducts_withid", con))
                 {
                     cmd.Connection = con;
                     con.Open();
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+            
                     using (MySqlDataReader sdr = cmd.ExecuteReader())
                     {
                         while (sdr.Read())
@@ -168,11 +179,15 @@ namespace MarketPricingSystem.DAL
             List<productvalue> topcheapthree = new List<productvalue>();
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
             {
-                string query = " select supermarketname , productname , price  from supermarket s, products p , productprices pc where s.supermarketid = pc.supermarketid and p.productid = pc.productid and p.productid =" + id.ToString() + " and pc.ISactiveprice=0    ORDER BY price ASC   limit 3 ;";
-                using (MySqlCommand cmd = new MySqlCommand(query))
+
+                using (MySqlCommand cmd = new MySqlCommand("Get_Cheapestproduct", con))
                 {
                     cmd.Connection = con;
                     con.Open();
+
+                    cmd.CommandType= CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@productid", id);
+
                     using (MySqlDataReader sdr = cmd.ExecuteReader())
                     {
                         while (sdr.Read())
@@ -203,15 +218,19 @@ namespace MarketPricingSystem.DAL
             List<productvalue> topexpensivethree = new List<productvalue>();
             using (MySqlConnection con = new MySqlConnection("server=localhost;user=root;password=123;database=marketpricing"))
             {
-                string query = " select supermarketname , productname , price  from supermarket s, products p , productprices pc where s.supermarketid = pc.supermarketid and p.productid = pc.productid and p.productid =" + id.ToString() + " and pc.ISactiveprice=0    ORDER BY price DESC   limit 3 ;";
-                using (MySqlCommand cmd = new MySqlCommand(query))
+                using (MySqlCommand cmd = new MySqlCommand(" Get_Expensiveproduct", con))
                 {
                     cmd.Connection = con;
                     con.Open();
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@productid", id);
+
                     using (MySqlDataReader sdr = cmd.ExecuteReader())
                     {
                         while (sdr.Read())
                         {
+                           
                             topexpensivethree.Add(new productvalue
                             {
                                 supermarketname = sdr["supermarketname"].ToString(),
@@ -230,27 +249,6 @@ namespace MarketPricingSystem.DAL
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
 
 }
