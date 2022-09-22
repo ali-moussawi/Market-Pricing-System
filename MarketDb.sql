@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `categories`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categories` (
   `categoryId` int NOT NULL AUTO_INCREMENT,
-  `categoryName` varchar(55) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `categoryName` varchar(255) NOT NULL,
   PRIMARY KEY (`categoryId`),
   UNIQUE KEY `categoryName_UNIQUE` (`categoryName`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (6,'Beverages'),(7,'Diary'),(5,'fruits'),(1,'NO CATEGORY'),(2,'vegetables'),(3,'سناك');
+INSERT INTO `categories` VALUES (1,'NO CATEGORY');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +83,7 @@ CREATE TABLE `productprices` (
   KEY `spid_idx` (`supermarketid`),
   CONSTRAINT `prid` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`) ON DELETE CASCADE,
   CONSTRAINT `spid` FOREIGN KEY (`supermarketid`) REFERENCES `supermarket` (`supermarketId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,6 @@ CREATE TABLE `productprices` (
 
 LOCK TABLES `productprices` WRITE;
 /*!40000 ALTER TABLE `productprices` DISABLE KEYS */;
-INSERT INTO `productprices` VALUES (1,1,1,10,'2022-09-18',1),(2,3,1,1000,'2022-09-19',1),(3,3,2,2000,'2022-09-19',0),(4,1,1,20000,'2022-09-19',1),(5,1,1,30000,'2022-09-19',1);
 /*!40000 ALTER TABLE `productprices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,16 +104,16 @@ DROP TABLE IF EXISTS `products`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
   `productId` int NOT NULL AUTO_INCREMENT,
-  `productName` varchar(255) NOT NULL,
+  `productName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `BarcodeNb` int NOT NULL,
-  `productDescription` varchar(255) DEFAULT NULL,
+  `productDescription` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `categoryId` int DEFAULT NULL,
   PRIMARY KEY (`productId`),
   UNIQUE KEY `productName_UNIQUE` (`productName`),
   UNIQUE KEY `BarcodeNb_UNIQUE` (`BarcodeNb`),
   KEY `ctgr_idx` (`categoryId`),
   CONSTRAINT `ctgr` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +122,6 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'picon',9281,'64 pieces',7),(2,'tomato',676,'1 kilo',2),(3,'Master',20978,'salt, big one',3);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,8 +137,8 @@ CREATE TABLE `rolepermissions` (
   `PermissionId` int NOT NULL,
   PRIMARY KEY (`RoleId`,`PermissionId`),
   KEY `forg2_idx` (`PermissionId`),
-  CONSTRAINT `forg1` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`),
-  CONSTRAINT `forg2` FOREIGN KEY (`PermissionId`) REFERENCES `permissions` (`PermissionId`)
+  CONSTRAINT `forg1` FOREIGN KEY (`RoleId`) REFERENCES `roles` (`RoleId`) ON DELETE CASCADE,
+  CONSTRAINT `forg2` FOREIGN KEY (`PermissionId`) REFERENCES `permissions` (`PermissionId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -150,7 +148,7 @@ CREATE TABLE `rolepermissions` (
 
 LOCK TABLES `rolepermissions` WRITE;
 /*!40000 ALTER TABLE `rolepermissions` DISABLE KEYS */;
-INSERT INTO `rolepermissions` VALUES (1,1),(3,1),(1,2),(1,3),(1,4),(1,5),(3,5),(1,6),(3,6),(1,7),(3,7),(1,8),(3,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(2,16),(1,17),(2,17),(1,18),(2,18),(1,19),(2,19);
+INSERT INTO `rolepermissions` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19);
 /*!40000 ALTER TABLE `rolepermissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +163,7 @@ CREATE TABLE `roles` (
   `RoleId` int NOT NULL AUTO_INCREMENT,
   `RoleName` varchar(50) NOT NULL,
   PRIMARY KEY (`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +172,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Admin'),(2,'test'),(3,'dmu');
+INSERT INTO `roles` VALUES (1,'Admin'),(12,'temprole');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +191,7 @@ CREATE TABLE `supermarket` (
   `phonenumber` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`supermarketId`),
   UNIQUE KEY `phonenumber_UNIQUE` (`phonenumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +200,7 @@ CREATE TABLE `supermarket` (
 
 LOCK TABLES `supermarket` WRITE;
 /*!40000 ALTER TABLE `supermarket` DISABLE KEYS */;
-INSERT INTO `supermarket` VALUES (1,'Karrfor','Ghobiery','open all days of the week','81048065'),(2,'Rammal','hadath','we have best prices','76998349'),(3,'Ammliye','Al Matar highway ','Best product prices and vouchers','01992876');
+INSERT INTO `supermarket` VALUES (1,'Karrfor','hadath','we depend on dollar 8000','81048065'),(2,'tawfir','Jbeil','Best product prices and vouchers','76998349'),(3,'Rammal','Al Matar highway ','visit us','01992876');
 /*!40000 ALTER TABLE `supermarket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +223,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `phoneNumber_UNIQUE` (`phoneNumber`),
   KEY `frg123roleid_idx` (`roleid`),
   CONSTRAINT `frg123roleid` FOREIGN KEY (`roleid`) REFERENCES `roles` (`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +232,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Ali moussawi','71548165','aha057@usal.edu.lb','admin123',1),(2,'mohamad','81767209','test@usal.edu.lb','test123',2),(5,'hala moussawi','0102999','hala@usal.edu.lb','hala123hala',3);
+INSERT INTO `users` VALUES (1,'Ali','01023932','admin@gmail.com','4U+sEfn9YsTNbRD8Ye6vA9a2i8Cs5Xg2pgR0QrUUXeQ=',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -247,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-19 22:37:03
+-- Dump completed on 2022-09-22 19:15:35
