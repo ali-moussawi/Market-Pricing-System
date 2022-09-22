@@ -200,7 +200,6 @@ CREATE TABLE `supermarket` (
 
 LOCK TABLES `supermarket` WRITE;
 /*!40000 ALTER TABLE `supermarket` DISABLE KEYS */;
-INSERT INTO `supermarket` VALUES (1,'Karrfor','hadath','we depend on dollar 8000','81048065'),(2,'tawfir','Jbeil','Best product prices and vouchers','76998349'),(3,'Rammal','Al Matar highway ','visit us','01992876');
 /*!40000 ALTER TABLE `supermarket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-22 19:15:35
+-- Dump completed on 2022-09-22 22:03:27
