@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using MarketPricingSystem.Models;
 
 namespace MarketPricingSystem.ViewModel
 {
     public class roleandpermissionsandcheckedone
     {
-        public Roles role { get; set; }
+        public MarketPricingSystem.Models.Roles role { get; set; } //target role
 
-        public List<Permissions> permissions { get; set; }
+        public List<Permissions> permissions { get; set; }//all permissions
 
-        public List<Permissions> checkedpermissions { get; set; }
+        public List<Rolepermissions> checkedpermissionsid { get; set; } //ids of permissions where roleid = roleid
 
     }
 }

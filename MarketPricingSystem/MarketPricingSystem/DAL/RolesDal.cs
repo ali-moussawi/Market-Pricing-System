@@ -52,6 +52,13 @@ namespace MarketPricingSystem.DAL
 
         public  void addperTorole(int roleid , int perid)
         {
+            var checkexist = _context.Rolepermissions.FirstOrDefault(rp => rp.RoleId == roleid && rp.PermissionId == perid);
+            if (checkexist!= null)
+            {
+                return;
+            }
+
+
             Rolepermissions newrolepermission = new Rolepermissions();
 
             newrolepermission.RoleId = roleid;
@@ -64,11 +71,7 @@ namespace MarketPricingSystem.DAL
 
         }
 
-
-
-
-     
-
+        
 
     }
 }
