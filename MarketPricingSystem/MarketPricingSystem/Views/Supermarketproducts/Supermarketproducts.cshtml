@@ -3,7 +3,15 @@
     ViewBag.Title = "Supermarketproducts";
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
+@{
 
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Products</h1>
@@ -11,74 +19,85 @@
             <li class="breadcrumb-item"><a href="/Supermarketproducts/Allsupermarkets">Supermarkets</a></li>
             <li class="breadcrumb-item active">products</li>
         </ol>
-        <div style="margin-bottom:10px">
+        @if (value.Contains("insertproducts"))
+        {
+            <div style="margin-bottom:10px">
 
-            <a href="/Supermarketproducts/Createproduct/@Model.marketid" class="btn btn-success" role="button">Add New product </a>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                All Products
+                <a href="/Supermarketproducts/Createproduct/@Model.marketid" class="btn btn-success" role="button">Add New product </a>
             </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Barcode</th>
-                            <th>Description</th>
-                            <th>price</th>
-                            <th>category</th>
-
-                            <th></th>
-
-
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Barcode</th>
-                            <th>Description</th>
-                            <th>price</th>
-                            <th>category</th>
-                            <th></th>
-
-                        </tr>
-                    </tfoot>
-
-                    <tbody>
-                        @foreach (var market in Model.supermarketproducts)
-                        {
-
+        }
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    All Products
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
                             <tr>
-                                <td>@market.productname</td>
-                                <td>@market.productBarcode</td>
-                                <td>@market.productDescription</td>
-                                <td>@market.productprice<span style="margin-left:10px">LB</span></td>
-                                <td>@market.productcategory</td>
-
-
-                                <th>
-
-
-                                    @Html.ActionLink("Update", "Updateproductprice", "Supermarketproducts", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary", @style = "color:white;" })
-
-                                    <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data1="@Model.marketid" middata2=" @market.productid">
-                                        Delete
-                                    </button>
-
-                                </th>
+                                <th>Name</th>
+                                <th>Barcode</th>
+                                <th>Description</th>
+                                <th>price</th>
+                                <th>category</th>
+                                @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                                {
+                                    <th></th>
+                                }
 
                             </tr>
-                        }
-                    </tbody>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Barcode</th>
+                                <th>Description</th>
+                                <th>price</th>
+                                <th>category</th>
+                                @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                                {
+                                    <th></th>
+                                }
+                            </tr>
+                        </tfoot>
+
+                        <tbody>
+                            @foreach (var market in Model.supermarketproducts)
+                            {
+
+                                <tr>
+                                    <td>@market.productname</td>
+                                    <td>@market.productBarcode</td>
+                                    <td>@market.productDescription</td>
+                                    <td>@market.productprice<span style="margin-left:10px">LB</span></td>
+                                    <td>@market.productcategory</td>
+
+                                    @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                                    {
+                                        <th>
+                                            @if (value.Contains("updateproductprice"))
+                                            {
+
+                                                @Html.ActionLink("Update", "Updateproductprice", "Supermarketproducts", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary", @style = "color:white;" })
+                                            }
+                                            @if (value.Contains("deleteproductpriced"))
+                                            {
+                                                <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data1="@Model.marketid" middata2=" @market.productid">
+                                                    Delete
+                                                </button>
+                                            }
+                                        </th>
+                                    }
+
+                                    </tr>
+                            }
+                        </tbody>
 
 
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 </main>
 
 

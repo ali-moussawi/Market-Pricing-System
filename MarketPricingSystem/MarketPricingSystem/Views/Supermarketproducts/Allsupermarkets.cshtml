@@ -4,7 +4,15 @@
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
 
+@{
 
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Super Markets</h1>
@@ -14,7 +22,7 @@
         </ol>
         <div style="margin-bottom:10px">
 
-           <span></span>
+            <span></span>
         </div>
         <div class="card mb-4">
             <div class="card-header">
@@ -29,10 +37,12 @@
                             <th>Market Region</th>
                             <th>Description</th>
                             <th>phone number</th>
-                            <th></th>
+                            @if (value.Contains("viewspp"))
+                            {
+                                <th></th>
+                            }
 
-
-                        </tr>
+                            </tr>
                     </thead>
                     <tfoot>
                         <tr>
@@ -40,7 +50,10 @@
                             <th>Market Region</th>
                             <th>Description</th>
                             <th>phone number</th>
-                            <th></th>
+                            @if (value.Contains("viewspp"))
+                            {
+                                <th></th>
+                            }
 
 
                         </tr>
@@ -55,13 +68,16 @@
                                 <td>@market.SupermarketDescription</td>
                                 <td>@market.Phonenumber</td>
 
+                                @if (value.Contains("viewspp"))
+                                {
+                                    <td>
 
-                                <td>
-                                    <a href="/Supermarketproducts/Supermarketproducts/@market.SupermarketId" class="btn btn-success" role="button">Products</a>
+                                        <a href="/Supermarketproducts/Supermarketproducts/@market.SupermarketId" class="btn btn-success" role="button">Products</a>
 
-                                </td>
+                                    </td>
+                                }
 
-                            </tr>
+                                </tr>
                         }
 
 

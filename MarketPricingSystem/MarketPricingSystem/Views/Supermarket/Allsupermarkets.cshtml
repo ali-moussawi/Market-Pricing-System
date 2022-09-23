@@ -4,7 +4,15 @@
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
 
+@{
 
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Super Markets</h1>
@@ -12,70 +20,86 @@
             <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active">supermarkets</li>
         </ol>
-        <div style="margin-bottom:10px">
 
-            <a href="/Supermarket/Createsupermarket" class="btn btn-success" role="button">Create New SuperMarket </a>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                All SuperMarkets
+        @if (value.Contains("addsupermarket"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Supermarket/Createsupermarket" class="btn btn-success" role="button">Create New SuperMarket </a>
             </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Market Name</th>
-                            <th>Market Region</th>
-                            <th>Description</th>
-                            <th>phone number</th>
-                            <th></th>
-
-
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Market Name</th>
-                            <th>Market Region</th>
-                            <th>Description</th>
-                            <th>phone number</th>
-                            <th></th>
-
-
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach (var market in Model)
-                        {
-
+        }
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    All SuperMarkets
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
                             <tr>
-                                <td>@market.SupermarketName</td>
-                                <td>@market.SupermarketRegion</td>
-                                <td>@market.SupermarketDescription</td>
-                                <td>@market.Phonenumber</td>
-
-
-                                <td>
-                                    <a href="/Supermarket/Updatesupermarket/@market.SupermarketId" class="btn btn-primary" role="button">Update</a>
-
-
-                                    <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@market.SupermarketId">
-                                        Delete
-                                    </button>
-
-
-                                </td>
+                                <th>Market Name</th>
+                                <th>Market Region</th>
+                                <th>Description</th>
+                                <th>phone number</th>
+                                @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                                {
+                                    <th></th>
+                                }
 
                             </tr>
-                        }
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Market Name</th>
+                                <th>Market Region</th>
+                                <th>Description</th>
+                                <th>phone number</th>
+                                @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                                {
+                                    <th></th>
+                                }
 
 
-                    </tbody>
-                </table>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var market in Model)
+                            {
+
+                                <tr>
+                                    <td>@market.SupermarketName</td>
+                                    <td>@market.SupermarketRegion</td>
+                                    <td>@market.SupermarketDescription</td>
+                                    <td>@market.Phonenumber</td>
+
+                                    @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                                    {
+                                        <td>
+                                            @if (value.Contains("updatesupermarket"))
+                                            {
+                                                <a href="/Supermarket/Updatesupermarket/@market.SupermarketId" class="btn btn-primary" role="button">Update</a>
+
+                                            }
+
+                                            @if (value.Contains("deletesupermarket"))
+                                            {
+                                                <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@market.SupermarketId">
+                                                    Delete
+                                                </button>
+                                            }
+
+
+                                        </td>
+                                    }
+                                    </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 </main>
 
 @section scripts {
@@ -99,7 +123,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url :"/Supermarket/ConfirmDelete/"+value,
+                        url: "/Supermarket/ConfirmDelete/" + value,
                         method: "get",
                         success: function () {
                             $(btn).closest('tr').fadeOut();

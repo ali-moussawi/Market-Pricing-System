@@ -3,7 +3,15 @@
     ViewBag.Title = "Allsupermarkets";
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
+@{
 
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
 
 <main>
     <div class="container-fluid px-4">
@@ -12,63 +20,69 @@
             <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active">roles</li>
         </ol>
-        <div  style="margin-bottom:10px">
-         
-            <a href="/Roles/Createrole" class="btn btn-success" role="button">Create New Role </a>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-              All Roles
+        @if (value.Contains("createrole"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Roles/Createrole" class="btn btn-success" role="button">Create New Role </a>
             </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Role Name</th>
-                            
-                       
-                            <th></th>
-                          
-
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Role Name</th>
-                          
-
-
-                            <th></th>
-
-
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach (var market in Model)
-                        {
-
+        }
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    All Roles
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
                             <tr>
-                                <td>@market.RoleName</td>
-                            
-
-                                <td>
+                                <th>Role Name</th>
 
 
-                                    <a href="/Roles/Rolepermissions/@market.RoleId" class="btn btn-primary" role="button">permissions</a>
+                                @if (value.Contains("updaterole"))
+                                {
+                                    <th></th>
+                                }
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Role Name</th>
 
 
-                                    <a href="/Roles/Updaterole/@market.RoleId" class="btn btn-warning" role="button">Edit permissions</a>
-
-                                </td>
+                                @if (value.Contains("updaterole"))
+                                {
+                                    <th></th>
+                                }
 
                             </tr>
-                        }
+                        </tfoot>
+                        <tbody>
+                            @foreach (var market in Model)
+                            {
+
+                                <tr>
+                                    <td>@market.RoleName</td>
 
 
-                    </tbody>
-                </table>
+                                    <td>
+
+
+                                        <a href="/Roles/Rolepermissions/@market.RoleId" class="btn btn-primary" role="button">permissions</a>
+
+                                        @if (value.Contains("updaterole"))
+                                        {
+                                            <a href="/Roles/Updaterole/@market.RoleId" class="btn btn-warning" role="button">Edit permissions</a>
+                                        }
+                                        </td>
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 </main>

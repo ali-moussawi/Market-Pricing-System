@@ -4,6 +4,15 @@
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
 
+@{
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
 
 <main>
     <div class="container-fluid px-4">
@@ -12,76 +21,90 @@
             <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active">categories</li>
         </ol>
-        <div style="margin-bottom:10px">
+        @if (value.Contains("addcategory"))
+        {
+            <div style="margin-bottom:10px">
 
-            <a href="/Category/Createcategory" class="btn btn-success" role="button">Add New Category </a>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                All Categories
+                <a href="/Category/Createcategory" class="btn btn-success" role="button">Add New Category </a>
             </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Category Name</th>
+        }
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    All Categories
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>Category Name</th>
+                                @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                                {
+                                    <th></th>
+                                }
 
-                            <th></th>
-
-
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Category Name</th>
-
-                            <th></th>
-
-
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach (var category in Model)
-                        {
-
-                            <tr class="js-row">
-                                <td>@category.CategoryName</td>
-
-
-                                <td>
-                                    <a href="/Category/Updatecategory/@category.CategoryId" class="btn btn-primary" role="button">Update</a>
-
-
-
-
-                               
-
-
-                                   
-                                        <button type="button" class="btn btn-danger   js-delete"  onclick="confirm(this)"  cid-data="@category.CategoryId">
-                                            Delete
-                                        </button>
-                                 
-
-
-                                </td>
 
                             </tr>
-                        }
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Category Name</th>
+
+                                @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                                {
+                                    <th></th>
+                                }
 
 
-                    </tbody>
-                </table>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var category in Model)
+                            {
+
+                                <tr class="js-row">
+                                    <td>@category.CategoryName</td>
+
+                                    @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                                    {
+                                        <td>
+                                            @if (value.Contains("updatecategory"))
+                                            {
+
+
+                                                <a href="/Category/Updatecategory/@category.CategoryId" class="btn btn-primary" role="button">Update</a>
+
+                                            }
+
+
+
+
+                                            @if (value.Contains("deletecategory"))
+                                            {
+                                                <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" cid-data="@category.CategoryId">
+                                                    Delete
+                                                </button>
+
+                                            }
+
+                                        </td>
+                                    }
+
+                                    </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 </main>
 
 
 
 @section scripts {
-   
+
     <script src="~/Scripts/sweetalert2@11.js"></script>
 
     <script>
@@ -101,7 +124,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url :"/Category/ConfirmDelete/"+value,
+                        url: "/Category/ConfirmDelete/" + value,
                         method: "get",
                         success: function () {
                             $(btn).closest('tr').fadeOut();

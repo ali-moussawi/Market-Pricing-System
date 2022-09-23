@@ -55,7 +55,7 @@ namespace MarketPricingSystem.Controllers
            Userandroles updateuser = new Userandroles();
             var targetuser = _context.Users.FirstOrDefault(u => u.UserId == id);
             targetuser.Password =encryptandDecrypt.DecryptPassword(targetuser.Password);
-            var rolelist = _context.Roles.Where(r=> r.RoleName != "Admin").ToList();
+            var rolelist = _context.Roles.Where(r=> r.RoleName != "Admin" && r.RoleName!="temprole").ToList();
             updateuser.User=targetuser;
             updateuser.Rolelist=rolelist;
 
@@ -134,7 +134,7 @@ namespace MarketPricingSystem.Controllers
         [PermissionAuthorization(Roles = "adduser")]
         public ActionResult Createuser()
         {
-            var roleslist = _context.Roles.Where(r=>r.RoleName != "Admin").ToList();
+            var roleslist = _context.Roles.Where(r=>r.RoleName != "Admin" && r.RoleName != "temprole").ToList();
             
 
             return View(roleslist);

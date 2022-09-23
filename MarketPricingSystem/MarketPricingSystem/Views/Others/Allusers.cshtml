@@ -3,7 +3,15 @@
     ViewBag.Title = "Allsupermarkets";
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
+@{
 
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
 
 <main>
     <div class="container-fluid px-4">
@@ -12,76 +20,89 @@
             <li class="breadcrumb-item"><a href="/Others/Createuser">Dashboard</a></li>
             <li class="breadcrumb-item active">Users</li>
         </ol>
-        <div style="margin-bottom:10px">
+        @if (value.Contains("adduser"))
+        {
+            <div style="margin-bottom:10px">
 
-            <a href="/Others/Createuser" class="btn btn-success" role="button">Create New User </a>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                All Users
+                <a href="/Others/Createuser" class="btn btn-success" role="button">Create New User </a>
             </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>phone number</th>
-                            <th>Email</th>
-                           
-                            <th >Role</th>
-
-
-                            <th></th>
-
-
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>phone number</th>
-                            <th>Email</th>
-                           
-                            <th >Role</th>
-
-
-                            <th></th>
-
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach (var user in Model)
-                        {
-
+        }
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    All Users
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
                             <tr>
-                                <td>@user.username</td>
-                                <td>@user.userphonenumber</td>
-                                <td>@user.usergmail</td>
-                              
-                                <td >@user.rolename </td>
+                                <th>Name</th>
+                                <th>phone number</th>
+                                <th>Email</th>
 
-                                <td >
+                                <th>Role</th>
 
-                                    <a href="/Others/Updateuser/@user.userid" class="btn btn-primary" role="button">Update</a>
+                                @if (value.Contains("updateuser") || value.Contains("deleteuser"))
+                                {
+                                    <th></th>
+                                }
 
-                                    
-
-                                    <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" uid-data="@user.userid">
-                                        Delete
-                                    </button>
-
-                                </td>
 
                             </tr>
-                        }
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>phone number</th>
+                                <th>Email</th>
+
+                                <th>Role</th>
 
 
-                    </tbody>
-                </table>
+                                @if (value.Contains("updateuser") || value.Contains("deleteuser"))
+                                {
+                                    <th></th>
+                                }
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+
+                                <tr>
+                                    <td>@user.username</td>
+                                    <td>@user.userphonenumber</td>
+                                    <td>@user.usergmail</td>
+
+                                    <td>@user.rolename </td>
+
+
+                                    @if (value.Contains("updateuser") || value.Contains("deleteuser"))
+                                    {
+                                        <td>
+                                            @if (value.Contains("updateuser"))
+                                            {
+                                                <a href="/Others/Updateuser/@user.userid" class="btn btn-primary" role="button">Update</a>
+                                            }
+
+                                            @if (value.Contains("deleteuser"))
+                                            {
+                                                <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" uid-data="@user.userid">
+                                                    Delete
+                                                </button>
+                                            }
+                                        </td>
+                                    }
+                                    </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 </main>
 
 
@@ -107,7 +128,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url:"/Others/ConfirmDelete/"+value,
+                        url: "/Others/ConfirmDelete/" + value,
                         method: "get",
                         success: function () {
                             $(btn).closest('tr').fadeOut();

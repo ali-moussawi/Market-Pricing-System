@@ -6,11 +6,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-
+using MarketPricingSystem.security;
 namespace MarketPricingSystem.Controllers
 {
     public class AccountController : Controller
     {
+         
         private EncryptandDecrypt encryptandDecrypt = new EncryptandDecrypt();
         private marketpricingContext _context;
 
@@ -52,11 +53,40 @@ namespace MarketPricingSystem.Controllers
 
                 var rolename = _context.Roles.Where(x => x.RoleId == roleid).FirstOrDefault().RoleName.ToLower();
 
-                FormsAuthentication.SetAuthCookie(userindb.Gmail.ToString()+","+rolename.ToString(), false);
+                FormsAuthentication.SetAuthCookie(userindb.Gmail.ToString() + "," + rolename.ToString(), false);
 
-               
 
-               
+                //add user permissions to cookie
+
+                var permissionsid = _context.Rolepermissions.Where(pr => pr.RoleId == roleid).ToList();
+
+                List<string> permissions = new List<string>();
+
+                foreach(var pid in permissionsid)
+                {
+                    permissions.Add(_context.Permissions.FirstOrDefault(p=>p.PermissionId == pid.PermissionId).PermissionName);
+
+                }
+
+
+                string allpermissions="";
+
+                foreach(var perm in permissions)
+                {
+
+                    allpermissions += perm + ",";
+                }
+
+                HttpCookie sameSiteCookie = new HttpCookie("Permissions");
+
+
+
+                sameSiteCookie.Value = encryptandDecrypt.EncryptPassword(allpermissions);
+                sameSiteCookie.Secure = true;
+                //add cookie to cookie collection
+                Response.Cookies.Add(sameSiteCookie);
+
+
                 return RedirectToAction("Dashboard", "Users");
             }
 

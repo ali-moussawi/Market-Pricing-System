@@ -3,6 +3,15 @@
     ViewBag.Title = "Allsupermarkets";
     Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
 }
+@{
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
 
 
 <main>
@@ -12,10 +21,13 @@
             <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active">products</li>
         </ol>
-        <div style="margin-bottom:10px">
+        @if (value.Contains("addproduct"))
+        {
+            <div style="margin-bottom:10px">
 
-            <a href="/Products/Createproduct" class="btn btn-success" role="button">Add New product </a>
-        </div>
+                <a href="/Products/Createproduct" class="btn btn-success" role="button">Add New product </a>
+            </div>
+        }
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -29,8 +41,10 @@
                             <th>Bar code</th>
                             <th>Product Description</th>
                             <th>Category</th>
-                            <th></th>
-
+                            @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                            {
+                                <th></th>
+                            }
 
                         </tr>
                     </thead>
@@ -40,8 +54,10 @@
                             <th>Bar code</th>
                             <th>Product Description</th>
                             <th>Category</th>
-                            <th></th>
-
+                            @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                            {
+                                <th></th>
+                            }
 
                         </tr>
                     </tfoot>
@@ -55,18 +71,24 @@
                                 <td>@product.productDescription</td>
                                 <td>@product.productcategory</td>
 
+                                @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                                {
+                                    <td>
+                                        @if (value.Contains("updateproduct"))
+                                        {
+                                            <a href="/Products/Updateproduct/@product.productid" class="btn btn-primary" role="button">Update</a>
 
-                                <td>
-                                    <a href="/Products/Updateproduct/@product.productid" class="btn btn-primary" role="button">Update</a>
-                                    
+                                        }
+                                        @if (value.Contains("deleteproduct"))
+                                        {
+                                            <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@product.productid">
+                                                Delete
+                                            </button>
+                                        }
+                                    </td>
+                                }
 
-                                    <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@product.productid">
-                                        Delete
-                                    </button>
-
-                                </td>
-
-                            </tr>
+                                </tr>
                         }
 
 
@@ -100,7 +122,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url :"/Products/ConfirmDelete/"+value,
+                        url: "/Products/ConfirmDelete/" + value,
                         method: "get",
                         success: function () {
                             $(btn).closest('tr').fadeOut();
