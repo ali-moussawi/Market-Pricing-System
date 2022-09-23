@@ -9,6 +9,7 @@ using System.Web.Security;
 using MarketPricingSystem.security;
 namespace MarketPricingSystem.Controllers
 {
+    
     public class AccountController : Controller
     {
          

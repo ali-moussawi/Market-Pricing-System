@@ -10,6 +10,7 @@ using System.Web.Security;
 
 namespace MarketPricingSystem.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
 

@@ -7,6 +7,8 @@ using MarketPricingSystem.Models;
 namespace MarketPricingSystem.CustomAuthorization
 {
 
+
+
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class PermissionAuthorization :AuthorizeAttribute
     {
@@ -17,8 +19,6 @@ namespace MarketPricingSystem.CustomAuthorization
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             bool isAuthorized = base.AuthorizeCore(httpContext);
-
-          
 
             var userrole = httpContext.User.Identity.Name.Split(',')[1];
             var roleid = _context.Roles.FirstOrDefault(r => r.RoleName == userrole).RoleId;
@@ -32,13 +32,7 @@ namespace MarketPricingSystem.CustomAuthorization
                 var targetid = target.PermissionId;
               
                 permissions.Add(_context.Permissions.FirstOrDefault(p => p.PermissionId == targetid));
-
-
             }
-
-
-
-
             //now we have all permissions of the user that have this role;
 
             var targetpermissions = permissions.FirstOrDefault( p=>p.PermissionName == Roles);
@@ -51,14 +45,6 @@ namespace MarketPricingSystem.CustomAuthorization
             {
                 return false;
             }
-
-
-
-
         }
-
-
-
-
     }
 }

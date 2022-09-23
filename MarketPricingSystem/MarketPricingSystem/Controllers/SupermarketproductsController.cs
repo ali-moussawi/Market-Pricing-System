@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace MarketPricingSystem.Controllers
 {
+    [Authorize]
     public class SupermarketproductsController : Controller
     {
         private marketpricingContext _context;

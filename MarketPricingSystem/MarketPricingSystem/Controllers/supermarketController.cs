@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace MarketPricingSystem.Controllers
 {
+    [Authorize]
     public class SupermarketController : Controller
     {
 

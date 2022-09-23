@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 
 namespace MarketPricingSystem.Controllers
 {
+    [Authorize]
     public class RolesController : Controller
     {
 
@@ -278,17 +279,11 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-
-
-
-
         [PermissionAuthorization(Roles = "updaterole")]
         [HttpPost]
         public ActionResult Confirmupdate(int roleid, string Rolename, int? viewsupermarket, int? addsupermarket, int? updatesupermarket, int? deletesupermarket, int? viewproduct, int? addproduct, int? updateproduct, int? deleteproduct, int? viewcategory, int? addcategory, int? updatecategory, int? deletecategory, int? viewroles, int? createrole, int? viewpermissions, int? viewusers, int? adduser, int? updateuser, int? deleteuser, int? updaterole, int? viewsp, int? viewspp, int? insertproducts, int? updateproductprice, int? deleteproductpriced)
         {
             var targetrole = _context.Roles.FirstOrDefault(r => r.RoleId == roleid);
-
-
             if(targetrole.RoleName != Rolename)
             {
                 var checkdb = _context.Roles.FirstOrDefault(c => c.RoleName == Rolename);
@@ -320,7 +315,7 @@ namespace MarketPricingSystem.Controllers
 
             foreach (var row2 in usersofrole)
             {
-                row2.Roleid = _context.Roles.FirstOrDefault(r=>r.RoleName=="Temprole").RoleId;
+                row2.Roleid = _context.Roles.FirstOrDefault(r=>r.RoleName== "Temprole").RoleId;
                 _context.SaveChanges();
             }
 

@@ -11,6 +11,7 @@ using System.Web.Security;
 
 namespace MarketPricingSystem.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private marketpricingContext _context;
