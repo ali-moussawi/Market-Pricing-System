@@ -238,10 +238,10 @@
     <Compile Include="Controllers\SupermarketController.cs" />
     <Compile Include="Controllers\SupermarketproductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="CustomAuthorization\customedashboardAuthorization.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="CustomAuthorization\PermissionAuthorization.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\otherDal.cs" />
     <Compile Include="DAL\productDal.cs" />

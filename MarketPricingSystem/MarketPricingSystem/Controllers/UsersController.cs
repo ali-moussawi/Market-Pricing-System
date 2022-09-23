@@ -47,7 +47,7 @@ namespace MarketPricingSystem.Controllers
 
         public ActionResult Settings()
         {
-            var gmail = User.Identity.Name;
+            var gmail = User.Identity.Name.Split(',').First();
             Users user = _context.Users.FirstOrDefault(u => u.Gmail == gmail);
             user.Password = encryptandDecrypt.DecryptPassword(user.Password);
             return View(user);

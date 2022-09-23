@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using MarketPricingSystem.ViewModel;
 using MarketPricingSystem.security;
+using MarketPricingSystem.CustomAuthorization;
+using System.Web.Security;
 
 namespace MarketPricingSystem.Controllers
 {
@@ -32,7 +34,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
+        [PermissionAuthorization(Roles = "viewusers")]
         public ActionResult Allusers()
         {
 
@@ -46,21 +48,9 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-     
 
-
-
-        public ActionResult Deleteuser(int id)
-        {
-            var targetuser = _context.Users.FirstOrDefault(m => m.UserId == id);
-
-            return View(targetuser);
-        }
-
-
-
-
-            public ActionResult Updateuser(int id)
+        [PermissionAuthorization(Roles = "updateuser")]
+        public ActionResult Updateuser(int id)
         {
            Userandroles updateuser = new Userandroles();
             var targetuser = _context.Users.FirstOrDefault(u => u.UserId == id);
@@ -75,8 +65,8 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-
-         public ActionResult Confirmupdate(int userid, string username, string phonenumber , string password, int roleid)
+        [PermissionAuthorization(Roles = "updateuser")]
+        public ActionResult Confirmupdate(int userid, string username, string phonenumber , string password, int roleid)
         {
             var targetuser = _context.Users.FirstOrDefault(m => m.UserId == userid);
 
@@ -128,7 +118,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
+        [PermissionAuthorization(Roles = "deleteuser")]
         public ActionResult ConfirmDelete(int id)
         {
             var targetuser = _context.Users.FirstOrDefault(m => m.UserId == id);
@@ -141,7 +131,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
+        [PermissionAuthorization(Roles = "adduser")]
         public ActionResult Createuser()
         {
             var roleslist = _context.Roles.Where(r=>r.RoleName != "Admin").ToList();
@@ -152,8 +142,8 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
-            public ActionResult Confirmcreate(string username ,string phonenumber, string gmail, string password,  int? roleid)
+        [PermissionAuthorization(Roles = "adduser")]
+        public ActionResult Confirmcreate(string username ,string phonenumber, string gmail, string password,  int? roleid)
         {
            
 

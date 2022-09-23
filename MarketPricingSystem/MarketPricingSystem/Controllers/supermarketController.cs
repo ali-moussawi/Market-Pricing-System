@@ -1,4 +1,5 @@
-﻿using MarketPricingSystem.DAL;
+﻿using MarketPricingSystem.CustomAuthorization;
+using MarketPricingSystem.DAL;
 using MarketPricingSystem.Models;
 using MarketPricingSystem.ViewModel;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
+        [PermissionAuthorization(Roles = "viewsupermarket")]
         public ActionResult Allsupermarkets()
         {
 
@@ -40,7 +42,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-      
+        [PermissionAuthorization(Roles = "deletesupermarket")]
         public ActionResult ConfirmDelete(int id)
         {
             var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == id);
@@ -51,7 +53,7 @@ namespace MarketPricingSystem.Controllers
             return RedirectToAction("Allsupermarkets");
         }
 
-
+        [PermissionAuthorization(Roles = "updatesupermarket")]
         public ActionResult Updatesupermarket(int id)
         {
             var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == id);
@@ -60,6 +62,9 @@ namespace MarketPricingSystem.Controllers
 
             return View(targetsupermarket);
         }
+
+
+        [PermissionAuthorization(Roles = "updatesupermarket")]
         [HttpPost]
         public ActionResult Confirmupdate(int Supermarketid, string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {
@@ -111,7 +116,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-
+        [PermissionAuthorization(Roles = "addsupermarket")]
         public ActionResult Createsupermarket()
         {
 
@@ -119,6 +124,8 @@ namespace MarketPricingSystem.Controllers
         }
 
 
+
+        [PermissionAuthorization(Roles = "addsupermarket")]
         [HttpPost]
         public ActionResult ConfirmCreate(string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {

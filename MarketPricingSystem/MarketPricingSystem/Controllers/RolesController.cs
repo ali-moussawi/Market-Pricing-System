@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using MarketPricingSystem.DAL;
 using MarketPricingSystem.ViewModel;
 using Microsoft.EntityFrameworkCore;
+using MarketPricingSystem.CustomAuthorization;
+using System.Web.Security;
+using System.Web.UI.WebControls;
 
 namespace MarketPricingSystem.Controllers
 {
@@ -30,7 +33,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
+        [PermissionAuthorization(Roles = "viewroles")]
         public ActionResult AllRoles()
         {
 
@@ -55,6 +58,12 @@ namespace MarketPricingSystem.Controllers
 
 
 
+
+
+
+
+
+        [PermissionAuthorization(Roles = "createrole")]
         public ActionResult Createrole()
         {
             var allpermissions = _context.Permissions.ToList();
@@ -62,9 +71,9 @@ namespace MarketPricingSystem.Controllers
             return View(allpermissions);
         }
 
-
+        [PermissionAuthorization(Roles = "createrole")]
         [HttpPost]
-        public ActionResult ConfirmCreate(string Rolename, int? viewsupermarket, int? addsupermarket, int? updatesupermarket, int? deletesupermarket, int? viewproduct, int? addproduct   , int? updateproduct, int? deleteproduct , int? viewcategory, int? addcategory, int? updatecategory , int? deletecategory, int? viewroles, int? createrole , int? viewpermissions , int? viewusers , int? adduser , int? updateuser , int? deleteuser)
+        public ActionResult ConfirmCreate(string Rolename, int? viewsupermarket, int? addsupermarket, int? updatesupermarket, int? deletesupermarket, int? viewproduct, int? addproduct   , int? updateproduct, int? deleteproduct , int? viewcategory, int? addcategory, int? updatecategory , int? deletecategory, int? viewroles, int? createrole , int? viewpermissions , int? viewusers , int? adduser , int? updateuser , int? deleteuser, int? updaterole, int? viewsp, int? viewspp, int? insertproducts, int? updateproductprice, int? deleteproductpriced)
         {
 
             var checkdb = _context.Roles.FirstOrDefault(c => c.RoleName == Rolename);
@@ -77,7 +86,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-            Roles newrole = new Roles();
+           MarketPricingSystem.Models.Roles newrole = new MarketPricingSystem.Models.Roles();
             newrole.RoleName = Rolename;
             _context.Roles.Add(newrole);
             _context.SaveChanges();
@@ -182,6 +191,58 @@ namespace MarketPricingSystem.Controllers
 
             }
 
+            ////////////////////////////////////////////////new permissions
+
+            if (updaterole != null)
+            {
+                roleDal.addperTorole(newroleid, updaterole.Value);
+
+            }
+
+
+
+
+            if (viewsp != null)
+            {
+                roleDal.addperTorole(newroleid, viewsp.Value);
+
+            }
+
+
+
+            if (viewspp != null)
+            {
+                roleDal.addperTorole(newroleid, viewspp.Value);
+
+            }
+
+
+                if (insertproducts != null)
+            {
+                roleDal.addperTorole(newroleid, insertproducts.Value);
+
+            }
+
+
+
+            if (updateproductprice != null)
+            {
+                roleDal.addperTorole(newroleid, updateproductprice.Value);
+
+            }
+
+
+
+            if (deleteproductpriced != null)
+            {
+                roleDal.addperTorole(newroleid, deleteproductpriced.Value);
+
+            }
+
+
+
+
+
             var rolelistt = _context.Roles.ToList();
             return RedirectToAction("AllRoles", rolelistt);
         }
@@ -191,6 +252,16 @@ namespace MarketPricingSystem.Controllers
 
 
 
+
+
+
+
+
+
+
+
+
+        [PermissionAuthorization(Roles = "updaterole")]
         public ActionResult Updaterole(int id)
         {
 
@@ -211,9 +282,9 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
+        [PermissionAuthorization(Roles = "updaterole")]
         [HttpPost]
-        public ActionResult Confirmupdate(int roleid, string Rolename, int? viewsupermarket, int? addsupermarket, int? updatesupermarket, int? deletesupermarket, int? viewproduct, int? addproduct, int? updateproduct, int? deleteproduct, int? viewcategory, int? addcategory, int? updatecategory, int? deletecategory, int? viewroles, int? createrole, int? viewpermissions, int? viewusers, int? adduser, int? updateuser, int? deleteuser)
+        public ActionResult Confirmupdate(int roleid, string Rolename, int? viewsupermarket, int? addsupermarket, int? updatesupermarket, int? deletesupermarket, int? viewproduct, int? addproduct, int? updateproduct, int? deleteproduct, int? viewcategory, int? addcategory, int? updatecategory, int? deletecategory, int? viewroles, int? createrole, int? viewpermissions, int? viewusers, int? adduser, int? updateuser, int? deleteuser, int? updaterole, int? viewsp, int? viewspp, int? insertproducts, int? updateproductprice, int? deleteproductpriced)
         {
             var targetrole = _context.Roles.FirstOrDefault(r => r.RoleId == roleid);
 
@@ -231,8 +302,8 @@ namespace MarketPricingSystem.Controllers
 
             targetrole.RoleName = Rolename;
             _context.SaveChanges();
-
-            Roles newrole = new Roles();
+            //we use name space becuase we have two refereneces of same name but namespace cannot be duplicated so it help to avoid ambiguos refereneces;
+           MarketPricingSystem.Models.Roles newrole = new MarketPricingSystem.Models.Roles();
             newrole.RoleName = targetrole.RoleName;
             newrole.RoleId = targetrole.RoleId;
 
@@ -364,6 +435,56 @@ namespace MarketPricingSystem.Controllers
                 roleDal.addperTorole(newroleid, deleteuser.Value);
 
             }
+
+
+
+            ////////////////////////////////////////////////new permissions
+
+            if (updaterole != null)
+            {
+                roleDal.addperTorole(newroleid, updaterole.Value);
+            }
+
+
+
+
+            if (viewsp != null)
+            {
+                roleDal.addperTorole(newroleid, viewsp.Value);
+
+            }
+
+
+
+            if (viewspp != null)
+            {
+                roleDal.addperTorole(newroleid, viewspp.Value);
+
+            }
+
+
+            if (insertproducts != null)
+            {
+                roleDal.addperTorole(newroleid, insertproducts.Value);
+
+            }
+
+
+
+            if (updateproductprice != null)
+            {
+                roleDal.addperTorole(newroleid, updateproductprice.Value);
+
+            }
+
+
+
+            if (deleteproductpriced != null)
+            {
+                roleDal.addperTorole(newroleid, deleteproductpriced.Value);
+
+            }
+
 
             var rolelistt = _context.Roles.ToList();
             return RedirectToAction("AllRoles", rolelistt);

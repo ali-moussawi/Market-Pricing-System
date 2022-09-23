@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MarketPricingSystem.DAL;
+using MarketPricingSystem.CustomAuthorization;
+using System.Web.Security;
+
 namespace MarketPricingSystem.Controllers
 {
     public class CategoryController : Controller
@@ -26,7 +29,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
+        [PermissionAuthorization(Roles = "viewcategory")]
         public ActionResult AllCategories() { 
 
             var categoryList = _context.Categories.Where(c=>c.CategoryName != "NO CATEGORY").ToList();
@@ -36,7 +39,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-
+        [PermissionAuthorization(Roles = "deletecategory")]
         public ActionResult ConfirmDelete(int id)
         {
             _categoryDAL.setproductnocategory(id);
@@ -51,6 +54,8 @@ namespace MarketPricingSystem.Controllers
         }
 
 
+
+        [PermissionAuthorization(Roles = "updatecategory")]
         public ActionResult Updatecategory(int id)
         {
             var targetcategory = _context.Categories.FirstOrDefault(m => m.CategoryId == id);
@@ -59,6 +64,9 @@ namespace MarketPricingSystem.Controllers
 
             return View(targetcategory);
         }
+
+
+        [PermissionAuthorization(Roles = "updatecategory")]
         [HttpPost]
         public ActionResult Confirmupdate(int Categoryid, string Categoryname)
         {
@@ -91,13 +99,15 @@ namespace MarketPricingSystem.Controllers
 
 
 
+
+        [PermissionAuthorization(Roles = "addcategory")]
         public ActionResult Createcategory()
         {
 
             return View();
         }
 
-
+        [PermissionAuthorization(Roles = "addcategory")]
         [HttpPost]
         public ActionResult ConfirmCreate(string CategoryName)
         {

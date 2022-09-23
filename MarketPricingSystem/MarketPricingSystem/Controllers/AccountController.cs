@@ -52,7 +52,7 @@ namespace MarketPricingSystem.Controllers
 
                 var rolename = _context.Roles.Where(x => x.RoleId == roleid).FirstOrDefault().RoleName.ToLower();
 
-                FormsAuthentication.SetAuthCookie(userindb.Gmail, false);
+                FormsAuthentication.SetAuthCookie(userindb.Gmail.ToString()+","+rolename.ToString(), false);
 
                
 

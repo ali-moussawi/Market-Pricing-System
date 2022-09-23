@@ -1,9 +1,11 @@
-﻿using MarketPricingSystem.Models;
+﻿using MarketPricingSystem.CustomAuthorization;
+using MarketPricingSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MarketPricingSystem.Controllers
 {
@@ -24,6 +26,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
+        [PermissionAuthorization(Roles = "viewpermissions")]
         public ActionResult Allpermissions()
         {
 

@@ -27,7 +27,7 @@ CREATE TABLE `categories` (
   `categoryName` varchar(255) NOT NULL,
   PRIMARY KEY (`categoryId`),
   UNIQUE KEY `categoryName_UNIQUE` (`categoryName`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `permissions` (
   `PermissionId` int NOT NULL AUTO_INCREMENT,
   `PermissionName` varchar(45) NOT NULL,
   PRIMARY KEY (`PermissionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `permissions` (
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
-INSERT INTO `permissions` VALUES (1,'viewsupermarket'),(2,'addsupermarket'),(3,'updatesupermarket'),(4,'deletesupermarket'),(5,'viewproduct'),(6,'addproduct'),(7,'updateproduct'),(8,'deleteproduct'),(9,'viewcategory'),(10,'addcategory'),(11,'updatecategory'),(12,'deletecategory'),(13,'viewroles'),(14,'createrole'),(15,'viewpermissions'),(16,'viewusers'),(17,'adduser'),(18,'updateuser'),(19,'deleteuser');
+INSERT INTO `permissions` VALUES (1,'viewsupermarket'),(2,'addsupermarket'),(3,'updatesupermarket'),(4,'deletesupermarket'),(5,'viewproduct'),(6,'addproduct'),(7,'updateproduct'),(8,'deleteproduct'),(9,'viewcategory'),(10,'addcategory'),(11,'updatecategory'),(12,'deletecategory'),(13,'viewroles'),(14,'createrole'),(15,'viewpermissions'),(16,'viewusers'),(17,'adduser'),(18,'updateuser'),(19,'deleteuser'),(20,'updaterole'),(21,'viewsp'),(22,'viewspp'),(23,'insertproducts'),(24,'updateproductprice'),(25,'deleteproductpriced');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +83,7 @@ CREATE TABLE `productprices` (
   KEY `spid_idx` (`supermarketid`),
   CONSTRAINT `prid` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`) ON DELETE CASCADE,
   CONSTRAINT `spid` FOREIGN KEY (`supermarketid`) REFERENCES `supermarket` (`supermarketId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `rolepermissions` (
 
 LOCK TABLES `rolepermissions` WRITE;
 /*!40000 ALTER TABLE `rolepermissions` DISABLE KEYS */;
-INSERT INTO `rolepermissions` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19);
+INSERT INTO `rolepermissions` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25);
 /*!40000 ALTER TABLE `rolepermissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +163,7 @@ CREATE TABLE `roles` (
   `RoleId` int NOT NULL AUTO_INCREMENT,
   `RoleName` varchar(50) NOT NULL,
   PRIMARY KEY (`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,7 @@ CREATE TABLE `supermarket` (
   `phonenumber` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`supermarketId`),
   UNIQUE KEY `phonenumber_UNIQUE` (`phonenumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `phoneNumber_UNIQUE` (`phoneNumber`),
   KEY `frg123roleid_idx` (`roleid`),
   CONSTRAINT `frg123roleid` FOREIGN KEY (`roleid`) REFERENCES `roles` (`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-22 22:03:27
+-- Dump completed on 2022-09-23 13:18:53
