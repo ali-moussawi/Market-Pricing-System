@@ -1,5 +1,5 @@
 1.must be add category = "NO CATEGORY".
-2.must be add role ="Admin" and "temprole" (admin has allpermissions).
+2.must be add role ="Admin" (admin has allpermissions).
 4.must be all permissions added in database(same name in picture).
 5.must have user with role admin (change email in code to the new email(allusers sp +dashboard users));
 

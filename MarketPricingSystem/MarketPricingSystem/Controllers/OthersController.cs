@@ -56,7 +56,7 @@ namespace MarketPricingSystem.Controllers
            Userandroles updateuser = new Userandroles();
             var targetuser = _context.Users.FirstOrDefault(u => u.UserId == id);
             targetuser.Password =encryptandDecrypt.DecryptPassword(targetuser.Password);
-            var rolelist = _context.Roles.Where(r=> r.RoleName != "Admin" && r.RoleName!="temprole").ToList();
+            var rolelist = _context.Roles.Where(r=> r.RoleName != "Admin").ToList();
             updateuser.User=targetuser;
             updateuser.Rolelist=rolelist;
 
@@ -108,17 +108,6 @@ namespace MarketPricingSystem.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
         [PermissionAuthorization(Roles = "deleteuser")]
         public ActionResult ConfirmDelete(int id)
         {
@@ -135,7 +124,7 @@ namespace MarketPricingSystem.Controllers
         [PermissionAuthorization(Roles = "adduser")]
         public ActionResult Createuser()
         {
-            var roleslist = _context.Roles.Where(r=>r.RoleName != "Admin" && r.RoleName != "temprole").ToList();
+            var roleslist = _context.Roles.Where(r=>r.RoleName != "Admin").ToList();
             
 
             return View(roleslist);
