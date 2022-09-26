@@ -7,7 +7,7 @@
 
 
 <form method="post" action="/Users/Updatesettings">
-   
+
     <div class="English wrapper bg-white mt-sm-5">
         <div class="English">
             <h4 class="pb-5 border-bottom">Account settings</h4>
@@ -27,7 +27,7 @@
                     <div class="col-md-6 pt-md-0 pt-3">
 
                         <label for="phone">Phone number</label>
-                        <input type="text" id="phone" class="bg-light form-control" value="@Model.PhoneNumber" name="phone" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('Please just enter numbers')"oninput="this.setCustomValidity('')" >
+                        <input type="text" id="phone" class="bg-light form-control" value="@Model.PhoneNumber" name="phone" required pattern="[0-9]+" oninvalid="this.setCustomValidity('Please just enter numbers')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
 
@@ -70,9 +70,9 @@
             </div>
         </div>
 
-        </div>
-
-
+    </div>
+    </form>
+    <form method="post" action="/Users/Updatesettings">
         <div class=" wrapper bg-white mt-sm-5">
             <div class="Arabic">
                 <h4 class="pb-5 border-bottom">اعدادات الحساب</h4>
@@ -92,7 +92,7 @@
                         <div class="col-md-6 pt-md-0 pt-3">
 
                             <label for="phone">رقم الهاتف</label>
-                            <input type="text" id="phone" class="bg-light form-control" value="@Model.PhoneNumber" name="phone" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('ادخل ارقام فقط')"oninput="this.setCustomValidity('')" >
+                            <input type="text" id="phone" class="bg-light form-control" value="@Model.PhoneNumber" name="phone" required pattern="[0-9]+" oninvalid="this.setCustomValidity('ادخل ارقام فقط')" oninput="this.setCustomValidity('')">
                         </div>
                     </div>
 
@@ -136,79 +136,41 @@
             </div>
         </div>
 
-</form>
+    </form>
 
 
-@section Styles{
+    @section Styles{
 
-    <link rel="stylesheet" href="~/Content/Settings.css" />
+        <link rel="stylesheet" href="~/Content/Settings.css" />
 
-}
-
-
+    }
 
 
-@section scripts
+
+
+    @section scripts
     {
 
-    <script>
-        const c11 = document.getElementById("c1");
-        const c22 = document.getElementById("c2");
-        c1.style.display = "none";
-        c2.style.display = "none";
-        const c11a = document.getElementById("c1a");
-        const c22a = document.getElementById("c2a");
-        c1a.style.display = "none";
-        c2a.style.display = "none";
-
-
-        function validate() {
-            var password = document.getElementById("password").value;
-            var confirmpassword = document.getElementById("confirmpassword").value;
-
-            const button = document.getElementById("btn");
-
-
-            const c1 = document.getElementById("c1");
-            const c2 = document.getElementById("c2");
-
-
-
-
-
-
-
-            var v = password === confirmpassword;
-            if (!v) {
-
-                c1.style.display = "block";
-                c2.style.display = "block";
-            }
-            button.disabled = !v;
-        }
-
-        function able() {
+        <script>
             const c11 = document.getElementById("c1");
             const c22 = document.getElementById("c2");
-            c11.style.display = "none";
-            c22.style.display = "none";
-            const button = document.getElementById("btn");
-            button.disabled = false;
-
-        }
-
-
+            c1.style.display = "none";
+            c2.style.display = "none";
+            const c11a = document.getElementById("c1a");
+            const c22a = document.getElementById("c2a");
+            c1a.style.display = "none";
+            c2a.style.display = "none";
 
 
-        function validatea() {
-            var password = document.getElementById("passworda").value;
-            var confirmpassword = document.getElementById("confirmpassworda").value;
+            function validate() {
+                var password = document.getElementById("password").value;
+                var confirmpassword = document.getElementById("confirmpassword").value;
 
-            const button = document.getElementById("btna");
+                const button = document.getElementById("btn");
 
 
-            const c1 = document.getElementById("c1a");
-            const c2 = document.getElementById("c2a");
+                const c1 = document.getElementById("c1");
+                const c2 = document.getElementById("c2");
 
 
 
@@ -216,29 +178,37 @@
 
 
 
-            var v = password === confirmpassword;
-            if (!v) {
+                var v = password === confirmpassword;
+                if (!v) {
 
-                c1.style.display = "block";
-                c2.style.display = "block";
+                    c1.style.display = "block";
+                    c2.style.display = "block";
+                }
+                button.disabled = !v;
             }
-            button.disabled = !v;
-        }
 
-        function ablea() {
-            const c11 = document.getElementById("c1a");
-            const c22 = document.getElementById("c2a");
-            c11.style.display = "none";
-            c22.style.display = "none";
-            const button = document.getElementById("btna");
-            button.disabled = false;
+            function able() {
+                const c11 = document.getElementById("c1");
+                const c22 = document.getElementById("c2");
+                c11.style.display = "none";
+                c22.style.display = "none";
+                const button = document.getElementById("btn");
+                button.disabled = false;
 
-        }
+            }
 
 
 
 
-    </script>
+            function validatea() {
+                var password = document.getElementById("passworda").value;
+                var confirmpassword = document.getElementById("confirmpassworda").value;
+
+                const button = document.getElementById("btna");
+
+
+                const c1 = document.getElementById("c1a");
+                const c2 = document.getElementById("c2a");
 
 
 
@@ -246,4 +216,34 @@
 
 
 
-}
+                var v = password === confirmpassword;
+                if (!v) {
+
+                    c1.style.display = "block";
+                    c2.style.display = "block";
+                }
+                button.disabled = !v;
+            }
+
+            function ablea() {
+                const c11 = document.getElementById("c1a");
+                const c22 = document.getElementById("c2a");
+                c11.style.display = "none";
+                c22.style.display = "none";
+                const button = document.getElementById("btna");
+                button.disabled = false;
+
+            }
+
+
+
+
+        </script>
+
+
+
+
+
+
+
+    }
