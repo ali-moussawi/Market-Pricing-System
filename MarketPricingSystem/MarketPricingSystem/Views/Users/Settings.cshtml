@@ -27,7 +27,7 @@
                     <div class="col-md-6 pt-md-0 pt-3">
 
                         <label for="phone">Phone number</label>
-                        <input type="text" id="phone" class="bg-light form-control" value="@Model.PhoneNumber" name="phone" required>
+                        <input type="text" id="phone" class="bg-light form-control" value="@Model.PhoneNumber" name="phone" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('Please just enter numbers')"oninput="this.setCustomValidity('')" >
                     </div>
                 </div>
 
@@ -92,7 +92,7 @@
                         <div class="col-md-6 pt-md-0 pt-3">
 
                             <label for="phone">رقم الهاتف</label>
-                            <input type="text" id="phone" class="bg-light form-control" value="@Model.PhoneNumber" name="phone" required>
+                            <input type="text" id="phone" class="bg-light form-control" value="@Model.PhoneNumber" name="phone" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('ادخل ارقام فقط')"oninput="this.setCustomValidity('')" >
                         </div>
                     </div>
 
@@ -110,14 +110,14 @@
                         <div class="col-md-6 pt-md-0 pt-3">
                             <label for="password">تغيير الرمز</label>
                             <input type="password" id="passworda" class="bg-light form-control" onclick="ablea()" name="newpassword" onchange="ablea()">
-                            <span id="c1a" style="color:red">Password does not match !</span>
+                            <span id="c1a" style="color:red">الرمز غير مطابق</span>
                         </div>
 
 
                         <div class="col-md-6 pt-md-0 pt-3">
                             <label for="confirmpassword">تاكيد الرمز الجديد</label>
                             <input type="password" id="confirmpassworda" class="bg-light form-control" onclick="ablea()" onchange="ablea()">
-                            <span id="c2a" style="color:red">Password does not match !</span>
+                            <span id="c2a" style="color:red">الرمز غير مطابق</span>
                         </div>
 
 

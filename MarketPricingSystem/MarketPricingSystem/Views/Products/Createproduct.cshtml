@@ -27,7 +27,7 @@
                                 <div class="col-md-6">
 
                                     <div class="form-floating">
-                                        <input class="form-control" id="Barcode" type="text" name="Barcode" required />
+                                        <input class="form-control" id="Barcode" type="text" name="Barcode" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('Please enter just numbers')"oninput="this.setCustomValidity('')"  />
                                         <label for="Barcode">Barcode</label>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                 <div class="col-md-6">
 
                                     <div class="form-floating">
-                                        <input class="form-control" id="Barcode" type="text" name="Barcode" required />
+                                        <input class="form-control" id="Barcode" type="text" name="Barcode" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('ادخل ارقام فقط')"oninput="this.setCustomValidity('')" />
                                         <label for="Barcode">الرمز</label>
                                     </div>
                                 </div>

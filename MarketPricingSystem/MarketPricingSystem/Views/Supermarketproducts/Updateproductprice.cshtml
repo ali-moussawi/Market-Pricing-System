@@ -18,7 +18,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="productprice" type="text" name="price" value="@Model.Price" required />
+                                        <input class="form-control" pattern="[0-9]+"   oninvalid="this.setCustomValidity('Please Just Enter a numbers')"oninput="this.setCustomValidity('')" id="productprice" type="text" name="price" value="@Model.Price" required />
                                         <label for="Productprice">New Price </label>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="productprice" type="text" name="price" value="@Model.Price" required />
+                                        <input class="form-control" pattern="[0-9]+"  oninvalid="this.setCustomValidity('ادخل ارقام فقط')"oninput="this.setCustomValidity('')" id="productprice" type="text" name="price" value="@Model.Price" required />
                                         <label for="Productprice">السعر الجديد </label>
                                     </div>
                                 </div>
@@ -81,3 +81,7 @@
         </div>
     </div>
 </main>
+
+
+
+

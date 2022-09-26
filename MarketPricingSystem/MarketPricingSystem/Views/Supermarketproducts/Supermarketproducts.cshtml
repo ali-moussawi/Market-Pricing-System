@@ -199,9 +199,13 @@
     <script>
         function confirm(event) {
             var btn = event;
-            let value = btn.getAttribute("middata2");
+            let value1 = btn.getAttribute("mid-data1");
+            let value2 = btn.getAttribute("middata2");
             let lang = localStorage.getItem("lang");
+
             if (lang == "English") {
+
+
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -213,7 +217,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "/Supermarketproducts/ConfirmDelete/" + value,
+                            url: "/Supermarketproducts/ConfirmDelete?marketid=" + value1 + "&productid=" + value2,
                             method: "get",
                             success: function () {
                                 $(btn).closest('tr').fadeOut();
@@ -246,7 +250,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "/Supermarketproducts/ConfirmDelete/" + value,
+                            url: "/Supermarketproducts/ConfirmDelete?marketid=" + value1 + "&productid=" + value2,
                             method: "get",
                             success: function () {
                                 $(btn).closest('tr').fadeOut();
