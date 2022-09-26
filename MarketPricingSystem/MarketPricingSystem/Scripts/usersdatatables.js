@@ -6,4 +6,8 @@
     if (datatablesSimple) {
         new simpleDatatables.DataTable(datatablesSimple);
     }
+    const datatablesSimplea = document.getElementById('datatablesSimplea');
+    if (datatablesSimplea) {
+        new simpleDatatables.DataTable(datatablesSimplea);
+    }
 });

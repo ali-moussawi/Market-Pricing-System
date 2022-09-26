@@ -103,12 +103,19 @@ namespace MarketPricingSystem.Controllers
 
 
         [PermissionAuthorization(Roles = "insertproducts")]
-        public ActionResult Confirmcreate(int marketid, int productid, int price)
+        public ActionResult Confirmcreate(int marketid, int? productid, int price)
         {
+            if(productid == null)
+            {
+               
+                    TempData["Message3"] = "Please select a product";
+                    return RedirectToAction("Createproduct",new { @id = marketid});
+                }
+            
          
             
                 Productprices newproductprice = new Productprices();
-                newproductprice.ProductId = productid;
+                newproductprice.ProductId = productid.Value;
                 newproductprice.Supermarketid = marketid;
                 newproductprice.Price = price;
                 newproductprice.Date = DateTime.Now;
