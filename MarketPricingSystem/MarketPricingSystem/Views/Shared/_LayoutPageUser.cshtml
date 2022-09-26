@@ -32,6 +32,11 @@
         .English {
             display: none;
         }
+
+
+       
+            
+
     </style>
 
 
@@ -50,18 +55,26 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
+               
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li>
-                    <a class="English dropdown-item" href="/Users/Settings">Profile settings</a>
-                    <a class="Arabic dropdown-item" href="/Users/Settings">اعدادات الحساب</a>
-                    
+                        <a class="English dropdown-item" href="/Users/Settings">Profile settings</a>
+                        <a class="Arabic dropdown-item" href="/Users/Settings">اعدادات الحساب</a>
+
                     </li>
 
                     <li><hr class="dropdown-divider" /></li>
                     <li>
-                    <a class="English dropdown-item" href="/Account/Signout">Logout</a>
-                    <a class="Arabic dropdown-item" href="/Account/Signout">تسجيل خروج</a>
+                        <a class="English dropdown-item" href="/Account/Signout">Logout</a>
+                        <a class="Arabic dropdown-item" href="/Account/Signout">تسجيل خروج</a>
+                    </li>
+
+
+                    <li>
+                        <a class="English dropdown-item" style="cursor:pointer" onclick="changelang()">change language to ar </a>
+                        <a class="Arabic dropdown-item" style="cursor:pointer" onclick="changelang()">en تغيير اللغه الى</a>
+
                     </li>
                 </ul>
             </li>
@@ -330,12 +343,15 @@
 
     <script>
 
-        localStorage.setItem("lang", "Arabic");
+
        
         let lang = localStorage.getItem("lang");
-
         console.log(lang);
+        if (lang == null) {
 
+            localStorage.setItem("lang", "English");
+
+        }
 
         if (lang == "Arabic") {
 
@@ -365,6 +381,28 @@
             for (const Arabicelement of Arabicelements) {
                 Arabicelement.style.display = "none";
             }
+
+        }
+
+
+        function changelang() {
+
+
+            let lang = localStorage.getItem("lang");
+
+
+
+
+            if (lang == "English") {
+                localStorage.setItem("lang", "Arabic");
+            }
+
+            if (lang == "Arabic") {
+                localStorage.setItem("lang", "English");
+            }
+
+            location.reload();
+
 
         }
 
