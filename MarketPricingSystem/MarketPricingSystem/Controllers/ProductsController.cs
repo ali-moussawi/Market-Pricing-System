@@ -79,7 +79,7 @@ namespace MarketPricingSystem.Controllers
 
         [PermissionAuthorization(Roles = "updateproduct")]
         [HttpPost]
-        public ActionResult Confirmupdate(int Productid, string productname, int Barcode, string ProductDescription, int Categoryid)
+        public ActionResult Confirmupdate(int Productid, string productname, int Barcode, string ProductDescription, int? Categoryid)
         {
             var targetproduct = _context.Products.FirstOrDefault(p => p.ProductId == Productid);
 
@@ -108,11 +108,19 @@ namespace MarketPricingSystem.Controllers
 
                 }
             }
+            if (Categoryid == null)
+            {
+
+                TempData["Message3"] = "Please select a category";
+
+                return RedirectToAction("Updateproduct", new { @id = targetproduct.ProductId });
+
+            }
 
             targetproduct.ProductName = productname;
             targetproduct.BarcodeNb=Barcode;
             targetproduct.ProductDescription = ProductDescription;
-            targetproduct.CategoryId = Categoryid;
+            targetproduct.CategoryId = Categoryid.Value;
             _context.SaveChanges();
 
 

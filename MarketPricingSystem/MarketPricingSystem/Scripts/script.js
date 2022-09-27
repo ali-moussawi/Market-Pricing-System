@@ -3,7 +3,6 @@ let navbar = document.querySelector(".navbar");
 
 
 
-// console.log( log);
 menu.onclick = () => {
   menu.classList.toggle("fa-times");
   navbar.classList.toggle("active");
