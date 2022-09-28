@@ -5,7 +5,7 @@
     ViewBag.Title = "Expensive product";
 }
 
-<main>
+<main class="English"> 
     <h1 style="margin-top: 130px; font-family: 'Times New Roman'; margin-left: 20px">Top Expensive Products</h1>
 
     <div style="margin-top: 50px;margin-bottom:100px; display: flex;justify-content:space-evenly">
@@ -71,6 +71,73 @@
 
 
 
+<main class="Arabic">
+    <h1 style="margin-top: 130px; font-family: 'Times New Roman'; margin-left: 20px">اغلى الاسعار</h1>
+
+    <div style="margin-top: 50px;margin-bottom:100px; display: flex;justify-content:space-evenly">
+
+
+
+
+
+        @foreach (var Expensive in Model)
+        {
+
+
+            <!-- flip-card-container -->
+            <div class="flip-card-container">
+                <div class="flip-card">
+
+                    <div class="card-front">
+                        <figure>
+                            <div class="img-bg"></div>
+                            <img src="https://previews.123rf.com/images/belchonock/belchonock1909/belchonock190922769/130625992-shopping-basket-and-grocery-products-on-white-background.jpg" alt="@Expensive.supermarketname">
+                            <figcaption>@Expensive.supermarketname</figcaption>
+                        </figure>
+
+                        <ul>
+                            <li>: اسم المنتج</li>
+                            <li>@Expensive.productname</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="card-back">
+                        <figure>
+                            <div class="img-bg"></div>
+                            <img src="https://media.istockphoto.com/photos/shopping-basket-full-of-variety-of-grocery-products-food-and-drink-on-picture-id1319625327?k=20&m=1319625327&s=170667a&w=0&h=AYFnDNYVTbHZoqClA5FrXALLQiozJkb12E2toFNvA04=" alt="Brohm Lake">
+                        </figure>
+
+                        <button style="cursor:text">@Expensive.productprice <span style="margin-left:10px">ل.ل</span></button>
+
+                        <div class="design-container">
+                            <span class="design design--1"></span>
+                            <span class="design design--2"></span>
+                            <span class="design design--3"></span>
+                            <span class="design design--4"></span>
+                            <span class="design design--5"></span>
+                            <span class="design design--6"></span>
+                            <span class="design design--7"></span>
+                            <span class="design design--8"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /flip-card-container -->
+
+
+        }
+
+
+
+
+    </div>
+</main>
+
+
+
+
 
 @section Styles {
     <style>
@@ -99,10 +166,6 @@
             --grey: hsl(0, 0%, 50%);
             width: 310px;
             height: 500px;
-        
-
-
-
             margin: 40px;
             perspective: 1000px;
         }

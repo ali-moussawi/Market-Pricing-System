@@ -125,7 +125,7 @@ namespace MarketPricingSystem.Controllers
                 }
 
 
-                return Json(new { success = true, responseText = "Role " + rolename + " Added Succesfully" }, JsonRequestBehavior.AllowGet);
+                return Json(new { redirecturl = Url.Action("AllRoles", "Roles"), isRedirect = true, success = true, responseText = "Role " + rolename + " Added Succesfully" }, JsonRequestBehavior.AllowGet);
 
 
 
@@ -238,7 +238,7 @@ namespace MarketPricingSystem.Controllers
             _context.Roles.Remove(oldrole);
             _context.SaveChanges();
 
-                return Json(new { success = true, responseText= "Role " + targetrole.RoleName + " updated Succesfully" }, JsonRequestBehavior.AllowGet);
+                return Json(new { redirecturl = Url.Action("AllRoles", "Roles") ,isRedirect = true,success = true, responseText= "Role " + targetrole.RoleName + " updated Succesfully" }, JsonRequestBehavior.AllowGet);
 
             
         }
