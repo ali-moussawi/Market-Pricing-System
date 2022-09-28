@@ -34,7 +34,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "viewroles")]
+        [PermissionAuthorization(Roles : "viewroles")]
         public ActionResult AllRoles()
         {
 
@@ -64,7 +64,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "createrole")]
+        [PermissionAuthorization(Roles : "createrole")]
         public ActionResult Createrole()
         {
             var allpermissions = _context.Permissions.ToList();
@@ -77,7 +77,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "createrole")]
+        [PermissionAuthorization(Roles : "createrole")]
         [HttpPost]
         public ActionResult ConfirmCreate(string Data)
         {
@@ -149,7 +149,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "updaterole")]
+        [PermissionAuthorization(Roles : "updaterole")]
         public ActionResult Updaterole(int id)
         {
 
@@ -170,7 +170,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "updaterole")]
+        [PermissionAuthorization(Roles : "updaterole")]
         [HttpPost]
         public ActionResult Confirmupdate(string Data)
         {

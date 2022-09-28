@@ -29,7 +29,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "viewproduct")]
+        [PermissionAuthorization(Roles : "viewproduct")]
         public ActionResult AllProducts()
         {
            
@@ -43,7 +43,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "deleteproduct")]
+        [PermissionAuthorization(Roles : "deleteproduct")]
         public ActionResult ConfirmDelete(int id)
         {
             var targetproduct = _context.Products.FirstOrDefault(m => m.ProductId == id);
@@ -56,7 +56,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "updateproduct")]
+        [PermissionAuthorization(Roles : "updateproduct")]
         public ActionResult Updateproduct(int id)
         {
             var targetproduct = _context.Products.FirstOrDefault(m => m.ProductId == id);
@@ -77,7 +77,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "updateproduct")]
+        [PermissionAuthorization(Roles : "updateproduct")]
         [HttpPost]
         public ActionResult Confirmupdate(int Productid, string productname, int Barcode, string ProductDescription, int? Categoryid)
         {
@@ -129,7 +129,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "addproduct")]
+        [PermissionAuthorization( Roles :"addproduct")]
         public ActionResult Createproduct()
         {
             var allcategories = _context.Categories.Where(c => c.CategoryName != "NO CATEGORY").ToList();
@@ -139,7 +139,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "addproduct")]
+        [PermissionAuthorization(Roles : "addproduct")]
         [HttpPost]
         public ActionResult ConfirmCreate(string productname, int Barcode, string ProductDescription, int? Categoryid)
         {

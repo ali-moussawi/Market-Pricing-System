@@ -30,7 +30,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "viewcategory")]
+        [PermissionAuthorization(Roles : "viewcategory")]
         public ActionResult AllCategories() { 
 
             var categoryList = _context.Categories.Where(c=>c.CategoryName != "NO CATEGORY").ToList();
@@ -40,7 +40,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "deletecategory")]
+        [PermissionAuthorization(Roles : "deletecategory")]
         public ActionResult ConfirmDelete(int id)
         {
             _categoryDAL.setproductnocategory(id);
@@ -56,7 +56,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "updatecategory")]
+        [PermissionAuthorization(Roles : "updatecategory")]
         public ActionResult Updatecategory(int id)
         {
             var targetcategory = _context.Categories.FirstOrDefault(m => m.CategoryId == id);
@@ -67,7 +67,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "updatecategory")]
+        [PermissionAuthorization(Roles : "updatecategory")]
         [HttpPost]
         public ActionResult Confirmupdate(int Categoryid, string Categoryname)
         {
@@ -101,14 +101,14 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "addcategory")]
+        [PermissionAuthorization(Roles : "addcategory")]
         public ActionResult Createcategory()
         {
 
             return View();
         }
 
-        [PermissionAuthorization(Roles = "addcategory")]
+        [PermissionAuthorization(Roles : "addcategory")]
         [HttpPost]
         public ActionResult ConfirmCreate(string CategoryName)
         {

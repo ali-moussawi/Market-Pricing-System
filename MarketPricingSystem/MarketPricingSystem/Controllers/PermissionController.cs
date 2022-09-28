@@ -27,7 +27,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "viewpermissions")]
+        [PermissionAuthorization(Roles :"viewpermissions")]
         public ActionResult Allpermissions()
         {
 

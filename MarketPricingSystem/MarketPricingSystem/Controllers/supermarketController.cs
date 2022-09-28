@@ -30,7 +30,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "viewsupermarket")]
+        [PermissionAuthorization(Roles : "viewsupermarket")]
         public ActionResult Allsupermarkets()
         {
 
@@ -43,7 +43,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "deletesupermarket")]
+        [PermissionAuthorization(Roles : "deletesupermarket")]
         public ActionResult ConfirmDelete(int id)
         {
             var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == id);
@@ -54,7 +54,7 @@ namespace MarketPricingSystem.Controllers
             return RedirectToAction("Allsupermarkets");
         }
 
-        [PermissionAuthorization(Roles = "updatesupermarket")]
+        [PermissionAuthorization(Roles : "updatesupermarket")]
         public ActionResult Updatesupermarket(int id)
         {
             var targetsupermarket = _context.Supermarket.FirstOrDefault(m => m.SupermarketId == id);
@@ -65,7 +65,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "updatesupermarket")]
+        [PermissionAuthorization(Roles : "updatesupermarket")]
         [HttpPost]
         public ActionResult Confirmupdate(int Supermarketid, string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {
@@ -117,7 +117,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "addsupermarket")]
+        [PermissionAuthorization(Roles : "addsupermarket")]
         public ActionResult Createsupermarket()
         {
 
@@ -126,7 +126,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "addsupermarket")]
+        [PermissionAuthorization(Roles : "addsupermarket")]
         [HttpPost]
         public ActionResult ConfirmCreate(string MarketName, string MarketRegion, string MarketDescription, string MarketNumber)
         {

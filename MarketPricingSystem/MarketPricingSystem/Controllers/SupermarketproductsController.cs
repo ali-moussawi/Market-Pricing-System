@@ -28,7 +28,7 @@ namespace MarketPricingSystem.Controllers
             _context.Dispose();
         }
 
-        [PermissionAuthorization(Roles = "viewsp")]
+        [PermissionAuthorization(Roles : "viewsp")]
         public ActionResult Allsupermarkets()
         {
             var allsupermarkets = _context.Supermarket.ToList();
@@ -36,7 +36,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "viewspp")]
+        [PermissionAuthorization(Roles : "viewspp")]
         public ActionResult Supermarketproducts(int id)
         {
             productDal product = new productDal();
@@ -53,7 +53,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "insertproducts")]
+        [PermissionAuthorization(Roles : "insertproducts")]
         public ActionResult Createproduct(int id)
         {
             marketandproducts marketandproducts = new marketandproducts();
@@ -102,7 +102,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "insertproducts")]
+        [PermissionAuthorization(Roles : "insertproducts")]
         public ActionResult Confirmcreate(int marketid, int? productid, int price)
         {
             if(productid == null)
@@ -131,7 +131,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "updateproductprice")]
+        [PermissionAuthorization(Roles : "updateproductprice")]
         public ActionResult Updateproductprice(int marketid, int productid)
         {
             var targetproduct = _context.Productprices.FirstOrDefault(p => p.Supermarketid == marketid && p.ProductId == productid && p.IsActivePrice == 0);
@@ -143,7 +143,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "updateproductprice")]
+        [PermissionAuthorization(Roles : "updateproductprice")]
         public ActionResult Confirmupdate(int marketid, int productid, int price)
         {
 
@@ -177,7 +177,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "deleteproductpriced")]
+        [PermissionAuthorization(Roles :"deleteproductpriced")]
         public ActionResult ConfirmDelete(int marketid, int productid)
         {
             var targetpricedproduct = _context.Productprices.FirstOrDefault(p => p.Supermarketid == marketid && p.ProductId == productid && p.IsActivePrice == 0);

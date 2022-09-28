@@ -34,6 +34,12 @@ namespace MarketPricingSystem.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult Unauthorized()
+        {
+            return View();
+        }
+
 
 
 

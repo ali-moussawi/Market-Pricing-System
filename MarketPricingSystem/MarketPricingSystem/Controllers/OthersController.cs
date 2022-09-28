@@ -35,7 +35,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "viewusers")]
+        [PermissionAuthorization(Roles : "viewusers")]
         public ActionResult Allusers()
         {
 
@@ -50,7 +50,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "updateuser")]
+        [PermissionAuthorization(Roles : "updateuser")]
         public ActionResult Updateuser(int id)
         {
            Userandroles updateuser = new Userandroles();
@@ -66,7 +66,7 @@ namespace MarketPricingSystem.Controllers
         }
 
 
-        [PermissionAuthorization(Roles = "updateuser")]
+        [PermissionAuthorization(Roles : "updateuser")]
         public ActionResult Confirmupdate(int userid, string username, string phonenumber , string password, int roleid)
         {
             var targetuser = _context.Users.FirstOrDefault(m => m.UserId == userid);
@@ -108,7 +108,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "deleteuser")]
+        [PermissionAuthorization(Roles : "deleteuser")]
         public ActionResult ConfirmDelete(int id)
         {
             var targetuser = _context.Users.FirstOrDefault(m => m.UserId == id);
@@ -121,7 +121,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "adduser")]
+        [PermissionAuthorization(Roles : "adduser")]
         public ActionResult Createuser()
         {
             var roleslist = _context.Roles.Where(r=>r.RoleName != "Admin").ToList();
@@ -132,7 +132,7 @@ namespace MarketPricingSystem.Controllers
 
 
 
-        [PermissionAuthorization(Roles = "adduser")]
+        [PermissionAuthorization(Roles : "adduser")]
         public ActionResult Confirmcreate(string username ,string phonenumber, string gmail, string password,  int? roleid)
         {
            
