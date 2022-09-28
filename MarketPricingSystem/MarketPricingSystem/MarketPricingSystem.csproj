@@ -247,6 +247,7 @@
     <Compile Include="DAL\otherDal.cs" />
     <Compile Include="DAL\productDal.cs" />
     <Compile Include="DAL\RolesDal.cs" />
+    <Compile Include="DAL\TrackDal.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,6 +269,7 @@
     <Compile Include="ViewModel\productvalue.cs" />
     <Compile Include="ViewModel\productdetails.cs" />
     <Compile Include="ViewModel\roleandpermissionsandcheckedone.cs" />
+    <Compile Include="ViewModel\Track.cs" />
     <Compile Include="ViewModel\userandroles.cs" />
     <Compile Include="ViewModel\Userdetails.cs" />
   </ItemGroup>
@@ -365,10 +367,12 @@
     <Content Include="Views\Supermarketproducts\Createproduct.cshtml" />
     <Content Include="Views\Supermarketproducts\Updateproductprice.cshtml" />
     <Content Include="Views\Roles\Updaterole.cshtml" />
-    <Content Include="Views\Track\Choose.cshtml" />
+    <Content Include="Views\Track\Graph.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Account\Unauthorized.cshtml" />
+    <Content Include="Views\Track\Allsupermarkets.cshtml" />
+    <Content Include="Views\Track\Supermarketproducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
