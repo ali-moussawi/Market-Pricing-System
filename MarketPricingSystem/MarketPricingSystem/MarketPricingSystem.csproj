@@ -303,6 +303,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\expensive-cheapest.js" />
+    <Content Include="Scripts\highcharts1.js" />
+    <Content Include="Scripts\highcharts2.js" />
+    <Content Include="Scripts\highcharts3.js" />
+    <Content Include="Scripts\highcharts4.js" />
     <Content Include="Scripts\HomedataTables.bootstrap4.min.js" />
     <Content Include="Scripts\Homejquery-3.5.1.js" />
     <Content Include="Scripts\Homejquery.dataTables.min.js" />
